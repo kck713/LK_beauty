@@ -1,0 +1,14 @@
+{
+  "name": "lk-beauty-axis-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LK BEAUTY AXIS 3-language (ko/en/ja) static landing site — studio (overseas visitors) & academy (domestic)",
+  "scripts": {
+    "build": "node src/build.js",
+    "build:preview": "PREVIEW=1 node src/build.js",
+    "dev": "node scripts/serve.js",
+    "qa": "node scripts/qa.js",
+    "test": "npm run build && npm run qa"
+  },
+  "engines": { "node": ">=18" }
+}
