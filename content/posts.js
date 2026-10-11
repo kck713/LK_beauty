@@ -25,6 +25,8 @@ module.exports = [
       seatsLeft: null,
       registrationOpen: false,
       businessUnit: 'academy', // 신청 데이터의 business_unit 분류 보조값
+      country: 'KR',            // 개최 국가(ISO). 해외 마스터클래스 추후 구현용, 현재 미표시
+      teachingLanguages: ['ko'], // 개최 언어. 추후 구현용, 현재 미표시
     },
     promotion: null, // { validUntil: 'YYYY-MM-DD', terms: { ko: [], en: [], ja: [] } }
     modal: { enabled: false, from: '', until: '' },

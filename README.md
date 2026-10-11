@@ -68,7 +68,7 @@ FIXTURES=1 npm run build && FIXTURES=1 npm run qa   # 샘플 데이터로 팝업
 색상은 `src/styles/main.css` 상단의 토큰만 바꾸면 전체에 반영됩니다. 로고가 확정되면 헤더의 워드마크(`.brand`)를 이미지로 교체하세요.
 웹폰트는 Google Fonts(`display=swap`)를 언어별로 최소 가중치만 로드합니다. 히어로 이미지는 `content/assets.js`에서 `status: 'ready'`로 바꾸면 자동으로 2단 레이아웃(이미지+카피)으로 전환됩니다.
 
-참고 사이트 요구사항 정의서와의 매핑(적용/보류/결정 필요)은 `docs/ARCHITECTURE.md` 에 있습니다.
+참고 사이트 요구사항 정의서와의 매핑은 `docs/ARCHITECTURE.md` 에 있습니다. 결정 사항: 전자상거래 제외, 해외 마스터클래스는 추후 구현(모델 필드만 준비).
 
 ## 운영 정보 채우기
 
