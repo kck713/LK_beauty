@@ -38,6 +38,7 @@ module.exports = {
     backHome: 'Back to home',
     learnMore: 'Learn more',
     faqHeading: 'Frequently asked questions',
+    quickMenu: { label: 'Quick menu', top: 'Back to top' },
     mobileCtaStudio: 'Design consultation inquiry',
     mobileCtaAcademy: 'Course consultation inquiry',
   },

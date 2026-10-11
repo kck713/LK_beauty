@@ -37,6 +37,7 @@ module.exports = {
     backHome: '홈으로',
     learnMore: '자세히 보기',
     faqHeading: '자주 묻는 질문',
+    quickMenu: { label: '빠른 메뉴', top: '맨 위로' },
     mobileCtaStudio: '나에게 맞는 디자인 상담',
     mobileCtaAcademy: '내 수준에 맞는 과정 상담',
   },

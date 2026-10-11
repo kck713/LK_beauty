@@ -111,6 +111,10 @@
     else thanksEl.hidden = true;
   }
 
+  // ---------- Quick menu: 맨 위로 ----------
+  var topBtn = document.querySelector('[data-quick-top]');
+  if (topBtn) topBtn.addEventListener('click', function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); var m = document.getElementById('main'); if (m) m.focus({ preventScroll: true }); });
+
   // ---------- Entry modal (행사·공지) ----------
   var modal = document.querySelector('[data-modal]');
   if (modal) {

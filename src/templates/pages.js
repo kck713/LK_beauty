@@ -1,12 +1,13 @@
 'use strict';
 const { esc, attr, pagePath, show, badge, list, cards, faq, steps } = require('./helpers');
-const { testimonialsSection, detailReady } = require('./extras');
+const { testimonialsSection, detailReady, spaceSection } = require('./extras');
 
 // ---------- 공통 조각 ----------
 
-function hero(t, h, { eyebrow, heading, sub, primary, secondary, unit, media }) {
+function hero(t, h, { eyebrow, heading, sub, primary, secondary, unit, media, cover }) {
+  const isCover = !!(cover && media);
   return `
-<section class="hero hero-${attr(unit || 'brand')}${media ? ' hero-with-media' : primary ? ' hero-editorial' : ''}">
+<section class="hero hero-${attr(unit || 'brand')}${isCover ? ' hero-cover' : media ? ' hero-with-media' : primary ? ' hero-editorial' : ''}">
   <div class="container">
     ${media ? `<div class="hero-media"><picture>${media.webp ? `<source type="image/webp" srcset="/${attr(media.webp)}">` : ''}<img src="/${attr(media.src)}" alt="${attr(media.alt)}" width="${media.width || 1200}" height="${media.height || 900}" fetchpriority="high"></picture></div>` : primary ? `<div class="hero-signature" aria-hidden="true"><span class="signature-index">LK BEAUTY AXIS</span><span class="signature-monogram">LK<span>AXIS</span></span><span class="signature-foot">${unit === 'studio' ? 'STUDIO' : unit === 'academy' ? 'ACADEMY' : 'STUDIO & ACADEMY'}<span>SEOUL</span></span></div>` : ''}
     <div class="hero-copy">
@@ -100,7 +101,7 @@ function home({ site, t, lang, ready }) {
     </a>`;
   };
   return hero(t, h, {
-    eyebrow: h.hero.eyebrow, heading: h.hero.heading, sub: h.hero.sub, unit: 'brand', media: heroMedia(ready, 'images/home/hero.jpg', h.hero.imageAlt, [1600, 897]),
+    eyebrow: h.hero.eyebrow, heading: h.hero.heading, sub: h.hero.sub, unit: 'brand', cover: true, media: heroMedia(ready, 'images/home/hero.jpg', h.hero.imageAlt, [1600, 897]),
     primary: { href: pagePath(lang, h.choose.order[0]), label: h.choose.order[0] === 'academy' ? h.hero.ctaAcademy : h.hero.ctaStudio },
     secondary: { href: pagePath(lang, h.choose.order[1]), label: h.choose.order[1] === 'academy' ? h.hero.ctaAcademy : h.hero.ctaStudio },
   })
@@ -148,6 +149,7 @@ function studio({ site, t, lang, studio: data, ready, testimonials }) {
   + section('process', s.process.heading, steps(s.process.steps), 'section-alt')
   + section('visit', s.visit.heading, `<p class="prose">${esc(s.visit.body)}</p><h3>${esc(s.visit.afterHeading)}</h3><p class="prose">${esc(s.visit.afterBody)}</p>`)
   + testimonialsSection({ site, t, lang, testimonials, unit: 'studio' })
+  + spaceSection({ site, t, lang, ready, compact: true })
   + faq(s.faq.items, t.common.faqHeading)
   + section('location', s.location.heading, locationBlock(site, t, lang), 'section-alt')
   + ctaBand(s.ctaBand, contactHref, 'studio');
@@ -213,7 +215,7 @@ function academy({ site, t, lang, academy: data, ready, testimonials }) {
   + ctaBand(a.ctaBand, contactHref, 'academy');
 }
 
-function about({ site, t, lang, academy: data, testimonials }) {
+function about({ site, t, lang, academy: data, testimonials, ready }) {
   const ab = t.about;
   const director = data.instructors.find((i) => i.id === 'director');
   const directorHtml = show(site, director) && (director.name[lang] || director.credentials[lang].length)
@@ -223,6 +225,7 @@ function about({ site, t, lang, academy: data, testimonials }) {
   + section('story', ab.hero.heading, ab.paragraphs.map((p) => `<p class="prose">${esc(p)}</p>`).join(''), 'sr-heading')
   + section('principles', ab.principles.heading, cards(ab.principles.items), 'section-alt')
   + section('operations', ab.operations.heading, list(ab.operations.items, 'notes'))
+  + spaceSection({ site, t, lang, ready, compact: false })
   + directorHtml
   + testimonialsSection({ site, t, lang, testimonials, unit: null })
   + section('channels', ab.channels.heading, channelsList(site, t) + locationBlock(site, t, lang), 'section-alt');

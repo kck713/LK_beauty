@@ -39,6 +39,7 @@ module.exports = {
     backHome: 'ホームへ戻る',
     learnMore: '詳しく見る',
     faqHeading: 'よくある質問',
+    quickMenu: { label: 'クイックメニュー', top: 'ページ上部へ' },
     mobileCtaStudio: 'デザイン相談のお問い合わせ',
     mobileCtaAcademy: '受講相談のお問い合わせ',
   },

@@ -120,6 +120,20 @@ collections:
                 fields:
                   - { name: verified, label: "공개", widget: boolean, default: false }
                   - { name: url, label: "URL", widget: string, required: false }
+          - name: space
+            label: "공간·위생 사진"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+              - { name: note, label: "위생·공간 안내 문구", widget: object, fields: *i18nStr }
+              - name: images
+                label: "사진 (첫 장이 크게 배치됨, 3~5장 권장)"
+                widget: list
+                required: false
+                fields:
+                  - { name: src, label: "이미지", widget: image, media_folder: "/public/images/about", public_folder: "images/about" }
+                  - { name: alt, label: "이미지 설명", widget: object, fields: *i18nStr }
           - name: privacy
             label: "개인정보 안내"
             widget: object

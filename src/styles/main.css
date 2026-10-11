@@ -459,3 +459,50 @@ h3 { font-family: var(--font-body); letter-spacing: -.025em; }
   .choice-card { padding: 26px; }
   .footer-brand span { letter-spacing: .05em; }
 }
+
+/* ---------- Immersive hero (홈, 사진이 있을 때) ---------- */
+.hero-cover { position: relative; isolation: isolate; padding: 0; background: var(--primary-dark); color: #fff; }
+.hero-cover .hero-media { position: absolute; inset: 0; margin: 0; max-width: none; width: 100%; z-index: -2; }
+.hero-cover .hero-media picture { display: block; }
+.hero-cover .hero-media picture, .hero-cover .hero-media img { width: 100%; height: 100%; }
+.hero-cover .hero-media img { object-fit: cover; object-position: 50% 32%; aspect-ratio: auto; }
+.hero-cover::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(22,59,74,.12) 0%, rgba(22,59,74,.28) 40%, rgba(22,59,74,.9) 100%); }
+.hero-cover .container { display: flex; flex-direction: column; justify-content: flex-end; min-height: clamp(520px, 76vh, 720px); padding-top: 32px; padding-bottom: 40px; }
+.hero-cover .hero-copy { max-width: 640px; }
+.hero-cover h1, .hero-cover .lead { color: #fff; }
+.hero-cover .lead { color: rgba(255,255,255,.86); }
+.hero-cover .eyebrow { color: #f3dde1; }
+.hero-cover .btn-primary { background: #fff; color: var(--primary); border-color: #fff; }
+.hero-cover .btn-primary:hover { background: var(--primary-soft); color: var(--primary); }
+.hero-cover .btn-secondary { color: #fff; border-color: rgba(255,255,255,.65); background: transparent; }
+.hero-cover .btn-secondary:hover { background: rgba(255,255,255,.14); border-color: #fff; color: #fff; }
+@media (min-width: 900px) {
+  .hero-cover .container { min-height: clamp(560px, 82vh, 840px); padding-bottom: 64px; display: flex; grid-template-columns: none; }
+  .hero-cover h1 { max-width: 15ch; }
+  .hero-cover .hero-media img { object-position: 50% 35%; }
+}
+
+/* ---------- Quick menu (데스크톱 우측 플로팅) ---------- */
+.quick-menu { display: none; }
+@media (min-width: 900px) {
+  .quick-menu { display: grid; position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 45; gap: 1px; background: var(--line); border: 1px solid var(--line); border-right: 0; }
+  .quick-item { display: grid; justify-items: center; gap: 4px; width: 72px; padding: 12px 6px 10px; background: var(--surface); color: var(--primary); text-decoration: none; font-size: .62rem; letter-spacing: .04em; font-weight: 600; text-align: center; }
+  .quick-item svg { width: 22px; height: 22px; }
+  .quick-item:hover { background: var(--primary-soft); color: var(--primary); }
+  .quick-contact { background: var(--primary); color: #fff; }
+  .quick-contact:hover { background: var(--primary-dark); color: #fff; }
+  body.modal-open .quick-menu { display: none; }
+}
+
+/* ---------- 공간·위생 콜라주 ---------- */
+.collage { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+.collage-item { margin: 0; overflow: hidden; background: var(--bg-alt); }
+.collage-item img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; }
+.collage-lead { grid-column: 1 / -1; }
+.collage-lead img { aspect-ratio: 16/10; }
+@media (min-width: 760px) {
+  .collage { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; }
+  .collage-lead { grid-column: 1 / 3; grid-row: 1 / 3; }
+  .collage-lead img { aspect-ratio: auto; }
+  .collage-item:not(.collage-lead) img { aspect-ratio: 1/1; }
+}

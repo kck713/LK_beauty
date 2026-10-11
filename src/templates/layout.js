@@ -109,6 +109,12 @@ ${content}
     <p class="footer-note">${esc(t.common.kstNote)}</p>
   </div>
 </footer>
+${page !== '404' ? `<nav class="quick-menu" aria-label="${attr(t.common.quickMenu.label)}">
+  <a class="quick-item quick-contact" href="${contactPath}" data-cta="quick-contact" data-unit="${attr(ctx.businessUnit || 'brand')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5z" stroke-linejoin="round"/><path d="M8 9h8M8 12h5" stroke-linecap="round"/></svg><span>${esc(contactLabel)}</span></a>
+  ${site.channels.instagram.verified ? `<a class="quick-item" href="${attr(site.channels.instagram.url)}" target="_blank" rel="me noopener" data-contact="instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg><span>${esc(t.common.instagram)}</span></a>` : ''}
+  ${site.channels.kakao.verified && site.channels.kakao.url ? `<a class="quick-item" href="${attr(site.channels.kakao.url)}" target="_blank" rel="noopener" data-contact="kakao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 4C7 4 3.5 7 3.5 10.6c0 2.3 1.5 4.3 3.8 5.5L6.5 20l4-2.6c.5.1 1 .1 1.5.1 5 0 8.5-3 8.5-6.9S17 4 12 4z" stroke-linejoin="round"/></svg><span>${esc(t.common.kakao)}</span></a>` : ''}
+  <a class="quick-item quick-top" href="#main" data-quick-top><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 19V6M6 12l6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${esc(t.common.quickMenu.top)}</span></a>
+</nav>` : ''}
 ${ctx.modalHtml || ''}
 ${mobileCta ? `<div class="mobile-cta" role="region" aria-label="${attr(mobileCta.label)}"><a class="btn btn-primary" href="${attr(mobileCta.href)}" data-cta="mobile-sticky" data-unit="${attr(mobileCta.unit)}">${esc(mobileCta.label)}</a></div>` : ''}
 <script src="/assets/main.js" defer></script>

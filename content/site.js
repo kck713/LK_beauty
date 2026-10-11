@@ -28,4 +28,6 @@ module.exports = {
   supportLanguages: data.supportLanguages,
   channels: data.channels,
   privacy: data.privacy,
+  // 공간·위생 사진 콜라주 (verified && 이미지 파일 존재 시 소개·스튜디오 페이지에 표시)
+  space: data.space || { verified: false, note: {}, images: [] },
 };

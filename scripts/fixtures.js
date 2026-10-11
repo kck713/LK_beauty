@@ -2,7 +2,8 @@
 // 실제 운영 정보가 아니며, 레이아웃·동선 확인 목적입니다. 공개 빌드에 절대 포함하지 마세요 (QA 가 차단).
 'use strict';
 
-module.exports = function applyFixtures({ posts, testimonials, studio, academy }) {
+module.exports = function applyFixtures({ posts, testimonials, studio, academy, site }) {
+  if (site) site.space = { verified: true, note: { ko: '[샘플] 공간·위생 안내 문구 자리. 실제 공간 사진으로 교체합니다.', en: '[Sample] Placeholder for the space and hygiene note.', ja: '[サンプル] 空間・衛生に関する案内文の位置。' }, images: [ { src: 'images/academy/hero.jpg', alt: { ko: '[샘플]', en: '[Sample]', ja: '[サンプル]' } }, { src: 'images/studio/hero.jpg', alt: { ko: '[샘플]', en: '[Sample]', ja: '[サンプル]' } }, { src: 'images/home/hero.jpg', alt: { ko: '[샘플]', en: '[Sample]', ja: '[サンプル]' } } ] };
   posts.length = 0;
   posts.push({
     id: 'fx-seminar', type: 'event', verified: true, publishedAt: '2026-10-01', image: 'images/posts/sample-seminar.jpg',

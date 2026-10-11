@@ -235,4 +235,20 @@ function modal({ site, t, lang, p, ready }) {
 <script>window.__LK_FORM_MESSAGES=window.__LK_FORM_MESSAGES||${JSON.stringify(c.errors).replace(/</g, '\\u003c')};</script>`;
 }
 
-module.exports = { testimonialsSection, newsIndex, postPage, postPublished, postPath, serviceDetail, courseDetail, detailReady, activeModalPost, modal, fmtDate };
+// ---------- 공간·위생 콜라주 ----------
+function spaceSection({ site, t, lang, ready, compact }) {
+  const sp = site.space;
+  if (!show(site, sp)) return '';
+  const imgs = (sp.images || []).filter((i) => i && i.src && ready(i.src)).slice(0, compact ? 3 : 5);
+  if (!imgs.length) return '';
+  return `
+<section class="section section-alt" id="space" aria-labelledby="space-h">
+  <div class="container">
+    <h2 id="space-h">${esc(t.about.space.heading)}${!sp.verified ? badge(site, t) : ''}</h2>
+    ${sp.note && sp.note[lang] ? `<p class="prose">${esc(sp.note[lang])}</p>` : ''}
+    <div class="collage collage-${imgs.length}">${imgs.map((i, n) => `<figure class="collage-item${n === 0 ? ' collage-lead' : ''}"><img src="/${attr(i.src)}" alt="${attr((i.alt && i.alt[lang]) || '')}" loading="lazy" width="1200" height="900"></figure>`).join('')}</div>
+  </div>
+</section>`;
+}
+
+module.exports = { spaceSection, testimonialsSection, newsIndex, postPage, postPublished, postPath, serviceDetail, courseDetail, detailReady, activeModalPost, modal, fmtDate };

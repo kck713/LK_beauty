@@ -24,7 +24,7 @@ const langs = site.languages.map((code) => require(`../content/i18n/${code}`));
 // 개발·QA 전용 샘플 데이터 (공개 배포 금지)
 const FIXTURES = process.env.FIXTURES === '1';
 if (FIXTURES) {
-  require('../scripts/fixtures')({ posts, testimonials, studio: studioData, academy: academyData });
+  require('../scripts/fixtures')({ posts, testimonials, studio: studioData, academy: academyData, site });
   console.warn('WARN: FIXTURES=1 — sample content merged. NEVER deploy this build.');
 }
 
