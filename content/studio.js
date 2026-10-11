@@ -14,6 +14,13 @@ module.exports = {
       priceKRW: null,          // 실제 결제 통화 기준
       retouchIncluded: null,   // true/false/조건 문자열
       retouchTerms: { ko: '', en: '', ja: '' },
+      // 상세 페이지: 세 언어 모두 detail 이 채워지고 verified 일 때만 /{lang}/studio/{slug}/ 생성
+      slug: { ko: 'hairstroke', en: 'hair-stroke-brows', ja: 'hairstroke' },
+      detail: {
+        ko: null, // { intro: '', forWhom: [], process: [], aftercare: [], faq: [{q,a}] }
+        en: null,
+        ja: null,
+      },
     },
     {
       id: 'eyeliner',
@@ -23,6 +30,8 @@ module.exports = {
       priceKRW: null,
       retouchIncluded: null,
       retouchTerms: { ko: '', en: '', ja: '' },
+      slug: { ko: 'eyeliner', en: 'eyeliner', ja: 'eyeliner' },
+      detail: { ko: null, en: null, ja: null },
     },
     {
       id: 'lips',
@@ -32,6 +41,8 @@ module.exports = {
       priceKRW: null,
       retouchIncluded: null,
       retouchTerms: { ko: '', en: '', ja: '' },
+      slug: { ko: 'lips', en: 'lips', ja: 'lips' },
+      detail: { ko: null, en: null, ja: null },
     },
   ],
 

@@ -8,6 +8,9 @@ const site = require('../content/site');
 const studioData = require('../content/studio');
 const academyData = require('../content/academy');
 const assets = require('../content/assets');
+const posts = require('../content/posts');
+const testimonials = require('../content/testimonials');
+const extras = require('./templates/extras');
 const { layout } = require('./templates/layout');
 const pages = require('./templates/pages');
 const { pagePath } = require('./templates/helpers');
@@ -17,6 +20,13 @@ const DIST = path.join(ROOT, 'dist');
 const PUBLIC = path.join(ROOT, 'public');
 
 const langs = site.languages.map((code) => require(`../content/i18n/${code}`));
+
+// 개발·QA 전용 샘플 데이터 (공개 배포 금지)
+const FIXTURES = process.env.FIXTURES === '1';
+if (FIXTURES) {
+  require('../scripts/fixtures')({ posts, testimonials, studio: studioData, academy: academyData });
+  console.warn('WARN: FIXTURES=1 — sample content merged. NEVER deploy this build.');
+}
 
 // ---------- i18n 키 구조 검증 ----------
 function keysOf(o, p = '') {
@@ -94,42 +104,90 @@ function build() {
   write('index.html', pages.root({ site, langs }));
   addSitemap('/', [...langs.map((l) => ({ lang: l.code, href: pagePath(l.code, '') })), { lang: 'x-default', href: '/' }]);
 
-  for (const def of PAGE_DEFS) {
-    const alternates = langs.map((l) => ({ lang: l.code, name: l.name, href: pagePath(l.code, def.slug) }));
-    // x-default: 해당 페이지 그룹의 기본 언어(한국어)판. 홈은 루트 언어 선택 페이지.
-    const xDefault = def.key === 'home' ? '/' : pagePath(site.defaultLang, def.slug);
+  const anyNews = langs.some((t) => posts.some((p) => extras.postPublished(site, p, t.code)));
+  const modalPost = extras.activeModalPost(site, posts);
 
+  // 공통 페이지 작성기
+  const fixtureMeta = FIXTURES ? '<meta name="lk-fixtures" content="1">' : '';
+  function emit({ t, slug, alternates, xDefault, meta, pageKey, unit, mobileCta, noindex, jsonLd, bodyClass, content, withModal = true }) {
+    const lang = t.code;
+    const html = layout({
+      site, t, lang, page: pageKey, businessUnit: unit,
+      canonicalPath: pagePath(lang, slug), alternates, xDefault, meta,
+      bodyClass: bodyClass || `page-${pageKey} lang-${lang}`, mobileCta, noindex: !!noindex, jsonLd,
+      showNews: anyNews,
+      modalHtml: withModal && modalPost ? extras.modal({ site, t, lang, p: modalPost, ready: assetReady }) : '',
+    }, content);
+    write(path.join(lang, slug, 'index.html'), fixtureMeta ? html.replace('<meta charset="utf-8">', '<meta charset="utf-8">' + fixtureMeta) : html);
+    if (!noindex) addSitemap(pagePath(lang, slug), [...alternates.map((a) => ({ lang: a.lang, href: a.href })), { lang: 'x-default', href: xDefault }]);
+  }
+  const altsFor = (slugByLang) => langs.filter((l) => slugByLang[l.code] != null).map((l) => ({ lang: l.code, name: l.name, href: pagePath(l.code, slugByLang[l.code]) }));
+  const ogFor = (rel) => (assetReady(rel) ? rel : (assetReady('images/og/default.png') ? 'images/og/default.png' : ''));
+
+  for (const def of PAGE_DEFS) {
+    const slugByLang = Object.fromEntries(langs.map((l) => [l.code, def.slug]));
+    const alternates = altsFor(slugByLang);
+    const xDefault = def.key === 'home' ? '/' : pagePath(site.defaultLang, def.slug);
     for (const t of langs) {
       const lang = t.code;
-      const meta = {
-        title: t[def.key].title,
-        description: t[def.key].description || '',
-        ogImage: assetReady(def.og) ? def.og : (assetReady('images/og/default.png') ? 'images/og/default.png' : ''),
-      };
-      const mobileCta = def.mobileCta ? {
-        href: pagePath(lang, 'contact') + '#' + def.mobileCta,
-        label: def.mobileCta === 'studio' ? t.common.mobileCtaStudio : t.common.mobileCtaAcademy,
-        unit: def.mobileCta,
-      } : null;
-
+      const meta = { title: t[def.key].title, description: t[def.key].description || '', ogImage: ogFor(def.og) };
+      const mobileCta = def.mobileCta ? { href: pagePath(lang, 'contact') + '#' + def.mobileCta, label: def.mobileCta === 'studio' ? t.common.mobileCtaStudio : t.common.mobileCtaAcademy, unit: def.mobileCta } : null;
       const jsonLd = def.key === 'home' ? {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: site.brand,
-        url: site.baseUrl + pagePath(lang, ''),
-        sameAs: [site.channels.instagram.url],
+        '@context': 'https://schema.org', '@type': 'Organization', name: site.brand, url: site.baseUrl + pagePath(lang, ''), sameAs: [site.channels.instagram.url],
         ...(site.address.verified ? { address: { '@type': 'PostalAddress', streetAddress: site.address.full[lang], addressLocality: 'Seoul', addressCountry: 'KR' } } : {}),
       } : null;
+      emit({
+        t, slug: def.slug, alternates, xDefault, meta, pageKey: def.key, unit: def.unit, mobileCta, noindex: def.noindex, jsonLd,
+        content: def.render({ site, t, lang, studio: studioData, academy: academyData, ready: assetReady, testimonials, posts }),
+        withModal: !['contact', 'thanks', 'privacy'].includes(def.key),
+      });
+    }
+  }
 
-      const html = layout({
-        site, t, lang, page: def.key, businessUnit: def.unit,
-        canonicalPath: pagePath(lang, def.slug), alternates, xDefault, meta,
-        bodyClass: `page-${def.key} lang-${lang}`, mobileCta, noindex: !!def.noindex, jsonLd,
-      }, def.render({ site, t, lang, studio: studioData, academy: academyData, ready: assetReady }));
-
-      write(path.join(lang, def.slug, 'index.html'), html);
-      if (!def.noindex) {
-        addSitemap(pagePath(lang, def.slug), [...alternates.map((a) => ({ lang: a.lang, href: a.href })), { lang: 'x-default', href: xDefault }]);
+  // 시술 상세 (/{lang}/studio/{slug}/) — 세 언어 모두 준비된 항목만
+  for (const sv of studioData.services.filter((x) => extras.detailReady(site, x, site.languages))) {
+    const slugByLang = Object.fromEntries(langs.map((l) => [l.code, 'studio/' + sv.slug[l.code]]));
+    const alternates = altsFor(slugByLang);
+    for (const t of langs) {
+      const d = sv.detail[t.code];
+      emit({ t, slug: slugByLang[t.code], alternates, xDefault: pagePath(site.defaultLang, slugByLang[site.defaultLang]), pageKey: 'studio-detail', unit: 'studio',
+        meta: { title: `${sv.name[t.code]} | ${t.studio.title}`, description: d.intro, ogImage: ogFor('images/og/studio.png') },
+        mobileCta: { href: pagePath(t.code, 'contact') + '#studio', label: t.common.mobileCtaStudio, unit: 'studio' },
+        content: extras.serviceDetail({ site, t, lang: t.code, sv }) });
+    }
+  }
+  // 과정 상세 (/{lang}/academy/{slug}/)
+  for (const c of academyData.courses.filter((x) => extras.detailReady(site, x, site.languages))) {
+    const slugByLang = Object.fromEntries(langs.map((l) => [l.code, 'academy/' + c.slug[l.code]]));
+    const alternates = altsFor(slugByLang);
+    for (const t of langs) {
+      const d = c.detail[t.code];
+      emit({ t, slug: slugByLang[t.code], alternates, xDefault: pagePath(site.defaultLang, slugByLang[site.defaultLang]), pageKey: 'academy-detail', unit: 'academy',
+        meta: { title: `${c.name[t.code]} | ${t.academy.title}`, description: d.intro, ogImage: ogFor('images/og/academy.png') },
+        mobileCta: { href: pagePath(t.code, 'contact') + '#academy', label: t.common.mobileCtaAcademy, unit: 'academy' },
+        content: extras.courseDetail({ site, t, lang: t.code, c }) });
+    }
+  }
+  // 소식 목록 + 게시물 (/{lang}/news/, /{lang}/news/{slug}/)
+  if (anyNews) {
+    const slugByLang = Object.fromEntries(langs.map((l) => [l.code, 'news']));
+    const alternates = altsFor(slugByLang);
+    for (const t of langs) {
+      const has = posts.some((p) => extras.postPublished(site, p, t.code));
+      emit({ t, slug: 'news', alternates, xDefault: pagePath(site.defaultLang, 'news'), pageKey: 'news', unit: 'brand', noindex: !has,
+        meta: { title: t.news.title, description: t.news.description, ogImage: ogFor('images/og/default.png') },
+        content: extras.newsIndex({ site, t, lang: t.code, posts, ready: assetReady }) });
+    }
+    for (const p of posts) {
+      const pubLangs = langs.filter((l) => extras.postPublished(site, p, l.code));
+      if (!pubLangs.length) continue;
+      const slugByLang = Object.fromEntries(pubLangs.map((l) => [l.code, 'news/' + p.slug[l.code]]));
+      const alternates = altsFor(slugByLang);
+      const xd = slugByLang[site.defaultLang] || slugByLang[pubLangs[0].code];
+      for (const t of pubLangs) {
+        emit({ t, slug: slugByLang[t.code], alternates, xDefault: pagePath(xd === slugByLang[site.defaultLang] ? site.defaultLang : pubLangs[0].code, xd), pageKey: 'post', unit: p.event && p.event.businessUnit ? p.event.businessUnit : 'brand',
+          meta: { title: `${p.title[t.code]} | ${t.common.brand}`, description: p.summary[t.code] || p.title[t.code], ogImage: assetReady(p.image) ? p.image : ogFor('images/og/default.png') },
+          content: extras.postPage({ site, t, lang: t.code, p, ready: assetReady }), withModal: false });
       }
     }
   }
@@ -167,6 +225,7 @@ ${u.alternates.map((a) => `    <xhtml:link rel="alternate" hreflang="${a.lang}" 
   const report = {
     builtAt: new Date().toISOString(),
     preview: site.preview,
+    fixtures: FIXTURES,
     baseUrl: site.baseUrl,
     formEndpoint: site.form.endpoint ? 'set' : 'MISSING',
     gtm: site.analytics.gtmId ? 'set' : 'not set',
@@ -181,7 +240,10 @@ ${u.alternates.map((a) => `    <xhtml:link rel="alternate" hreflang="${a.lang}" 
       ...studioData.cases.filter((s) => !s.verified).map((s) => `studio.cases.${s.id}`),
       ...academyData.courses.filter((s) => !s.verified).map((s) => `academy.courses.${s.id}`),
       ...academyData.instructors.filter((s) => !s.verified).map((s) => `academy.instructors.${s.id}`),
+      ...posts.filter((s) => !s.verified).map((s) => `posts.${s.id}`),
+      ...testimonials.filter((s) => !s.verified || !s.consent).map((s) => `testimonials.${s.id}`),
     ],
+    modal: modalPost ? modalPost.id : null,
   };
   fs.writeFileSync(path.join(DIST, 'build-report.json'), JSON.stringify(report, null, 2));
   console.log(`Built ${sitemapUrls.length} indexable pages → dist/ ${site.preview ? '(PREVIEW: unverified items visible)' : ''}`);

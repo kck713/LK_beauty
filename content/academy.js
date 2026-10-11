@@ -16,6 +16,9 @@ module.exports = {
       priceKRW: null,
       includes: { ko: [], en: [], ja: [] }, // 도구·모델·재교육 조건
       outcomes: { ko: [], en: [], ja: [] },
+      // 상세 페이지: 세 언어 모두 detail 이 채워지고 verified 일 때만 /{lang}/academy/{slug}/ 생성
+      slug: { ko: 'beginner', en: 'beginner', ja: 'beginner' },
+      detail: { ko: null, en: null, ja: null }, // { intro: '', forWhom: [], process: [], faq: [{q,a}] }
     },
     {
       id: 'course-hairstroke-advanced',
@@ -28,6 +31,8 @@ module.exports = {
       priceKRW: null,
       includes: { ko: [], en: [], ja: [] },
       outcomes: { ko: [], en: [], ja: [] },
+      slug: { ko: 'hair-stroke', en: 'hair-stroke', ja: 'hair-stroke' },
+      detail: { ko: null, en: null, ja: null },
     },
   ],
 

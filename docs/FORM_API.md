@@ -9,7 +9,8 @@
 
 ```json
 {
-  "business_unit": "studio",            // studio | academy
+  "business_unit": "studio",            // studio | academy | event
+  "event_id": "…",                      // event 일 때 (posts.js 의 id)
   "page_language": "en",                // 표시 언어
   "preferred_language": "en",           // 희망 상담 언어 (표시 언어와 별개)
   "lead_key": "uuid",                   // 중복 방지 키
@@ -50,6 +51,7 @@ CORS: 사이트 도메인에서의 `POST` + `Content-Type` 헤더를 허용해�
 
 - 검증(필수 필드·길이·허용값), 허니팟, 속도 제한
 - `lead_key` unique 로 중복 방지 (DB unique index 권장)
+- `business_unit=event` 는 `event_id` 별로 집계해 정원 관리에 활용 (잔여석은 운영자가 `content/posts.js` 의 `seatsLeft` 에 반영)
 - 상태 관리: `new → contacted → consulted → booked/enrolled → visited/paid`, 별도 사유: 연락불가·부적합·중복·취소
 - 담당자, 접수시각, 첫 응답시각을 사업별로 기록
 - 개인정보는 보관 기간 정책에 따라 파기 (`docs/MISSING_INFO.md` 우선순위 3)

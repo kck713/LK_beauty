@@ -23,6 +23,7 @@ function layout(ctx, content) {
     ['academy', t.common.nav.academy],
     ['about', t.common.nav.about],
     ['contact', t.common.nav.contact],
+    ...(ctx.showNews ? [['news', t.common.nav.news]] : []),
   ];
   const ogImage = meta.ogImage ? site.baseUrl + '/' + meta.ogImage : '';
   const gtm = site.analytics.gtmId;
@@ -104,6 +105,7 @@ ${content}
     <p class="footer-note">${esc(t.common.kstNote)}</p>
   </div>
 </footer>
+${ctx.modalHtml || ''}
 ${mobileCta ? `<div class="mobile-cta" role="region" aria-label="${attr(mobileCta.label)}"><a class="btn btn-primary" href="${attr(mobileCta.href)}" data-cta="mobile-sticky" data-unit="${attr(mobileCta.unit)}">${esc(mobileCta.label)}</a></div>` : ''}
 <script src="/assets/main.js" defer></script>
 </body>

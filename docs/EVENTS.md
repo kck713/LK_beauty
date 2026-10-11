@@ -9,7 +9,7 @@
 |---|---|---|
 | `page_language` | `ko` / `en` / `ja` | 페이지 표시 언어. 국적을 뜻하지 않음 |
 | `page_type` | `home` / `studio` / `academy` / `about` / `contact` / `privacy` / `thanks` / `404` | |
-| `business_unit` | `brand` / `studio` / `academy` | 상담 탭 전환 시 contact 페이지에서 갱신 |
+| `business_unit` | `brand` / `studio` / `academy` / `event` | 상담 탭 전환 시 contact 페이지에서 갱신. 이벤트 신청·팝업 폼은 `event` |
 | `campaign_id` | 문자열 | URL `campaign_id` 또는 `utm_campaign` (last-touch) |
 
 ## 클라이언트 이벤트 (사이트에서 발생)
@@ -19,7 +19,8 @@
 | `cta_click` | `data-cta` 가 붙은 상담 버튼 클릭 | `cta_location` (hero-primary / hero-secondary / band / mobile-sticky / home-choice / home-location), `business_unit` | 관심 행동 |
 | `contact_click` | 인스타·카카오·전화·메일 등 외부 연결 클릭 | `contact_channel` | 외부 이동. **문의 완료 아님** |
 | `form_start` | 폼 첫 입력 | `business_unit` | 접수 시작 |
-| `lead_submit` | **서버 2xx 응답 이후에만** | `business_unit`, `service_id` (관심 시술 또는 과정 코드), `preferred_language`, `lead_id` | 접수 완료. 클릭 시 발생 금지 |
+| `lead_submit` | **서버 2xx 응답 이후에만** | `business_unit`, `service_id` (관심 시술 또는 과정 코드), `preferred_language`, `lead_id`, `event_id` (이벤트 폼) | 접수 완료. 클릭 시 발생 금지 |
+| `modal_view` | 진입 팝업이 실제로 열렸을 때 | `modal_id` | 팝업 노출. 세션당 1회 |
 | `lead_submit_error` | 서버 오류·중복(409)·네트워크 실패 | `error_type` | 접수 실패 |
 
 접수 완료 페이지(`/{lang}/contact/thanks/`)는 이벤트를 발생시키지 않으며 `noindex` 입니다. 전환은 `lead_submit` 으로만 집계합니다.

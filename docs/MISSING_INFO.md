@@ -32,7 +32,11 @@
 | 수료 후 실제 지원 | `content/academy.js` → `postCompletionSupport` | |
 | 공간·위생 절차 사진 | `content/assets.js` | |
 | OG 이미지 3종 (기본/스튜디오/아카데미) | `content/assets.js` | 없으면 og:image 생략 |
-| 후기 원문·사용 동의·대가 여부 | (미구현) | 확보 전 후기 섹션 없음 |
+| 후기 원문·사용 동의·대가 여부 | `content/testimonials.js` | `verified && consent` 일 때만 노출. 번역 없는 언어에선 숨김 |
+| 시술 상세 페이지 본문 (3개 언어) | `content/studio.js` → `services[].detail` | 세 언어 모두 채워져야 생성 |
+| 과정 상세 페이지 본문 (3개 언어) | `content/academy.js` → `courses[].detail` | 세 언어 모두 채워져야 생성 |
+| 세미나·이벤트·프로모션 게시물 | `content/posts.js` | 언어별 부분 게시 가능. 팝업은 `modal.enabled` |
+| 지도 임베드 URL | `content/site.js` → `address.mapEmbedUrl` | 주소 verified 일 때만 표시 |
 
 ## 우선순위 3 — 정책·측정
 

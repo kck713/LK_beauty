@@ -13,12 +13,14 @@
 content/
   site.js          운영 정보(주소·시간·채널·지원 언어·폼 엔드포인트·분석)
   i18n/{ko,en,ja}.js  모든 문구 (키 구조 동일, 빌드 시 검증)
-  studio.js        시술 메뉴·사례·가격 (verified 플래그)
-  academy.js       과정·커리큘럼·영상·성장 사례·강사 (verified 플래그)
+  studio.js        시술 메뉴·사례·가격·시술 상세 (verified 플래그)
+  academy.js       과정·커리큘럼·영상·성장 사례·강사·과정 상세 (verified 플래그)
+  posts.js         소식·이벤트·프로모션 게시물, 진입 팝업 설정
+  testimonials.js  고객·수강생 후기 (verified + consent 게이팅)
   assets.js        이미지 자산 매핑과 상태
 src/
   build.js         SSG (hreflang·canonical·sitemap·robots·404 생성)
-  templates/       layout, pages, helpers
+  templates/       layout, pages, extras(후기·소식·상세·팝업), helpers
   styles/main.css  모바일 우선, reduced-motion, 44px 터치 영역
   scripts/main.js  내비·탭·폼·UTM·이벤트 (PII 미전송)
   scripts/root.js  루트 언어 추천(리디렉션 없음)
@@ -41,6 +43,9 @@ docs/              MISSING_INFO · EVENTS · FORM_API · DEPLOY · QA
 | 상담 | `/ko/contact/` (`#studio` / `#academy`) | `/en/contact/` | `/ja/contact/` |
 | 개인정보 | `/ko/privacy/` | `/en/privacy/` | `/ja/privacy/` |
 | 접수 완료 (noindex) | `/ko/contact/thanks/` | `/en/contact/thanks/` | `/ja/contact/thanks/` |
+| 소식·이벤트 (게시물 있을 때) | `/ko/news/`, `/ko/news/{slug}/` | `/en/news/…` | `/ja/news/…` |
+| 시술 상세 (3개 언어 모두 준비 시) | `/ko/studio/{slug}/` | `/en/studio/{slug}/` | `/ja/studio/{slug}/` |
+| 과정 상세 (3개 언어 모두 준비 시) | `/ko/academy/{slug}/` | `/en/academy/{slug}/` | `/ja/academy/{slug}/` |
 
 광고 도착점: 영어·일본어 시술 → `/en/studio/`, `/ja/studio/` / 한국어 교육 → `/ko/academy/`. 홈은 광고 도착점으로 쓰지 않습니다.
 
@@ -52,6 +57,7 @@ npm run build:preview  # 내부 검토용 (미확정 항목을 배지와 함께 
 npm run dev            # http://localhost:4173
 npm run qa             # 출시 QA 검사
 npm test               # build + qa
+FIXTURES=1 npm run build && FIXTURES=1 npm run qa   # 샘플 데이터로 팝업·소식·상세·후기 레이아웃 확인 (배포 금지)
 ```
 
 환경변수는 `.env.example` 참고 (`SITE_URL`, `FORM_ENDPOINT`, `GTM_ID`).
@@ -61,6 +67,8 @@ npm test               # build + qa
 참고 레퍼런스를 바탕으로 한 아트디렉션: 흰 배경, 딥 틸(`--primary`) 주색, 버건디(`--accent`) 포인트, 세리프 디스플레이 제목(Playfair Display + Noto Serif KR/JP), 산세리프 본문(Montserrat + 시스템 CJK), 각진 버튼·입력창, 중앙 정렬 로고와 섹션 제목.
 색상은 `src/styles/main.css` 상단의 토큰만 바꾸면 전체에 반영됩니다. 로고가 확정되면 헤더의 워드마크(`.brand`)를 이미지로 교체하세요.
 웹폰트는 Google Fonts(`display=swap`)를 언어별로 최소 가중치만 로드합니다. 히어로 이미지는 `content/assets.js`에서 `status: 'ready'`로 바꾸면 자동으로 2단 레이아웃(이미지+카피)으로 전환됩니다.
+
+참고 사이트 요구사항 정의서와의 매핑(적용/보류/결정 필요)은 `docs/ARCHITECTURE.md` 에 있습니다.
 
 ## 운영 정보 채우기
 

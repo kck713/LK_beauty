@@ -16,5 +16,6 @@ module.exports = {
   'images/academy/growth-1-before.jpg': { status: 'missing', note: '수강생 작업 전. 동의·촬영 시점 필수.', usedBy: ['/*/academy/'] },
   'images/academy/growth-1-after.jpg': { status: 'missing', note: '수강생 작업 후. 동의·촬영 시점 필수.', usedBy: ['/*/academy/'] },
   'images/about/director.jpg': { status: 'missing', note: '원장 사진.', usedBy: ['/*/about/'] },
+  'images/posts/sample-seminar.jpg': { status: 'missing', note: '이벤트 배너 1600×900. 팝업·목록·상세 공용.', usedBy: ['/*/news/*'] },
   'images/about/space-1.jpg': { status: 'missing', note: '공간·위생 절차 사진.', usedBy: ['/*/about/'] },
 };

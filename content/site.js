@@ -33,6 +33,7 @@ module.exports = {
       ja: 'ソウル 江南区 三成洞',
     },
     mapUrl: null, // 확정된 지도 링크가 없으면 가짜 목적지를 만들지 않음
+    mapEmbedUrl: null, // Google Maps embed URL (주소 verified 일 때만 iframe 표시)
     parking: { verified: false, ko: '', en: '', ja: '' },
     nearestStation: { verified: false, ko: '', en: '', ja: '' },
   },

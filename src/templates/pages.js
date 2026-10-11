@@ -1,5 +1,6 @@
 'use strict';
 const { esc, attr, pagePath, show, badge, list, cards, faq, steps } = require('./helpers');
+const { testimonialsSection, detailReady } = require('./extras');
 
 // ---------- 공통 조각 ----------
 
@@ -66,6 +67,7 @@ function locationBlock(site, t, lang) {
     <div><dt>${esc(t.common.hoursLabel)}</dt><dd>${esc(hours)}${!site.hours.verified ? badge(site, t) : ''}</dd></div>
   </dl>
   <p class="muted small">${esc(t.common.kstNote)}</p>
+  ${a.verified && a.mapEmbedUrl ? `<div class="map-embed"><iframe src="${attr(a.mapEmbedUrl)}" title="${attr(t.common.locationLabel)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>` : ''}
 </div>`;
 }
 
@@ -106,7 +108,7 @@ function home({ site, t, lang, ready }) {
   + section('location', h.location.heading, `<p class="prose">${esc(h.location.desc)}</p>${locationBlock(site, t, lang)}<p><a class="btn btn-primary" href="${pagePath(lang, 'contact')}" data-cta="home-location" data-unit="brand">${esc(h.location.cta)}</a></p>`, 'section-alt');
 }
 
-function studio({ site, t, lang, studio: data, ready }) {
+function studio({ site, t, lang, studio: data, ready, testimonials }) {
   const s = t.studio;
   const contactHref = pagePath(lang, 'contact') + '#studio';
   const cases = data.cases.filter((c) => show(site, c) && (c.verified ? c.consent : true));
@@ -124,7 +126,7 @@ function studio({ site, t, lang, studio: data, ready }) {
 
   const servicesHtml = services.length ? `<div class="cards">${services.map((sv) => `
     <div class="card">
-      <h3 class="card-title">${esc(sv.name[lang])}${!sv.verified ? badge(site, t) : ''}</h3>
+      <h3 class="card-title">${detailReady(site, sv, site.languages) ? `<a href="${pagePath(lang, 'studio/' + sv.slug[lang])}">${esc(sv.name[lang])}</a>` : esc(sv.name[lang])}${!sv.verified ? badge(site, t) : ''}</h3>
       ${sv.summary[lang] ? `<p class="card-desc">${esc(sv.summary[lang])}</p>` : ''}
       ${sv.priceKRW ? `<p class="card-meta">${esc(s.services.priceLabel)}: ₩${Number(sv.priceKRW).toLocaleString('en-US')} (KRW)</p>` : ''}
       ${sv.retouchTerms[lang] ? `<p class="card-meta">${esc(s.services.retouchLabel)}: ${esc(sv.retouchTerms[lang])}</p>` : ''}
@@ -143,12 +145,13 @@ function studio({ site, t, lang, studio: data, ready }) {
   + section('pricing', s.pricing.heading, `<p class="prose">${esc(s.pricing.body)}</p>${list(s.pricing.notes, 'notes')}`)
   + section('process', s.process.heading, steps(s.process.steps), 'section-alt')
   + section('visit', s.visit.heading, `<p class="prose">${esc(s.visit.body)}</p><h3>${esc(s.visit.afterHeading)}</h3><p class="prose">${esc(s.visit.afterBody)}</p>`)
+  + testimonialsSection({ site, t, lang, testimonials, unit: 'studio' })
   + faq(s.faq.items, t.common.faqHeading)
   + section('location', s.location.heading, locationBlock(site, t, lang), 'section-alt')
   + ctaBand(s.ctaBand, contactHref, 'studio');
 }
 
-function academy({ site, t, lang, academy: data, ready }) {
+function academy({ site, t, lang, academy: data, ready, testimonials }) {
   const a = t.academy;
   const contactHref = pagePath(lang, 'contact') + '#academy';
   const courses = data.courses.filter((c) => show(site, c));
@@ -165,7 +168,7 @@ function academy({ site, t, lang, academy: data, ready }) {
     </figure>`).join('')}</div>` : '';
 
   const coursesHtml = courses.length ? `<div class="table-wrap"><table class="table">
-    <thead><tr><th scope="col"></th>${courses.map((c) => `<th scope="col">${esc(c.name[lang])}${!c.verified ? badge(site, t) : ''}</th>`).join('')}</tr></thead>
+    <thead><tr><th scope="col"></th>${courses.map((c) => `<th scope="col">${detailReady(site, c, site.languages) ? `<a href="${pagePath(lang, 'academy/' + c.slug[lang])}">${esc(c.name[lang])}</a>` : esc(c.name[lang])}${!c.verified ? badge(site, t) : ''}</th>`).join('')}</tr></thead>
     <tbody>
       <tr><th scope="row">${esc(a.courses.duration)}</th>${courses.map((c) => `<td>${esc(c.duration[lang])}</td>`).join('')}</tr>
       <tr><th scope="row">${esc(a.courses.schedule)}</th>${courses.map((c) => `<td>${esc(c.schedule[lang])}</td>`).join('')}</tr>
@@ -203,11 +206,12 @@ function academy({ site, t, lang, academy: data, ready }) {
   + section('courses', a.courses.heading, coursesHtml)
   + (support ? section('support', a.support.heading, list(support), 'section-alt') : '')
   + section('language', t.studio.languageSupport.heading, languageSupportBlock(site, t, lang), 'section-alt')
+  + testimonialsSection({ site, t, lang, testimonials, unit: 'academy' })
   + faq(a.faq.items, t.common.faqHeading)
   + ctaBand(a.ctaBand, contactHref, 'academy');
 }
 
-function about({ site, t, lang, academy: data }) {
+function about({ site, t, lang, academy: data, testimonials }) {
   const ab = t.about;
   const director = data.instructors.find((i) => i.id === 'director');
   const directorHtml = show(site, director) && (director.name[lang] || director.credentials[lang].length)
@@ -218,6 +222,7 @@ function about({ site, t, lang, academy: data }) {
   + section('principles', ab.principles.heading, cards(ab.principles.items), 'section-alt')
   + section('operations', ab.operations.heading, list(ab.operations.items, 'notes'))
   + directorHtml
+  + testimonialsSection({ site, t, lang, testimonials, unit: null })
   + section('channels', ab.channels.heading, channelsList(site, t) + locationBlock(site, t, lang), 'section-alt');
 }
 
@@ -334,7 +339,7 @@ function thanks({ t, lang }) {
 <section class="hero hero-compact">
   <div class="container">
     <h1>${esc(th.heading)}</h1>
-    <p class="lead" data-thanks-unit data-studio="${attr(th.studio)}" data-academy="${attr(th.academy)}"></p>
+    <p class="lead" data-thanks-unit data-studio="${attr(th.studio)}" data-academy="${attr(th.academy)}" data-event="${attr(th.event)}"></p>
     <p class="prose">${esc(th.body)}</p>
     <h2 class="h3">${esc(th.next)}</h2>
     <div class="hero-actions">

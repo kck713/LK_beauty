@@ -106,9 +106,46 @@
   // ---------- Thanks page copy ----------
   var thanksEl = document.querySelector('[data-thanks-unit]');
   if (thanksEl) {
-    var unit = (location.search.match(/[?&]unit=(studio|academy)/) || [])[1];
+    var unit = (location.search.match(/[?&]unit=(studio|academy|event)/) || [])[1];
     if (unit) thanksEl.textContent = thanksEl.getAttribute('data-' + unit) || '';
     else thanksEl.hidden = true;
+  }
+
+  // ---------- Entry modal (행사·공지) ----------
+  var modal = document.querySelector('[data-modal]');
+  if (modal) {
+    var mid = modal.getAttribute('data-modal-id');
+    var key = 'lk_modal_dismissed_' + mid;
+    var until = modal.getAttribute('data-modal-until');
+    var expired = until && new Date() > new Date(until.length <= 10 ? until + 'T23:59:59+09:00' : until);
+    var dismissed = (function () { try { var v = localStorage.getItem(key); if (!v) return sessionStorage.getItem(key) === '1'; return Number(v) > Date.now(); } catch (e) { return false; } })();
+    var lastFocus = null;
+    function closeModal() {
+      modal.hidden = true; document.body.classList.remove('modal-open');
+      try { sessionStorage.setItem(key, '1'); } catch (e) {}
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    function openModal() {
+      lastFocus = document.activeElement;
+      modal.hidden = false; document.body.classList.add('modal-open');
+      var first = modal.querySelector('.modal-close'); if (first) first.focus();
+      track('modal_view', { modal_id: mid });
+    }
+    if (!expired && !dismissed) setTimeout(openModal, 600);
+    modal.addEventListener('click', function (e) { if (e.target.closest('[data-modal-close]')) closeModal(); });
+    var dismissBtn = modal.querySelector('[data-modal-dismiss-today]');
+    if (dismissBtn) dismissBtn.addEventListener('click', function () { try { localStorage.setItem(key, String(Date.now() + 24 * 3600 * 1000)); } catch (e) {} closeModal(); });
+    document.addEventListener('keydown', function (e) {
+      if (modal.hidden) return;
+      if (e.key === 'Escape') { e.preventDefault(); closeModal(); return; }
+      if (e.key === 'Tab') { // 간단한 포커스 트랩
+        var f = modal.querySelectorAll('a[href], button:not([disabled]), input:not([type=hidden]):not([tabindex="-1"]), select, textarea');
+        if (!f.length) return;
+        var firstEl = f[0], lastEl = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === firstEl) { e.preventDefault(); lastEl.focus(); }
+        else if (!e.shiftKey && document.activeElement === lastEl) { e.preventDefault(); firstEl.focus(); }
+      }
+    });
   }
 
   // ---------- Forms ----------
@@ -212,6 +249,7 @@
           service_id: data.service_interest || data.course_interest || '',
           preferred_language: data.preferred_language || '',
           lead_id: (body && body.lead_id) || leadKey,
+          event_id: data.event_id || '',
         });
         var url = LK.thanksPath + '?unit=' + encodeURIComponent(unit);
         location.assign(url);

@@ -40,6 +40,7 @@ for (const f of files) {
   const is404 = /404\.html$/.test(r);
   const isRoot = r === '/index.html';
 
+  if (html.includes('name="lk-fixtures"') && process.env.FIXTURES !== '1') fail(r, 'FIXTURES build must not be deployed');
   if (!get(html, /<title>([^<]+)<\/title>/)) fail(r, 'missing <title>');
   if (!get(html, /<meta name="description" content="([^"]*)"/)) fail(r, 'missing meta description');
   const h1s = all(html, /<h1[^>]*>/g); if (h1s.length !== 1) fail(r, `expected 1 <h1>, found ${h1s.length}`);
@@ -53,7 +54,10 @@ for (const f of files) {
   const hl = all(html, /<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g).map((m) => ({ lang: m[1], href: m[2] }));
   const hlLangs = hl.map((h) => h.lang).sort().join(',');
   if (!is404) {
-    if (hlLangs !== ['x-default', ...LANGS].sort().join(',')) fail(r, `hreflang set = [${hlLangs}]`);
+    const isPost = /\/news\/[^/]+\/index\.html$/.test(r);
+    const expected = ['x-default', ...LANGS].sort().join(',');
+    if (!isPost && hlLangs !== expected) fail(r, `hreflang set = [${hlLangs}]`);
+    if (isPost && (!hl.some((h) => h.lang === 'x-default') || hl.some((h) => !['x-default', ...LANGS].includes(h.lang)))) fail(r, `post hreflang set = [${hlLangs}]`);
     if (!isRoot && !hl.some((h) => h.href === canonical)) fail(r, 'hreflang lacks self-reference');
     for (const h of hl) {
       const target = h.href.replace(site.baseUrl, '');
@@ -85,6 +89,8 @@ for (const f of files) {
   for (const m of all(html, />[^<]*(\{\w+\})[^<]*</g)) fail(r, `unfilled placeholder ${m[1]}`);
   if (/undefined|\[object Object\]|NaN/.test(html.replace(/<script[\s\S]*?<\/script>/g, ''))) fail(r, 'contains "undefined"/[object Object]/NaN');
   if (!site.preview && html.includes('badge-unverified')) fail(r, 'unverified badge exposed in public build');
+  // 팝업은 상담·접수완료·개인정보 페이지에 없어야 함
+  if (/\/(contact|privacy)\//.test(r) && html.includes('data-modal')) fail(r, 'entry modal must not render on contact/privacy pages');
 
   // 폼
   if (/\/contact\/index\.html$/.test(r)) {
