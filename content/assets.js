@@ -4,14 +4,14 @@
 'use strict';
 
 module.exports = {
-  'images/og/default.png': { status: 'missing', note: '1200×630 OG 이미지. 로고 기반. 텍스트 최소화.', usedBy: ['all pages'] },
-  'images/og/studio.png': { status: 'missing', note: '스튜디오용 OG. 대표 작업 1개(동의 확인).', usedBy: ['/*/studio/'] },
-  'images/og/academy.png': { status: 'missing', note: '아카데미용 OG. 교정 장면.', usedBy: ['/*/academy/'] },
+  'images/og/default.jpg': { status: 'ready', note: '1200×630 OG 이미지. 로고 기반. 텍스트 최소화.', usedBy: ['all pages'] },
+  'images/og/studio.jpg': { status: 'ready', note: '스튜디오용 OG. 대표 작업 1개(동의 확인).', usedBy: ['/*/studio/'] },
+  'images/og/academy.jpg': { status: 'ready', note: '아카데미용 OG. 교정 장면.', usedBy: ['/*/academy/'] },
   'images/logo.svg': { status: 'missing', note: '기존 로고 원본. 포인트색 추출 기준.', usedBy: ['header', 'favicon'] },
-  'images/home/hero.jpg': { status: 'missing', note: '홈 첫 화면. 실제 작업/사람 중심. 1600px, WebP 병행.', usedBy: ['/*/'] },
-  'images/studio/hero.jpg': { status: 'missing', note: '대표 작업 1개. 촬영 시점 기록.', usedBy: ['/*/studio/'] },
+  'images/home/hero.jpg': { status: 'ready', note: '홈 첫 화면. 2026-10-11 운영자 제공 모델 이미지(실제 고객·작업 아님). 1600px JPG+WebP. 사용권 확인 필요.', usedBy: ['/*/'] },
+  'images/studio/hero.jpg': { status: 'ready', note: '운영자 제공 모델 이미지(실제 작업 아님). 실제 대표 작업 사진 확보 시 교체. 1200×1500 JPG+WebP.', usedBy: ['/*/studio/'] },
   'images/cases/placeholder.jpg': { status: 'missing', note: '사례 3~6개. 직후/탈각 후/리터치 후 구분.', usedBy: ['/*/studio/'] },
-  'images/academy/hero.jpg': { status: 'missing', note: '교정 장면(손·설명 보이게).', usedBy: ['/*/academy/'] },
+  'images/academy/hero.jpg': { status: 'ready', note: '운영자 제공 모델 이미지. 실제 교정 장면 사진 확보 시 교체. 1600px JPG+WebP.', usedBy: ['/*/academy/'] },
   'images/academy/coaching-1-poster.jpg': { status: 'missing', note: '교정 영상 포스터. 자동재생 금지.', usedBy: ['/*/academy/'] },
   'images/academy/growth-1-before.jpg': { status: 'missing', note: '수강생 작업 전. 동의·촬영 시점 필수.', usedBy: ['/*/academy/'] },
   'images/academy/growth-1-after.jpg': { status: 'missing', note: '수강생 작업 후. 동의·촬영 시점 필수.', usedBy: ['/*/academy/'] },

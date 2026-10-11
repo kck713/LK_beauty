@@ -47,7 +47,7 @@ module.exports = {
     description: 'Permanent makeup designed for your face, and an academy that teaches the judgment behind it. LK BEAUTY AXIS studio and academy in Samseong-dong, Gangnam, Seoul.',
     hero: {
       eyebrow: 'Permanent Makeup Studio & Academy · Samseong-dong, Seoul',
-      imageAlt: 'A brow design consultation at LK BEAUTY AXIS studio in Seoul',
+      imageAlt: 'Model image of three people with different faces side by side',
       heading: 'We design beauty for the individual, and teach the judgment behind it.',
       sub: 'A studio that designs brows and features to suit your face, and an academy that teaches the standards behind those decisions. Choose the page that fits your purpose.',
       ctaAcademy: 'Explore the academy',
@@ -94,7 +94,7 @@ module.exports = {
     description: 'Brows that follow your face. Design consultation, pricing and retouch information, and how to book at LK BEAUTY AXIS studio in Samseong-dong, Seoul — for visitors travelling to Korea.',
     hero: {
       eyebrow: 'Studio · Samseong-dong, Seoul',
-      imageAlt: 'Real hair-stroke brow work at LK BEAUTY AXIS studio',
+      imageAlt: 'Model image of a face in profile showing natural brow hair flow',
       heading: 'Hair flow that fits your face. A look that fits you.',
       sub: 'We look at the shape and flow of your brows and the mood you want, and design together.',
       ctaPrimary: 'Design consultation inquiry',
@@ -175,7 +175,7 @@ module.exports = {
     description: 'The skill of drawing hair strokes and the judgment to design. Courses for beginners and experienced artists with correction-based teaching at LK BEAUTY AXIS academy in Gangnam, Seoul.',
     hero: {
       eyebrow: 'Academy · Gangnam, Seoul',
-      imageAlt: 'An instructor correcting a student’s work at LK BEAUTY AXIS academy',
+      imageAlt: 'Model image of a person checking their brow line with fingertips',
       heading: 'The skill to draw hair strokes. The judgment to design.',
       sub: 'Find the permanent makeup course that fits your experience and goals. Teaching is primarily conducted in Korean; please ask about language support before enrolling.',
       ctaPrimary: 'Course consultation inquiry',

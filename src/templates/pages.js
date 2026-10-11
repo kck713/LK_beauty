@@ -8,7 +8,7 @@ function hero(t, h, { eyebrow, heading, sub, primary, secondary, unit, media }) 
   return `
 <section class="hero hero-${attr(unit || 'brand')}${media ? ' hero-with-media' : primary ? ' hero-editorial' : ''}">
   <div class="container">
-    ${media ? `<div class="hero-media"><img src="/${attr(media.src)}" alt="${attr(media.alt)}" width="1200" height="900" fetchpriority="high"></div>` : primary ? `<div class="hero-signature" aria-hidden="true"><span class="signature-index">LK BEAUTY AXIS</span><span class="signature-monogram">LK<span>AXIS</span></span><span class="signature-foot">${unit === 'studio' ? 'STUDIO' : unit === 'academy' ? 'ACADEMY' : 'STUDIO & ACADEMY'}<span>SEOUL</span></span></div>` : ''}
+    ${media ? `<div class="hero-media"><picture>${media.webp ? `<source type="image/webp" srcset="/${attr(media.webp)}">` : ''}<img src="/${attr(media.src)}" alt="${attr(media.alt)}" width="${media.width || 1200}" height="${media.height || 900}" fetchpriority="high"></picture></div>` : primary ? `<div class="hero-signature" aria-hidden="true"><span class="signature-index">LK BEAUTY AXIS</span><span class="signature-monogram">LK<span>AXIS</span></span><span class="signature-foot">${unit === 'studio' ? 'STUDIO' : unit === 'academy' ? 'ACADEMY' : 'STUDIO & ACADEMY'}<span>SEOUL</span></span></div>` : ''}
     <div class="hero-copy">
       ${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ''}
       <h1>${esc(heading)}</h1>
@@ -23,8 +23,10 @@ function hero(t, h, { eyebrow, heading, sub, primary, secondary, unit, media }) 
 }
 
 // 준비된 이미지 자산만 히어로에 사용 (없으면 타이포 중심 히어로)
-function heroMedia(ready, rel, alt) {
-  return ready && ready(rel) ? { src: rel, alt } : null;
+function heroMedia(ready, rel, alt, dims) {
+  if (!(ready && ready(rel))) return null;
+  const webp = rel.replace(/\.jpe?g$/i, '.webp');
+  return { src: rel, alt, webp: ready(webp) ? webp : null, width: dims && dims[0], height: dims && dims[1] };
 }
 
 function section(id, heading, inner, extraCls = '') {
@@ -98,7 +100,7 @@ function home({ site, t, lang, ready }) {
     </a>`;
   };
   return hero(t, h, {
-    eyebrow: h.hero.eyebrow, heading: h.hero.heading, sub: h.hero.sub, unit: 'brand', media: heroMedia(ready, 'images/home/hero.jpg', h.hero.imageAlt),
+    eyebrow: h.hero.eyebrow, heading: h.hero.heading, sub: h.hero.sub, unit: 'brand', media: heroMedia(ready, 'images/home/hero.jpg', h.hero.imageAlt, [1600, 897]),
     primary: { href: pagePath(lang, h.choose.order[0]), label: h.choose.order[0] === 'academy' ? h.hero.ctaAcademy : h.hero.ctaStudio },
     secondary: { href: pagePath(lang, h.choose.order[1]), label: h.choose.order[1] === 'academy' ? h.hero.ctaAcademy : h.hero.ctaStudio },
   })
@@ -133,7 +135,7 @@ function studio({ site, t, lang, studio: data, ready, testimonials }) {
     </div>`).join('')}</div>` : `<p class="prose">${esc(s.services.pending)}</p>`;
 
   return hero(t, s, {
-    eyebrow: s.hero.eyebrow, heading: s.hero.heading, sub: s.hero.sub, unit: 'studio', media: heroMedia(ready, 'images/studio/hero.jpg', s.hero.imageAlt),
+    eyebrow: s.hero.eyebrow, heading: s.hero.heading, sub: s.hero.sub, unit: 'studio', media: heroMedia(ready, 'images/studio/hero.jpg', s.hero.imageAlt, [1200, 1500]),
     primary: { href: contactHref, label: s.hero.ctaPrimary },
     secondary: { href: '#process', label: s.hero.ctaSecondary },
   })
@@ -194,7 +196,7 @@ function academy({ site, t, lang, academy: data, ready, testimonials }) {
     </div>`).join('')}</div>` : '';
 
   return hero(t, a, {
-    eyebrow: a.hero.eyebrow, heading: a.hero.heading, sub: a.hero.sub, unit: 'academy', media: heroMedia(ready, 'images/academy/hero.jpg', a.hero.imageAlt),
+    eyebrow: a.hero.eyebrow, heading: a.hero.heading, sub: a.hero.sub, unit: 'academy', media: heroMedia(ready, 'images/academy/hero.jpg', a.hero.imageAlt, [1600, 900]),
     primary: { href: contactHref, label: a.hero.ctaPrimary },
     secondary: { href: '#tracks', label: a.hero.ctaSecondary },
   })

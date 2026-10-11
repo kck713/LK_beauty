@@ -134,13 +134,13 @@ function assetReady(rel) {
 // ---------- 페이지 정의 ----------
 // group: hreflang 대응 그룹. 같은 서비스의 언어판끼리만 연결 (스튜디오↔스튜디오, 아카데미↔아카데미).
 const PAGE_DEFS = [
-  { key: 'home', slug: '', render: pages.home, unit: 'brand', og: 'images/og/default.png', mobileCta: null },
-  { key: 'studio', slug: 'studio', render: pages.studio, unit: 'studio', og: 'images/og/studio.png', mobileCta: 'studio' },
-  { key: 'academy', slug: 'academy', render: pages.academy, unit: 'academy', og: 'images/og/academy.png', mobileCta: 'academy' },
-  { key: 'about', slug: 'about', render: pages.about, unit: 'brand', og: 'images/og/default.png', mobileCta: null },
-  { key: 'contact', slug: 'contact', render: pages.contact, unit: 'brand', og: 'images/og/default.png', mobileCta: null },
-  { key: 'privacy', slug: 'privacy', render: pages.privacy, unit: 'brand', og: 'images/og/default.png', mobileCta: null },
-  { key: 'thanks', slug: 'contact/thanks', render: pages.thanks, unit: 'brand', og: 'images/og/default.png', mobileCta: null, noindex: true },
+  { key: 'home', slug: '', render: pages.home, unit: 'brand', og: 'images/og/default.jpg', mobileCta: null },
+  { key: 'studio', slug: 'studio', render: pages.studio, unit: 'studio', og: 'images/og/studio.jpg', mobileCta: 'studio' },
+  { key: 'academy', slug: 'academy', render: pages.academy, unit: 'academy', og: 'images/og/academy.jpg', mobileCta: 'academy' },
+  { key: 'about', slug: 'about', render: pages.about, unit: 'brand', og: 'images/og/default.jpg', mobileCta: null },
+  { key: 'contact', slug: 'contact', render: pages.contact, unit: 'brand', og: 'images/og/default.jpg', mobileCta: null },
+  { key: 'privacy', slug: 'privacy', render: pages.privacy, unit: 'brand', og: 'images/og/default.jpg', mobileCta: null },
+  { key: 'thanks', slug: 'contact/thanks', render: pages.thanks, unit: 'brand', og: 'images/og/default.jpg', mobileCta: null, noindex: true },
 ];
 
 function build() {
@@ -180,7 +180,7 @@ function build() {
     if (!noindex) addSitemap(pagePath(lang, slug), [...alternates.map((a) => ({ lang: a.lang, href: a.href })), { lang: 'x-default', href: xDefault }]);
   }
   const altsFor = (slugByLang) => langs.filter((l) => slugByLang[l.code] != null).map((l) => ({ lang: l.code, name: l.name, href: pagePath(l.code, slugByLang[l.code]) }));
-  const ogFor = (rel) => (assetReady(rel) ? rel : (assetReady('images/og/default.png') ? 'images/og/default.png' : ''));
+  const ogFor = (rel) => (assetReady(rel) ? rel : (assetReady('images/og/default.jpg') ? 'images/og/default.jpg' : ''));
 
   for (const def of PAGE_DEFS) {
     const slugByLang = Object.fromEntries(langs.map((l) => [l.code, def.slug]));
@@ -209,7 +209,7 @@ function build() {
     for (const t of langs) {
       const d = sv.detail[t.code];
       emit({ t, slug: slugByLang[t.code], alternates, xDefault: pagePath(site.defaultLang, slugByLang[site.defaultLang]), pageKey: 'studio-detail', unit: 'studio',
-        meta: { title: `${sv.name[t.code]} | ${t.studio.title}`, description: d.intro, ogImage: ogFor('images/og/studio.png') },
+        meta: { title: `${sv.name[t.code]} | ${t.studio.title}`, description: d.intro, ogImage: ogFor('images/og/studio.jpg') },
         mobileCta: { href: pagePath(t.code, 'contact') + '#studio', label: t.common.mobileCtaStudio, unit: 'studio' },
         content: extras.serviceDetail({ site, t, lang: t.code, sv }) });
     }
@@ -221,7 +221,7 @@ function build() {
     for (const t of langs) {
       const d = c.detail[t.code];
       emit({ t, slug: slugByLang[t.code], alternates, xDefault: pagePath(site.defaultLang, slugByLang[site.defaultLang]), pageKey: 'academy-detail', unit: 'academy',
-        meta: { title: `${c.name[t.code]} | ${t.academy.title}`, description: d.intro, ogImage: ogFor('images/og/academy.png') },
+        meta: { title: `${c.name[t.code]} | ${t.academy.title}`, description: d.intro, ogImage: ogFor('images/og/academy.jpg') },
         mobileCta: { href: pagePath(t.code, 'contact') + '#academy', label: t.common.mobileCtaAcademy, unit: 'academy' },
         content: extras.courseDetail({ site, t, lang: t.code, c }) });
     }
@@ -233,7 +233,7 @@ function build() {
     for (const t of langs) {
       const has = posts.some((p) => extras.postPublished(site, p, t.code));
       emit({ t, slug: 'news', alternates, xDefault: pagePath(site.defaultLang, 'news'), pageKey: 'news', unit: 'brand', noindex: !has,
-        meta: { title: t.news.title, description: t.news.description, ogImage: ogFor('images/og/default.png') },
+        meta: { title: t.news.title, description: t.news.description, ogImage: ogFor('images/og/default.jpg') },
         content: extras.newsIndex({ site, t, lang: t.code, posts, ready: assetReady }) });
     }
     for (const p of posts) {
@@ -244,7 +244,7 @@ function build() {
       const xd = slugByLang[site.defaultLang] || slugByLang[pubLangs[0].code];
       for (const t of pubLangs) {
         emit({ t, slug: slugByLang[t.code], alternates, xDefault: pagePath(xd === slugByLang[site.defaultLang] ? site.defaultLang : pubLangs[0].code, xd), pageKey: 'post', unit: p.event && p.event.businessUnit ? p.event.businessUnit : 'brand',
-          meta: { title: `${p.title[t.code]} | ${t.common.brand}`, description: p.summary[t.code] || p.title[t.code], ogImage: assetReady(p.image) ? p.image : ogFor('images/og/default.png') },
+          meta: { title: `${p.title[t.code]} | ${t.common.brand}`, description: p.summary[t.code] || p.title[t.code], ogImage: assetReady(p.image) ? p.image : ogFor('images/og/default.jpg') },
           content: extras.postPage({ site, t, lang: t.code, p, ready: assetReady }), withModal: false });
       }
     }

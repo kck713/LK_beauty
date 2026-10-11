@@ -22,6 +22,7 @@
 
 | 항목 | 파일 | 비고 |
 |---|---|---|
+| 히어로·OG 이미지 사용권 | `public/images/{home,studio,academy}/hero.jpg`, `public/images/og/*.jpg` | 2026-10-11 운영자 제공 모델 이미지 적용. 상업 사용 라이선스 확인 필요. 실제 작업·공간 사진 확보 시 교체 |
 | 로고 원본·브랜드 가이드·포인트색 | `public/images/logo.svg`, `src/styles/main.css` `--accent` | 현재 임시 'LK' 마크·갈색 포인트 |
 | 공식 한글 표기 (Lab / Axis 명칭 정리) | `content/data/site.json` → `brandKo` | 확정 전 영문만 사용 |
 | 실제 작업 사례 3~6개 (원본, 촬영 시점, 디자인 이유, 사용 동의) | `content/data/studio.json` → `cases`, `public/images/cases/` | 직후/탈각 후/리터치 후 구분 |
