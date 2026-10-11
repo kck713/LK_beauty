@@ -103,10 +103,20 @@ function validateContent() {
 }
 
 // ---------- 유틸 ----------
+// RELATIVE=1: 절대 경로(/ko/studio/)를 상대 경로(../studio/index.html)로 변환 — 하위 경로·미리보기 호스팅(아티팩트 등)용. 공개 배포에서는 사용하지 않음.
+const RELATIVE = process.env.RELATIVE === '1';
+function relativize(html, rel) {
+  const depth = rel.split('/').length - 1; // 'ko/studio/index.html' → 2
+  const prefix = depth ? '../'.repeat(depth) : './';
+  const conv = (p) => prefix + (p.endsWith('/') ? p + 'index.html' : p);
+  return html
+    .replace(/\b(href|src|action)="\/(?!\/)([^"#?]*)([#?][^"]*)?"/g, (m, a, p, rest) => `${a}="${conv(p)}${rest || ''}"`)
+    .replace(/thanksPath:"\/([^"]*)"/g, (m, p) => `thanksPath:"${conv(p)}"`);
+}
 function write(rel, html) {
   const out = path.join(DIST, rel);
   fs.mkdirSync(path.dirname(out), { recursive: true });
-  fs.writeFileSync(out, html);
+  fs.writeFileSync(out, RELATIVE && rel.endsWith('.html') ? relativize(html, rel) : html);
 }
 function copyDir(src, dst) {
   if (!fs.existsSync(src)) return;
