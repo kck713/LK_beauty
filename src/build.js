@@ -110,7 +110,7 @@ function relativize(html, rel) {
   const prefix = depth ? '../'.repeat(depth) : './';
   const conv = (p) => prefix + (p.endsWith('/') ? p + 'index.html' : p);
   return html
-    .replace(/\b(href|src|action)="\/(?!\/)([^"#?]*)([#?][^"]*)?"/g, (m, a, p, rest) => `${a}="${conv(p)}${rest || ''}"`)
+    .replace(/\b(href|src|srcset|poster|action)="\/(?!\/)([^"#?]*)([#?][^"]*)?"/g, (m, a, p, rest) => `${a}="${conv(p)}${rest || ''}"`)
     .replace(/thanksPath:"\/([^"]*)"/g, (m, p) => `thanksPath:"${conv(p)}"`);
 }
 function write(rel, html) {
