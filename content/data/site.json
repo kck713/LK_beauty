@@ -1,0 +1,95 @@
+{
+  "brand": "LK BEAUTY AXIS",
+  "brandKo": {
+    "verified": false,
+    "value": ""
+  },
+  "instagramHandle": "@lk_beautyaxis",
+  "address": {
+    "verified": false,
+    "full": {
+      "ko": "서울 강남구 삼성로116길 5 3층",
+      "en": "3F, 5 Samseong-ro 116-gil, Gangnam-gu, Seoul, Korea",
+      "ja": "ソウル特別市江南区三成路116ギル5 3階"
+    },
+    "area": {
+      "ko": "서울 강남구 삼성동",
+      "en": "Samseong-dong, Gangnam-gu, Seoul",
+      "ja": "ソウル 江南区 三成洞"
+    },
+    "mapUrl": null,
+    "mapEmbedUrl": null,
+    "parking": {
+      "verified": false,
+      "ko": "",
+      "en": "",
+      "ja": ""
+    },
+    "nearestStation": {
+      "verified": false,
+      "ko": "",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "hours": {
+    "verified": false,
+    "ko": "",
+    "en": "",
+    "ja": ""
+  },
+  "supportLanguages": {
+    "verified": false,
+    "consultation": [],
+    "note": {
+      "ko": "",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "channels": {
+    "instagram": {
+      "verified": true,
+      "url": "https://www.instagram.com/lk_beautyaxis/",
+      "label": "@lk_beautyaxis"
+    },
+    "kakao": {
+      "verified": false,
+      "url": "https://pf.kakao.com/_DBTKs",
+      "label": "KakaoTalk"
+    },
+    "email": {
+      "verified": false,
+      "address": ""
+    },
+    "phone": {
+      "verified": false,
+      "number": "",
+      "display": ""
+    },
+    "whatsapp": {
+      "verified": false,
+      "url": ""
+    },
+    "line": {
+      "verified": false,
+      "url": ""
+    }
+  },
+  "privacy": {
+    "controller": "LK BEAUTY AXIS",
+    "retention": {
+      "verified": false,
+      "ko": "",
+      "en": "",
+      "ja": ""
+    },
+    "contact": {
+      "verified": false,
+      "ko": "",
+      "en": "",
+      "ja": ""
+    },
+    "lastUpdated": "2026-10-11"
+  }
+}

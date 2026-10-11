@@ -1,0 +1,124 @@
+{
+  "services": [
+    {
+      "id": "brow-hairstroke",
+      "verified": false,
+      "name": {
+        "ko": "눈썹 헤어스트록",
+        "en": "Hair-stroke brows",
+        "ja": "眉ヘアストローク"
+      },
+      "summary": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "priceKRW": null,
+      "retouchIncluded": null,
+      "retouchTerms": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "slug": {
+        "ko": "hairstroke",
+        "en": "hair-stroke-brows",
+        "ja": "hairstroke"
+      },
+      "detail": {
+        "ko": null,
+        "en": null,
+        "ja": null
+      }
+    },
+    {
+      "id": "eyeliner",
+      "verified": false,
+      "name": {
+        "ko": "아이라인",
+        "en": "Eyeliner",
+        "ja": "アイライン"
+      },
+      "summary": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "priceKRW": null,
+      "retouchIncluded": null,
+      "retouchTerms": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "slug": {
+        "ko": "eyeliner",
+        "en": "eyeliner",
+        "ja": "eyeliner"
+      },
+      "detail": {
+        "ko": null,
+        "en": null,
+        "ja": null
+      }
+    },
+    {
+      "id": "lips",
+      "verified": false,
+      "name": {
+        "ko": "입술",
+        "en": "Lips",
+        "ja": "リップ"
+      },
+      "summary": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "priceKRW": null,
+      "retouchIncluded": null,
+      "retouchTerms": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "slug": {
+        "ko": "lips",
+        "en": "lips",
+        "ja": "lips"
+      },
+      "detail": {
+        "ko": null,
+        "en": null,
+        "ja": null
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "case-placeholder-1",
+      "verified": false,
+      "serviceId": "brow-hairstroke",
+      "image": "images/cases/placeholder.jpg",
+      "alt": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "stage": "healed",
+      "takenAt": "",
+      "consent": false,
+      "reason": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      }
+    }
+  ],
+  "fxReference": {
+    "verified": false,
+    "asOf": "",
+    "usdPerKrw": null,
+    "jpyPerKrw": null
+  }
+}

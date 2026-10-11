@@ -1,5 +1,5 @@
-// 이미지 자산 매핑 — 실제 파일을 public/images/ 에 넣고 status 를 'ready' 로 바꿉니다.
-// 빌드 시 status 가 'ready' 가 아닌 자산을 참조하는 섹션은 공개 빌드에서 렌더링되지 않습니다.
+// 필요한 이미지 자산 체크리스트 — 실제 파일이 public/images/ 경로에 존재하면 빌드가 자동으로 사용합니다 (CMS 업로드 포함).
+// status 값은 참고용이며 빌드 판정에는 쓰지 않습니다. dist/build-report.json 의 missingAssets 로 누락을 확인하세요.
 
 'use strict';
 

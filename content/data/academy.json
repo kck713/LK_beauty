@@ -1,0 +1,160 @@
+{
+  "courses": [
+    {
+      "id": "course-beginner",
+      "verified": false,
+      "track": "beginner",
+      "name": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "duration": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "schedule": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "capacity": null,
+      "priceKRW": null,
+      "includes": {
+        "ko": [],
+        "en": [],
+        "ja": []
+      },
+      "outcomes": {
+        "ko": [],
+        "en": [],
+        "ja": []
+      },
+      "slug": {
+        "ko": "beginner",
+        "en": "beginner",
+        "ja": "beginner"
+      },
+      "detail": {
+        "ko": null,
+        "en": null,
+        "ja": null
+      }
+    },
+    {
+      "id": "course-hairstroke-advanced",
+      "verified": false,
+      "track": "experienced",
+      "name": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "duration": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "schedule": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "capacity": null,
+      "priceKRW": null,
+      "includes": {
+        "ko": [],
+        "en": [],
+        "ja": []
+      },
+      "outcomes": {
+        "ko": [],
+        "en": [],
+        "ja": []
+      },
+      "slug": {
+        "ko": "hair-stroke",
+        "en": "hair-stroke",
+        "ja": "hair-stroke"
+      },
+      "detail": {
+        "ko": null,
+        "en": null,
+        "ja": null
+      }
+    }
+  ],
+  "curriculum": {
+    "verified": false,
+    "steps": {
+      "ko": [],
+      "en": [],
+      "ja": []
+    }
+  },
+  "coachingVideos": [
+    {
+      "id": "coaching-placeholder-1",
+      "verified": false,
+      "poster": "images/academy/coaching-1-poster.jpg",
+      "src": "",
+      "caption": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      }
+    }
+  ],
+  "growthCases": [
+    {
+      "id": "growth-placeholder-1",
+      "verified": false,
+      "consent": false,
+      "before": "images/academy/growth-1-before.jpg",
+      "after": "images/academy/growth-1-after.jpg",
+      "priorExperience": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "course": "",
+      "beforeTakenAt": "",
+      "afterTakenAt": "",
+      "supervised": null,
+      "note": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      }
+    }
+  ],
+  "instructors": [
+    {
+      "id": "director",
+      "verified": false,
+      "name": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "role": {
+        "ko": "원장",
+        "en": "Director",
+        "ja": "院長"
+      },
+      "credentials": {
+        "ko": [],
+        "en": [],
+        "ja": []
+      },
+      "photo": "images/about/director.jpg"
+    }
+  ],
+  "postCompletionSupport": {
+    "verified": false,
+    "ko": [],
+    "en": [],
+    "ja": []
+  }
+}

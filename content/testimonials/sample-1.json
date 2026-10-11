@@ -1,0 +1,20 @@
+{
+  "id": "sample-1",
+  "verified": false,
+  "consent": false,
+  "compensated": false,
+  "unit": "studio",
+  "displayName": "",
+  "context": {
+    "ko": "",
+    "en": "",
+    "ja": ""
+  },
+  "quote": {
+    "ko": "",
+    "en": "",
+    "ja": ""
+  },
+  "sourceUrl": "",
+  "date": ""
+}

@@ -8,7 +8,7 @@
 | 요구 | 적용 | 구현 위치 |
 |---|---|---|
 | GNB: 좌 햄버거 · 중앙 로고 · 우 아이콘 | **적용** (우측은 장바구니 대신 상담 아이콘. 쇼핑 기능 결정 시 교체 가능) | `src/templates/layout.js`, `.header-inner` |
-| 진입 팝업: 행사 이미지 + 성명·연락처 폼 + CTA | **적용** — `content/posts.js`의 게시물에 `modal.enabled:true`와 기간을 설정하면 노출. 세션당 1회, '오늘 하루 보지 않기', Esc·포커스 트랩, 상담/개인정보/접수완료 페이지 제외 | `src/templates/extras.js` `modal()`, `src/scripts/main.js` |
+| 진입 팝업: 행사 이미지 + 성명·연락처 폼 + CTA | **적용** — `content/posts/*.json`의 게시물에 `modal.enabled:true`와 기간을 설정하면 노출. 세션당 1회, '오늘 하루 보지 않기', Esc·포커스 트랩, 상담/개인정보/접수완료 페이지 제외 | `src/templates/extras.js` `modal()`, `src/scripts/main.js` |
 | 팝업 폼 데이터 전송 | **적용** — 상담 폼과 같은 엔드포인트로 `business_unit:"event"`, `event_id` 포함 전송. 서버 성공 후에만 `lead_submit` | `docs/FORM_API.md` |
 | 메인 Hero & About | **적용** — 홈 히어로(이미지 슬롯 포함) + '유행보다 기준' 소개. "상위 10대" 같은 검증 불가 수치는 사용하지 않음 | `content/i18n/*.js` `home` |
 
@@ -17,7 +17,7 @@
 | 참고 사이트 | LK 대응 | 상태 |
 |---|---|---|
 | Trang chủ (홈) | `/{lang}/` | 적용 |
-| Giới thiệu (브랜드 소개·강사진·리뷰) | `/{lang}/about/` + 강사(`academy.instructors`) + 후기 모듈(`content/testimonials.js`) | 적용. 강사·후기는 검증·동의 후 노출 |
+| Giới thiệu (브랜드 소개·강사진·리뷰) | `/{lang}/about/` + 강사(`academy.instructors`) + 후기 모듈(`content/testimonials/*.json`) | 적용. 강사·후기는 검증·동의 후 노출 |
 | Dịch vụ (시술별 상세) | `/{lang}/studio/` + 시술 상세 `/{lang}/studio/{slug}/` | 적용. `services[].detail` 3개 언어 모두 채워지고 `verified` 일 때 자동 생성. 언어별 slug 지원, hreflang 자동 |
 | Đào tạo (글로벌 마스터클래스·1:1 프리미엄) | `/{lang}/academy/` + 과정 상세 `/{lang}/academy/{slug}/` | 과정 상세 적용. **해외 마스터클래스는 기획안 범위 밖(한국인 대상 아카데미)** → 미적용. 필요 시 `posts` 의 event 타입으로 국내 세미나만 운영 |
 | Sản phẩm (제품 구매·장바구니) | 없음 | **결정 필요** (아래 3-B) |
@@ -36,10 +36,10 @@
 - 운영자 결정: 전자상거래를 붙이지 않습니다. 헤더 우측은 상담 아이콘을 유지하고, 장바구니·제품 페이지·결제는 구현하지 않습니다.
 - 추후 필요해지면 외부 커머스 링크(스마트스토어 등)를 메뉴 항목으로 추가하는 방식이 가장 가볍습니다. 사이트 구조 변경은 필요 없습니다.
 
-### C. CMS (후기·포트폴리오·언론 보도 백오피스) — 구조 적용, 도구 선택 필요
-- 현재 콘텐츠는 `content/*.js` 파일이 단일 소스이며, Git 커밋 → 빌드 → 배포로 반영됩니다.
-- 운영자가 직접 자주 수정해야 하면 Git 기반 CMS(Decap CMS / Tina)를 `content/` 에 연결하는 방식을 권장합니다. 빌드 구조 변경 없이 폼 UI만 추가됩니다. `verified`/`consent` 플래그를 CMS 필드로 그대로 노출해 미검증 게시를 막습니다.
-- 데이터 모델은 이미 준비됨: 후기(`testimonials.js`), 사례·포트폴리오(`studio.cases`, `academy.growthCases`), 소식·언론(`posts.js` type news).
+### C. CMS (후기·포트폴리오·언론 보도 백오피스) — **Decap CMS 적용 (2026-10-11)**
+- `/admin/` 에서 Git 기반 CMS(Decap)로 운영 정보·시술·과정·사례·소식·후기를 편집합니다. 저장 → GitHub 커밋/PR → 빌드·배포. 설정은 `public/admin/config.yml`, 안내는 `docs/CMS.md`.
+- 운영 데이터는 JSON(`content/data/*.json`, `content/posts/*.json`, `content/testimonials/*.json`)이 단일 소스이며, 문구(i18n)·빌드 설정은 개발자 영역(JS)으로 분리했습니다.
+- `verified`/`consent` 플래그가 CMS 필드('운영자 확인 완료', '사용 동의')로 노출되고, 검토 워크플로우(PR)와 빌드 단계 유효성 검사가 미검증 게시를 2중으로 막습니다.
 
 ### D. 글로벌 스케줄링 (마스터클래스 일정·TO·신청) — 국내 이벤트 범위로 적용, **해외 마스터클래스는 추후 구현 (2026-10-11 결정)**
 - `posts.js` event 타입: 일시(KST)·장소·정원·잔여석·접수 여부. 상세 페이지에 참가 신청 폼, 목록·팝업 연동.

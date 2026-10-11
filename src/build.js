@@ -55,6 +55,53 @@ function validateI18n() {
   if (bad) { console.error('i18n validation failed'); process.exit(1); }
 }
 
+// ---------- 콘텐츠(JSON) 유효성 검사 — CMS 편집 실수를 빌드 단계에서 차단 ----------
+function validateContent() {
+  const errs = [];
+  const L = site.languages;
+  const isId = (v) => typeof v === 'string' && /^[a-z0-9-]+$/.test(v);
+  const i18nObj = (o) => o && typeof o === 'object';
+  const uniq = (arr, what) => { const seen = new Set(); for (const x of arr) { if (seen.has(x.id)) errs.push(`${what}: duplicate id "${x.id}"`); seen.add(x.id); } };
+
+  for (const sv of studioData.services) {
+    if (!isId(sv.id)) errs.push(`studio.services: invalid id "${sv.id}"`);
+    if (!i18nObj(sv.name) || L.some((l) => !sv.name[l])) errs.push(`studio.services.${sv.id}: name must have ko/en/ja`);
+    if (sv.priceKRW != null && sv.priceKRW !== '' && !(Number(sv.priceKRW) > 0)) errs.push(`studio.services.${sv.id}: priceKRW must be a positive number`);
+    if (sv.verified && sv.slug && L.some((l) => sv.slug[l] && !/^[a-z0-9-]+$/.test(sv.slug[l]))) errs.push(`studio.services.${sv.id}: slug must be lowercase a-z0-9-`);
+  }
+  uniq(studioData.services, 'studio.services');
+  for (const c of studioData.cases) {
+    if (!isId(c.id)) errs.push(`studio.cases: invalid id "${c.id}"`);
+    if (c.verified && !c.consent) errs.push(`studio.cases.${c.id}: verified case requires consent`);
+    if (c.verified && !assetReady(c.image)) errs.push(`studio.cases.${c.id}: image missing (${c.image})`);
+    if (c.verified && !['immediate', 'healed', 'after-retouch'].includes(c.stage)) errs.push(`studio.cases.${c.id}: invalid stage`);
+  }
+  for (const c of academyData.courses) {
+    if (!isId(c.id)) errs.push(`academy.courses: invalid id "${c.id}"`);
+    if (c.verified && L.some((l) => !c.name[l])) errs.push(`academy.courses.${c.id}: verified course needs name in ko/en/ja`);
+    if (c.priceKRW != null && c.priceKRW !== '' && !(Number(c.priceKRW) > 0)) errs.push(`academy.courses.${c.id}: priceKRW must be a positive number`);
+  }
+  uniq(academyData.courses, 'academy.courses');
+  for (const g of academyData.growthCases) if (g.verified && !g.consent) errs.push(`academy.growthCases.${g.id}: verified case requires consent`);
+  for (const p of posts) {
+    if (!isId(p.id)) errs.push(`posts: invalid id "${p.id}"`);
+    if (!['news', 'event', 'promotion'].includes(p.type)) errs.push(`posts.${p.id}: invalid type "${p.type}"`);
+    if (p.verified && !L.some((l) => p.slug && p.slug[l] && p.title && p.title[l])) errs.push(`posts.${p.id}: verified post needs slug+title in at least one language`);
+    for (const l of L) if (p.slug && p.slug[l] && !/^[a-z0-9-]+$/.test(p.slug[l])) errs.push(`posts.${p.id}: slug.${l} must be lowercase a-z0-9-`);
+    if (p.type === 'event' && p.verified && p.event && p.event.registrationOpen && !p.event.startsAt) errs.push(`posts.${p.id}: open registration requires startsAt`);
+  }
+  uniq(posts, 'posts');
+  const modals = posts.filter((p) => p.modal && p.modal.enabled && (p.verified || site.preview));
+  if (modals.length > 1) errs.push(`posts: more than one modal enabled (${modals.map((p) => p.id).join(', ')})`);
+  for (const t of testimonials) {
+    if (!isId(t.id)) errs.push(`testimonials: invalid id "${t.id}"`);
+    if (!['studio', 'academy'].includes(t.unit)) errs.push(`testimonials.${t.id}: unit must be studio|academy`);
+    if (t.verified && !t.consent) errs.push(`testimonials.${t.id}: verified testimonial requires consent`);
+  }
+  uniq(testimonials, 'testimonials');
+  if (errs.length) { errs.forEach((e) => console.error('[content] ' + e)); console.error('content validation failed'); process.exit(1); }
+}
+
 // ---------- 유틸 ----------
 function write(rel, html) {
   const out = path.join(DIST, rel);
@@ -69,9 +116,9 @@ function copyDir(src, dst) {
     if (e.isDirectory()) copyDir(s, d); else fs.copyFileSync(s, d);
   }
 }
+// 이미지 자산 준비 여부: public/ 에 실제 파일이 있으면 사용 (CMS 업로드 즉시 반영). content/assets.js 는 체크리스트 용도.
 function assetReady(rel) {
-  const a = assets[rel];
-  return a && a.status === 'ready' && fs.existsSync(path.join(PUBLIC, rel));
+  return !!rel && fs.existsSync(path.join(PUBLIC, rel));
 }
 
 // ---------- 페이지 정의 ----------
@@ -88,6 +135,7 @@ const PAGE_DEFS = [
 
 function build() {
   validateI18n();
+  validateContent();
   fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
 
@@ -214,7 +262,7 @@ ${u.alternates.map((a) => `    <xhtml:link rel="alternate" hreflang="${a.lang}" 
 </urlset>
 `;
   write('sitemap.xml', sitemap);
-  write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /*/contact/thanks/\nSitemap: ${site.baseUrl}/sitemap.xml\n`);
+  write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /*/contact/thanks/\nSitemap: ${site.baseUrl}/sitemap.xml\n`);
 
   // favicon (로고 확정 전 임시)
   if (!fs.existsSync(path.join(DIST, 'favicon.svg'))) {
@@ -230,7 +278,7 @@ ${u.alternates.map((a) => `    <xhtml:link rel="alternate" hreflang="${a.lang}" 
     formEndpoint: site.form.endpoint ? 'set' : 'MISSING',
     gtm: site.analytics.gtmId ? 'set' : 'not set',
     pages: sitemapUrls.length,
-    missingAssets: Object.entries(assets).filter(([k]) => !assetReady(k)).map(([k, v]) => `${k} (${v.status})`),
+    missingAssets: Object.keys(assets).filter((k) => !assetReady(k)),
     unverified: [
       ...(site.address.verified ? [] : ['site.address']),
       ...(site.hours.verified ? [] : ['site.hours']),

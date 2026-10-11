@@ -11,13 +11,15 @@
 
 ```
 content/
-  site.js          운영 정보(주소·시간·채널·지원 언어·폼 엔드포인트·분석)
-  i18n/{ko,en,ja}.js  모든 문구 (키 구조 동일, 빌드 시 검증)
-  studio.js        시술 메뉴·사례·가격·시술 상세 (verified 플래그)
-  academy.js       과정·커리큘럼·영상·성장 사례·강사·과정 상세 (verified 플래그)
-  posts.js         소식·이벤트·프로모션 게시물, 진입 팝업 설정
-  testimonials.js  고객·수강생 후기 (verified + consent 게이팅)
-  assets.js        이미지 자산 매핑과 상태
+  data/site.json      운영 정보(주소·시간·채널·지원 언어·개인정보)  ← CMS 편집
+  data/studio.json    시술 메뉴·가격·사례·시술 상세              ← CMS 편집
+  data/academy.json   과정·커리큘럼·영상·성장 사례·강사·과정 상세 ← CMS 편집
+  posts/*.json        소식·이벤트·프로모션, 진입 팝업 설정        ← CMS 편집
+  testimonials/*.json 고객·수강생 후기 (verified + consent)      ← CMS 편집
+  i18n/{ko,en,ja}.js  모든 UI 문구 (개발자 영역, 키 구조 빌드 시 검증)
+  site.js 등 *.js     JSON 로더 + 환경변수(도메인·폼·분석)
+  assets.js           필요한 이미지 체크리스트
+public/admin/         Decap CMS (index.html, config.yml)
 src/
   build.js         SSG (hreflang·canonical·sitemap·robots·404 생성)
   templates/       layout, pages, extras(후기·소식·상세·팝업), helpers
@@ -68,11 +70,11 @@ FIXTURES=1 npm run build && FIXTURES=1 npm run qa   # 샘플 데이터로 팝업
 색상은 `src/styles/main.css` 상단의 토큰만 바꾸면 전체에 반영됩니다. 로고가 확정되면 헤더의 워드마크(`.brand`)를 이미지로 교체하세요.
 웹폰트는 Google Fonts(`display=swap`)를 언어별로 최소 가중치만 로드합니다. 히어로 이미지는 `content/assets.js`에서 `status: 'ready'`로 바꾸면 자동으로 2단 레이아웃(이미지+카피)으로 전환됩니다.
 
-참고 사이트 요구사항 정의서와의 매핑은 `docs/ARCHITECTURE.md` 에 있습니다. 결정 사항: 전자상거래 제외, 해외 마스터클래스는 추후 구현(모델 필드만 준비).
+CMS 사용·설정은 `docs/CMS.md`, 참고 사이트 요구사항 정의서와의 매핑은 `docs/ARCHITECTURE.md` 에 있습니다. 결정 사항: 전자상거래 제외, 해외 마스터클래스는 추후 구현(모델 필드만 준비).
 
 ## 운영 정보 채우기
 
 1. `docs/MISSING_INFO.md` 의 목록을 확인
-2. 해당 `content/*.js` 에 값을 넣고 `verified: true`
-3. 이미지는 `public/images/...` 에 넣고 `content/assets.js` 의 `status: 'ready'`
+2. `/admin/` (Decap CMS) 또는 `content/data/*.json` 에서 값을 넣고 '운영자 확인 완료(verified)' 를 켬
+3. 이미지는 CMS 업로드 또는 `public/images/...` 에 직접 추가 (파일이 있으면 빌드가 자동 사용)
 4. `npm test` 로 검증 후 배포 (`docs/DEPLOY.md`)

@@ -20,7 +20,7 @@ function walk(dir, out = []) {
   }
   return out;
 }
-const files = walk(DIST);
+const files = walk(DIST).filter((f) => !f.includes(`${path.sep}admin${path.sep}`));
 const rel = (f) => '/' + path.relative(DIST, f).replace(/\\/g, '/');
 const urlOf = (f) => rel(f).replace(/index\.html$/, '');
 const existsUrl = (u) => {

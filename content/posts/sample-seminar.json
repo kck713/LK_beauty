@@ -1,0 +1,50 @@
+{
+  "id": "sample-seminar",
+  "type": "event",
+  "verified": false,
+  "publishedAt": "2026-11-01",
+  "image": "",
+  "slug": {
+    "ko": "hairstroke-seminar",
+    "en": "hairstroke-seminar",
+    "ja": "hairstroke-seminar"
+  },
+  "title": {
+    "ko": "",
+    "en": "",
+    "ja": ""
+  },
+  "summary": {
+    "ko": "",
+    "en": "",
+    "ja": ""
+  },
+  "body": {
+    "ko": [],
+    "en": [],
+    "ja": []
+  },
+  "event": {
+    "startsAt": "",
+    "endsAt": "",
+    "location": {
+      "ko": "",
+      "en": "",
+      "ja": ""
+    },
+    "capacity": null,
+    "seatsLeft": null,
+    "registrationOpen": false,
+    "businessUnit": "academy",
+    "country": "KR",
+    "teachingLanguages": [
+      "ko"
+    ]
+  },
+  "promotion": null,
+  "modal": {
+    "enabled": false,
+    "from": "",
+    "until": ""
+  }
+}

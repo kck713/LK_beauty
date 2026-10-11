@@ -1,0 +1,391 @@
+# Decap CMS 설정 — 운영자가 /admin/ 에서 편집하면 GitHub 커밋(검토 워크플로우에서는 PR)이 생성됩니다.
+# 배포 전 확인: backend.repo / backend.branch / backend.base_url (docs/CMS.md)
+
+backend:
+  name: github
+  repo: kck713/LK_beauty
+  branch: main                 # 운영 브랜치로 변경
+  base_url: https://REPLACE-WITH-OAUTH-PROVIDER   # GitHub OAuth 중계 서버 (docs/CMS.md 의 선택지 참고)
+  commit_messages:
+    create: "content: {{collection}} {{slug}} 생성"
+    update: "content: {{collection}} {{slug}} 수정"
+    delete: "content: {{collection}} {{slug}} 삭제"
+    uploadMedia: "media: {{path}} 업로드"
+    deleteMedia: "media: {{path}} 삭제"
+
+# 검토 워크플로우: 저장 → 초안(PR) → 검토 → 게시(머지). verified 플래그와 함께 미검증 공개를 막는 2중 장치.
+publish_mode: editorial_workflow
+
+# 로컬 테스트: `npx decap-server` 실행 후 http://localhost:4173/admin/ (docs/CMS.md)
+local_backend: true
+
+media_folder: public/images/uploads
+public_folder: images/uploads
+
+site_url: https://lkbeautyaxis.example   # SITE_URL 확정 후 변경
+display_url: https://lkbeautyaxis.example
+logo_url: /favicon.svg
+
+collections:
+  # ---------------------------------------------------------------- 사이트 운영 정보
+  - name: site
+    label: "사이트 운영 정보"
+    description: "주소·운영시간·문의 채널·상담 지원 언어·개인정보 안내. '운영자 확인 완료'가 꺼진 항목은 공개 사이트에 노출되지 않습니다."
+    files:
+      - name: site
+        label: "운영 정보"
+        file: content/data/site.json
+        format: json
+        fields:
+          - { name: brand, label: "브랜드 영문명", widget: string, default: "LK BEAUTY AXIS" }
+          - name: brandKo
+            label: "브랜드 한글 표기"
+            widget: object
+            fields:
+              - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+              - { name: value, label: "한글 표기", widget: string, required: false }
+          - { name: instagramHandle, label: "인스타그램 핸들", widget: string }
+          - name: address
+            label: "주소"
+            widget: object
+            fields:
+              - { name: verified, label: "운영자 확인 완료(상세 주소 공개)", widget: boolean, default: false, hint: "꺼져 있으면 동(洞) 단위 지역명만 표시됩니다." }
+              - name: full
+                label: "상세 주소"
+                widget: object
+                fields: &i18nStr
+                  - { name: ko, label: "한국어", widget: string, required: false }
+                  - { name: en, label: "English", widget: string, required: false }
+                  - { name: ja, label: "日本語", widget: string, required: false }
+              - { name: area, label: "지역명(동 단위)", widget: object, fields: *i18nStr }
+              - { name: mapUrl, label: "지도 링크 URL", widget: string, required: false }
+              - { name: mapEmbedUrl, label: "지도 임베드 URL (Google Maps Embed)", widget: string, required: false, hint: "주소 확인 완료일 때만 표시됩니다." }
+              - name: parking
+                label: "주차 안내"
+                widget: object
+                fields: &i18nVerified
+                  - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+                  - { name: ko, label: "한국어", widget: text, required: false }
+                  - { name: en, label: "English", widget: text, required: false }
+                  - { name: ja, label: "日本語", widget: text, required: false }
+              - { name: nearestStation, label: "가까운 역", widget: object, fields: *i18nVerified }
+          - { name: hours, label: "운영시간 (KST)", widget: object, fields: *i18nVerified }
+          - name: supportLanguages
+            label: "상담 지원 언어"
+            widget: object
+            fields:
+              - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false, hint: "확인 전에는 '페이지 언어 ≠ 상담 언어' 안내 문구가 표시됩니다." }
+              - { name: consultation, label: "상담 가능 언어", widget: select, multiple: true, options: [ko, en, ja], required: false }
+              - { name: note, label: "지원 범위 안내 문구", widget: object, fields: *i18nStr }
+          - name: channels
+            label: "문의 채널"
+            widget: object
+            fields:
+              - name: instagram
+                label: "인스타그램"
+                widget: object
+                fields:
+                  - { name: verified, label: "공개", widget: boolean, default: true }
+                  - { name: url, label: "URL", widget: string }
+                  - { name: label, label: "표시명", widget: string }
+              - name: kakao
+                label: "카카오톡 채널"
+                widget: object
+                fields:
+                  - { name: verified, label: "공개(운영 가능 확인)", widget: boolean, default: false }
+                  - { name: url, label: "URL", widget: string, required: false }
+                  - { name: label, label: "표시명", widget: string, required: false }
+              - name: email
+                label: "이메일"
+                widget: object
+                fields:
+                  - { name: verified, label: "공개", widget: boolean, default: false }
+                  - { name: address, label: "주소", widget: string, required: false }
+              - name: phone
+                label: "전화"
+                widget: object
+                fields:
+                  - { name: verified, label: "공개", widget: boolean, default: false }
+                  - { name: number, label: "번호(국제형식, 예 +82101234567)", widget: string, required: false }
+                  - { name: display, label: "표시 형식", widget: string, required: false }
+              - name: whatsapp
+                label: "WhatsApp"
+                widget: object
+                fields:
+                  - { name: verified, label: "공개", widget: boolean, default: false }
+                  - { name: url, label: "URL", widget: string, required: false }
+              - name: line
+                label: "LINE"
+                widget: object
+                fields:
+                  - { name: verified, label: "공개", widget: boolean, default: false }
+                  - { name: url, label: "URL", widget: string, required: false }
+          - name: privacy
+            label: "개인정보 안내"
+            widget: object
+            fields:
+              - { name: controller, label: "처리 주체", widget: string }
+              - { name: retention, label: "보관 기간", widget: object, fields: *i18nVerified }
+              - { name: contact, label: "담당 연락처", widget: object, fields: *i18nVerified }
+              - { name: lastUpdated, label: "최종 수정일", widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+
+  # ---------------------------------------------------------------- 스튜디오
+  - name: studio
+    label: "스튜디오"
+    description: "시술 메뉴·가격·리터치 조건·실제 사례. 사례는 고객 동의와 촬영 시점이 있어야 공개됩니다."
+    files:
+      - name: studio
+        label: "시술 메뉴·사례"
+        file: content/data/studio.json
+        format: json
+        fields:
+          - name: services
+            label: "시술 메뉴"
+            label_singular: "시술"
+            widget: list
+            summary: "{{fields.name.ko}} ({{fields.id}})"
+            fields:
+              - { name: id, label: "ID (영문 소문자·하이픈, 변경 금지)", widget: string, pattern: ["^[a-z0-9-]+$", "영문 소문자·숫자·하이픈만"] }
+              - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+              - { name: name, label: "시술명", widget: object, fields: *i18nStr }
+              - { name: summary, label: "한 줄 설명", widget: object, fields: *i18nStr }
+              - { name: priceKRW, label: "가격 (KRW)", widget: number, value_type: int, required: false, hint: "실제 결제 통화 기준. 비우면 '상담 시 안내'" }
+              - { name: retouchIncluded, label: "리터치 포함", widget: boolean, required: false }
+              - { name: retouchTerms, label: "리터치 조건", widget: object, fields: *i18nStr }
+              - name: slug
+                label: "상세 페이지 URL slug"
+                widget: object
+                fields: *i18nStr
+              - name: detail
+                label: "상세 페이지 본문 (세 언어 모두 '소개'가 채워져야 생성)"
+                widget: object
+                collapsed: true
+                fields:
+                  - name: ko
+                    label: "한국어"
+                    widget: object
+                    collapsed: true
+                    fields: &detailFields
+                      - { name: intro, label: "소개", widget: text, required: false }
+                      - { name: forWhom, label: "이런 분께", widget: list, required: false, field: { name: item, label: "항목", widget: string } }
+                      - name: process
+                        label: "진행 순서"
+                        widget: list
+                        required: false
+                        fields:
+                          - { name: title, label: "단계", widget: string }
+                          - { name: desc, label: "설명", widget: string, required: false }
+                      - { name: aftercare, label: "관리 안내", widget: list, required: false, field: { name: item, label: "항목", widget: string } }
+                      - name: faq
+                        label: "FAQ"
+                        widget: list
+                        required: false
+                        fields:
+                          - { name: q, label: "질문", widget: string }
+                          - { name: a, label: "답변", widget: text }
+                  - { name: en, label: "English", widget: object, collapsed: true, fields: *detailFields }
+                  - { name: ja, label: "日本語", widget: object, collapsed: true, fields: *detailFields }
+          - name: cases
+            label: "실제 작업 사례"
+            label_singular: "사례"
+            widget: list
+            summary: "{{fields.id}} · {{fields.stage}}"
+            fields:
+              - { name: id, label: "ID", widget: string, pattern: ["^[a-z0-9-]+$", "영문 소문자·숫자·하이픈만"] }
+              - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+              - { name: consent, label: "고객 사용 동의 확인", widget: boolean, default: false, hint: "동의 없이는 공개되지 않습니다." }
+              - { name: serviceId, label: "시술 ID", widget: string }
+              - { name: image, label: "원본 이미지 (결과를 바꾸는 보정 금지)", widget: image, required: false, media_folder: "/public/images/cases", public_folder: "images/cases" }
+              - { name: alt, label: "이미지 설명", widget: object, fields: *i18nStr }
+              - { name: stage, label: "촬영 시점", widget: select, options: [{ label: "시술 직후", value: immediate }, { label: "탈각 후", value: healed }, { label: "리터치 후", value: after-retouch }] }
+              - { name: takenAt, label: "촬영 연월 (YYYY-MM)", widget: string, required: false }
+              - { name: reason, label: "디자인 선택 이유", widget: object, fields: *i18nStr }
+          - name: fxReference
+            label: "환율 참고 표시"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: verified, label: "사용", widget: boolean, default: false }
+              - { name: asOf, label: "환율 기준일", widget: string, required: false }
+              - { name: usdPerKrw, label: "USD per KRW", widget: number, value_type: float, required: false }
+              - { name: jpyPerKrw, label: "JPY per KRW", widget: number, value_type: float, required: false }
+
+  # ---------------------------------------------------------------- 아카데미
+  - name: academy
+    label: "아카데미"
+    description: "과정·커리큘럼·교정 영상·수강생 성장 사례·강사·수료 후 지원. 과거 모집 글의 정원·가격을 현재값으로 쓰지 마세요."
+    files:
+      - name: academy
+        label: "과정·강사·사례"
+        file: content/data/academy.json
+        format: json
+        fields:
+          - name: courses
+            label: "과정"
+            label_singular: "과정"
+            widget: list
+            summary: "{{fields.name.ko}} ({{fields.id}})"
+            fields:
+              - { name: id, label: "ID", widget: string, pattern: ["^[a-z0-9-]+$", "영문 소문자·숫자·하이픈만"] }
+              - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+              - { name: track, label: "대상", widget: select, options: [{ label: "입문", value: beginner }, { label: "경력", value: experienced }] }
+              - { name: name, label: "과정명", widget: object, fields: *i18nStr }
+              - { name: duration, label: "기간", widget: object, fields: *i18nStr }
+              - { name: schedule, label: "일정", widget: object, fields: *i18nStr }
+              - { name: capacity, label: "정원", widget: number, value_type: int, required: false }
+              - { name: priceKRW, label: "수강료 (KRW)", widget: number, value_type: int, required: false }
+              - name: includes
+                label: "포함 사항 (도구·모델·재교육 조건)"
+                widget: object
+                fields: &i18nList
+                  - { name: ko, label: "한국어", widget: list, required: false, field: { name: item, label: "항목", widget: string } }
+                  - { name: en, label: "English", widget: list, required: false, field: { name: item, label: "항목", widget: string } }
+                  - { name: ja, label: "日本語", widget: list, required: false, field: { name: item, label: "항목", widget: string } }
+              - { name: outcomes, label: "수료 시 도달 목표", widget: object, fields: *i18nList }
+              - { name: slug, label: "상세 페이지 URL slug", widget: object, fields: *i18nStr }
+              - name: detail
+                label: "상세 페이지 본문 (세 언어 모두 '소개'가 채워져야 생성)"
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: ko, label: "한국어", widget: object, collapsed: true, fields: *detailFields }
+                  - { name: en, label: "English", widget: object, collapsed: true, fields: *detailFields }
+                  - { name: ja, label: "日本語", widget: object, collapsed: true, fields: *detailFields }
+          - name: curriculum
+            label: "공식 커리큘럼 단계"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+              - { name: steps, label: "단계", widget: object, fields: *i18nList }
+          - name: coachingVideos
+            label: "교정 장면 영상 (자동재생 없음)"
+            label_singular: "영상"
+            widget: list
+            fields:
+              - { name: id, label: "ID", widget: string, pattern: ["^[a-z0-9-]+$", "영문 소문자·숫자·하이픈만"] }
+              - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+              - { name: poster, label: "포스터 이미지", widget: image, required: false, media_folder: "/public/images/academy", public_folder: "images/academy" }
+              - { name: src, label: "영상 파일 경로 또는 URL", widget: string, required: false }
+              - { name: caption, label: "설명", widget: object, fields: *i18nStr }
+          - name: growthCases
+            label: "수강생 성장 사례"
+            label_singular: "사례"
+            widget: list
+            fields:
+              - { name: id, label: "ID", widget: string, pattern: ["^[a-z0-9-]+$", "영문 소문자·숫자·하이픈만"] }
+              - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+              - { name: consent, label: "수강생 사용 동의 확인", widget: boolean, default: false }
+              - { name: before, label: "수강 전 이미지", widget: image, required: false, media_folder: "/public/images/academy", public_folder: "images/academy" }
+              - { name: after, label: "수강 후 이미지", widget: image, required: false, media_folder: "/public/images/academy", public_folder: "images/academy" }
+              - { name: priorExperience, label: "수강 전 경력", widget: object, fields: *i18nStr }
+              - { name: course, label: "수강 과정 ID", widget: string, required: false }
+              - { name: beforeTakenAt, label: "전 촬영 연월", widget: string, required: false }
+              - { name: afterTakenAt, label: "후 촬영 연월", widget: string, required: false }
+              - { name: supervised, label: "강사 지도 하 작업", widget: boolean, required: false, hint: "강사가 완성한 작업을 수강생 독립 작업으로 표시하지 않습니다." }
+              - { name: note, label: "설명", widget: object, fields: *i18nStr }
+          - name: instructors
+            label: "강사"
+            label_singular: "강사"
+            widget: list
+            fields:
+              - { name: id, label: "ID (원장은 director)", widget: string, pattern: ["^[a-z0-9-]+$", "영문 소문자·숫자·하이픈만"] }
+              - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+              - { name: name, label: "이름", widget: object, fields: *i18nStr }
+              - { name: role, label: "역할", widget: object, fields: *i18nStr }
+              - { name: credentials, label: "검증 가능한 경력", widget: object, fields: *i18nList }
+              - { name: photo, label: "사진", widget: image, required: false, media_folder: "/public/images/about", public_folder: "images/about" }
+          - name: postCompletionSupport
+            label: "수료 후 실제 지원"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+              - { name: ko, label: "한국어", widget: list, required: false, field: { name: item, label: "항목", widget: string } }
+              - { name: en, label: "English", widget: list, required: false, field: { name: item, label: "항목", widget: string } }
+              - { name: ja, label: "日本語", widget: list, required: false, field: { name: item, label: "항목", widget: string } }
+
+  # ---------------------------------------------------------------- 소식·이벤트·프로모션
+  - name: posts
+    label: "소식·이벤트·프로모션"
+    label_singular: "게시물"
+    folder: content/posts
+    create: true
+    extension: json
+    format: json
+    slug: "{{fields.id}}"
+    summary: "[{{type}}] {{title.ko}} · {{publishedAt}}"
+    description: "제목·slug가 있는 언어에서만 게시됩니다. 진입 팝업은 한 게시물만 켜세요."
+    fields:
+      - { name: id, label: "ID (파일명, 영문 소문자·하이픈)", widget: string, pattern: ["^[a-z0-9-]+$", "영문 소문자·숫자·하이픈만"] }
+      - { name: type, label: "유형", widget: select, options: [{ label: "소식", value: news }, { label: "이벤트", value: event }, { label: "프로모션", value: promotion }], default: news }
+      - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+      - { name: publishedAt, label: "게시일", widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { name: image, label: "대표 이미지 (16:9)", widget: image, required: false, media_folder: "/public/images/posts", public_folder: "images/posts" }
+      - { name: slug, label: "URL slug (비우면 해당 언어에 게시 안 함)", widget: object, fields: *i18nStr }
+      - { name: title, label: "제목", widget: object, fields: *i18nStr }
+      - { name: summary, label: "요약", widget: object, fields: *i18nStr }
+      - name: body
+        label: "본문 (문단 단위)"
+        widget: object
+        fields:
+          - { name: ko, label: "한국어", widget: list, required: false, field: { name: p, label: "문단", widget: text } }
+          - { name: en, label: "English", widget: list, required: false, field: { name: p, label: "문단", widget: text } }
+          - { name: ja, label: "日本語", widget: list, required: false, field: { name: p, label: "문단", widget: text } }
+      - name: event
+        label: "이벤트 정보 (유형이 이벤트일 때)"
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - { name: startsAt, label: "시작 일시 (KST)", widget: datetime, required: false, format: "YYYY-MM-DDTHH:mm:ssZ", date_format: "YYYY-MM-DD", time_format: "HH:mm" }
+          - { name: endsAt, label: "종료 일시 (KST)", widget: datetime, required: false, format: "YYYY-MM-DDTHH:mm:ssZ", date_format: "YYYY-MM-DD", time_format: "HH:mm" }
+          - { name: location, label: "장소", widget: object, fields: *i18nStr }
+          - { name: capacity, label: "정원", widget: number, value_type: int, required: false }
+          - { name: seatsLeft, label: "잔여석 (운영자 확정값)", widget: number, value_type: int, required: false }
+          - { name: registrationOpen, label: "참가 신청 접수 중", widget: boolean, default: false }
+          - { name: businessUnit, label: "관련 사업", widget: select, options: [{ label: "아카데미", value: academy }, { label: "스튜디오", value: studio }, { label: "브랜드", value: brand }], default: academy }
+          - { name: country, label: "개최 국가 (ISO, 추후 해외 클래스용)", widget: string, default: KR, required: false }
+          - { name: teachingLanguages, label: "개최 언어 (추후 해외 클래스용)", widget: select, multiple: true, options: [ko, en, ja], default: [ko], required: false }
+      - name: promotion
+        label: "프로모션 정보 (유형이 프로모션일 때)"
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - { name: validUntil, label: "적용 종료일", widget: datetime, required: false, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+          - name: terms
+            label: "유의사항"
+            widget: object
+            fields: *i18nList
+      - name: modal
+        label: "진입 팝업"
+        widget: object
+        collapsed: true
+        fields:
+          - { name: enabled, label: "팝업으로 노출", widget: boolean, default: false, hint: "한 번에 하나만 켜세요. 상담·개인정보·접수완료 페이지에는 뜨지 않습니다." }
+          - { name: from, label: "노출 시작일", widget: datetime, required: false, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+          - { name: until, label: "노출 종료일", widget: datetime, required: false, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+
+  # ---------------------------------------------------------------- 후기
+  - name: testimonials
+    label: "고객·수강생 후기"
+    label_singular: "후기"
+    folder: content/testimonials
+    create: true
+    extension: json
+    format: json
+    slug: "{{fields.id}}"
+    summary: "{{displayName}} · {{unit}} · {{date}}"
+    description: "'운영자 확인 완료'와 '사용 동의'가 모두 켜진 후기만 공개됩니다. 후기를 생성·각색하지 마세요."
+    fields:
+      - { name: id, label: "ID (파일명)", widget: string, pattern: ["^[a-z0-9-]+$", "영문 소문자·숫자·하이픈만"] }
+      - { name: verified, label: "운영자 확인 완료(공개)", widget: boolean, default: false }
+      - { name: consent, label: "사용 동의 확인", widget: boolean, default: false }
+      - { name: compensated, label: "대가 제공 후기", widget: boolean, default: false, hint: "켜면 '제공 받은 후기'로 표시됩니다." }
+      - { name: unit, label: "구분", widget: select, options: [{ label: "시술 고객", value: studio }, { label: "수강생", value: academy }] }
+      - { name: displayName, label: "표시 이름 (동의한 표기만, 예: J.K.)", widget: string, required: false }
+      - { name: context, label: "맥락 (예: 헤어스트록 · 2026-05 · 탈각 후)", widget: object, fields: *i18nStr }
+      - { name: quote, label: "후기 본문 (번역 없는 언어에선 숨김)", widget: object, fields: *i18nStr }
+      - { name: sourceUrl, label: "원문 링크 (내부 기록용, 비공개)", widget: string, required: false }
+      - { name: date, label: "작성 연월", widget: string, required: false }
