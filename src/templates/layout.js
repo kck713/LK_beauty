@@ -27,6 +27,9 @@ function layout(ctx, content) {
   ];
   const ogImage = meta.ogImage ? site.baseUrl + '/' + meta.ogImage : '';
   const gtm = site.analytics.gtmId;
+  const activeUnit = ctx.businessUnit === 'studio' || ctx.businessUnit === 'academy' ? ctx.businessUnit : 'brand';
+  const contactPath = pagePath(lang, 'contact') + (activeUnit === 'brand' ? '' : '#' + activeUnit);
+  const contactLabel = activeUnit === 'studio' ? t.common.ctaStudio : activeUnit === 'academy' ? t.common.ctaAcademy : t.common.ctaContact;
 
   return `<!doctype html>
 <html lang="${attr(t.htmlLang)}" dir="${attr(t.dir)}">
@@ -70,19 +73,20 @@ ${gtm ? `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${at
       <span class="brand-text">${esc(t.common.brand)}</span>
       <span class="brand-sub">${esc(t.common.unitLabel)}</span>
     </a>
-    <a class="header-contact" href="${pagePath(lang, 'contact')}" aria-label="${attr(t.common.ctaContact)}" data-cta="header-icon" data-unit="${attr(ctx.businessUnit || 'brand')}">
+    <a class="header-contact" href="${contactPath}" aria-label="${attr(contactLabel)}" data-cta="header-icon" data-unit="${attr(ctx.businessUnit || 'brand')}">
+      <span class="header-contact-label">${esc(contactLabel)}</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5z" stroke-linejoin="round"/><path d="M8 9h8M8 12h5" stroke-linecap="round"/></svg>
     </a>
     <nav id="site-nav" class="site-nav" aria-label="${attr(t.common.menu)}">
       <ul class="nav-list">
         ${nav.map(([p, label]) => `<li><a href="${pagePath(lang, p)}"${(p === page || (p === '' && page === 'home')) ? ' aria-current="page"' : ''}>${esc(label)}</a></li>`).join('')}
       </ul>
+    </nav>
       <div class="lang-switch" aria-label="${attr(t.common.languageLabel)}">
         ${alternates.map((a) => a.lang === lang
           ? `<span class="lang-current" aria-current="true" lang="${attr(a.lang)}"><span class="sr-only">${esc(t.common.currentLanguage)}: </span>${esc(a.name)}</span>`
           : `<a href="${attr(a.href)}" hreflang="${attr(a.lang)}" lang="${attr(a.lang)}" rel="alternate">${esc(a.name)}</a>`).join('<span class="lang-sep" aria-hidden="true">·</span>')}
       </div>
-    </nav>
   </div>
 </header>
 <main id="main" tabindex="-1">

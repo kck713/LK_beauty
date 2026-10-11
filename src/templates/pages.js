@@ -6,9 +6,9 @@ const { testimonialsSection, detailReady } = require('./extras');
 
 function hero(t, h, { eyebrow, heading, sub, primary, secondary, unit, media }) {
   return `
-<section class="hero${media ? ' hero-with-media' : ''}">
+<section class="hero hero-${attr(unit || 'brand')}${media ? ' hero-with-media' : primary ? ' hero-editorial' : ''}">
   <div class="container">
-    ${media ? `<div class="hero-media"><img src="/${attr(media.src)}" alt="${attr(media.alt)}" width="1200" height="900" fetchpriority="high"></div>` : ''}
+    ${media ? `<div class="hero-media"><img src="/${attr(media.src)}" alt="${attr(media.alt)}" width="1200" height="900" fetchpriority="high"></div>` : primary ? `<div class="hero-signature" aria-hidden="true"><span class="signature-index">LK BEAUTY AXIS</span><span class="signature-monogram">LK<span>AXIS</span></span><span class="signature-foot">${unit === 'studio' ? 'STUDIO' : unit === 'academy' ? 'ACADEMY' : 'STUDIO & ACADEMY'}<span>SEOUL</span></span></div>` : ''}
     <div class="hero-copy">
       ${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ''}
       <h1>${esc(heading)}</h1>
@@ -91,10 +91,10 @@ function home({ site, t, lang, ready }) {
     const c = h.choose[key];
     return `
     <a class="choice-card choice-${key}" href="${pagePath(lang, key)}" data-cta="home-choice" data-unit="${key}">
-      <span class="choice-kicker">${esc(t.common.nav[key])}</span>
+      <span class="choice-top"><span class="choice-kicker">${esc(t.common.nav[key])}</span><span class="choice-number" aria-hidden="true">${key === 'studio' ? '01' : '02'}</span></span>
       <span class="choice-title">${esc(c.title)}</span>
       <span class="choice-desc">${esc(c.desc)}</span>
-      <span class="choice-cta">${esc(c.cta)} →</span>
+      <span class="choice-cta">${esc(c.cta)}<span aria-hidden="true">↗</span></span>
     </a>`;
   };
   return hero(t, h, {

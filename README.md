@@ -64,11 +64,11 @@ FIXTURES=1 npm run build && FIXTURES=1 npm run qa   # 샘플 데이터로 팝업
 
 환경변수는 `.env.example` 참고 (`SITE_URL`, `FORM_ENDPOINT`, `GTM_ID`).
 
-## 디자인 방향 (v2)
+## 디자인 방향 (editorial refinement)
 
-참고 레퍼런스를 바탕으로 한 아트디렉션: 흰 배경, 딥 틸(`--primary`) 주색, 버건디(`--accent`) 포인트, 세리프 디스플레이 제목(Playfair Display + Noto Serif KR/JP), 산세리프 본문(Montserrat + 시스템 CJK), 각진 버튼·입력창, 중앙 정렬 로고와 섹션 제목.
-색상은 `src/styles/main.css` 상단의 토큰만 바꾸면 전체에 반영됩니다. 로고가 확정되면 헤더의 워드마크(`.brand`)를 이미지로 교체하세요.
-웹폰트는 Google Fonts(`display=swap`)를 언어별로 최소 가중치만 로드합니다. 히어로 이미지는 `content/assets.js`에서 `status: 'ready'`로 바꾸면 자동으로 2단 레이아웃(이미지+카피)으로 전환됩니다.
+오프화이트 바탕, 기존 딥 틸 주색과 버건디 포인트를 유지합니다. 비대칭 첫 화면, 왼쪽 정렬 타이포그래피, 서로 다른 색의 스튜디오·아카데미 카드로 콘텐츠의 위계를 구성합니다. 모바일에서 언어 선택은 항상 표시하고, 데스크톱 상담 버튼은 현재 페이지에 맞는 시술/수강 문의로 연결합니다.
+
+웹폰트는 기존 Google Fonts 구성을 유지합니다. 히어로 이미지는 `content/assets.js`에서 `status: 'ready'`로 등록하면 사진을 사용하고, 사진이 없으면 장식용 LK 브랜드 그래픽을 표시합니다. 실제 결과·공간·고객 사진은 생성하지 않습니다. 변경 근거와 출시 준비 항목은 `docs/DESIGN_REVIEW.md`를 참고하세요.
 
 CMS 사용·설정은 `docs/CMS.md`, 참고 사이트 요구사항 정의서와의 매핑은 `docs/ARCHITECTURE.md` 에 있습니다. 결정 사항: 전자상거래 제외, 해외 마스터클래스는 추후 구현(모델 필드만 준비).
 
