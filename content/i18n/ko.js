@@ -46,6 +46,7 @@ module.exports = {
     description: '개인의 인상에 맞는 반영구 디자인, 그리고 그 판단 기준을 가르치는 교육. 서울 강남구 삼성동 LK BEAUTY AXIS 스튜디오·아카데미.',
     hero: {
       eyebrow: '반영구 아카데미 & 스튜디오 · 서울 삼성동',
+      imageAlt: 'LK BEAUTY AXIS 스튜디오에서 눈썹 디자인을 상담하는 모습',
       heading: '개인의 아름다움을 설계하고, 그 기준을 가르칩니다.',
       sub: '얼굴에 맞는 결과 인상을 디자인하는 스튜디오, 그 판단 기준을 배우는 아카데미. 목적에 맞는 페이지를 선택하세요.',
       ctaAcademy: '수강 과정 알아보기',
@@ -92,6 +93,7 @@ module.exports = {
     description: '얼굴에 맞는 결, 나에게 맞는 인상. 서울 삼성동 LK BEAUTY AXIS 스튜디오의 디자인 상담, 비용·리터치 안내, 상담·예약 순서.',
     hero: {
       eyebrow: '스튜디오 · 서울 삼성동',
+      imageAlt: 'LK BEAUTY AXIS 스튜디오의 실제 눈썹 반영구 작업',
       heading: '얼굴에 맞는 결, 나에게 맞는 인상.',
       sub: '눈썹의 형태와 결, 원하는 분위기를 함께 살펴 디자인을 상담합니다.',
       ctaPrimary: '나에게 맞는 디자인 상담',
@@ -172,6 +174,7 @@ module.exports = {
     description: '결을 그리는 기술, 디자인을 판단하는 기준. 입문·경력별 반영구 교육 과정과 실제 교정 지도 방식을 확인하고 서울 강남 LK BEAUTY AXIS 아카데미 수강 상담을 접수하세요.',
     hero: {
       eyebrow: '아카데미 · 서울 강남',
+      imageAlt: 'LK BEAUTY AXIS 아카데미에서 수강생의 작업을 교정하는 장면',
       heading: '결을 그리는 기술, 디자인을 판단하는 기준.',
       sub: '나의 경험과 목표에 맞는 반영구 교육 과정을 확인하세요.',
       ctaPrimary: '내 수준에 맞는 과정 상담',

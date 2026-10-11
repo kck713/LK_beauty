@@ -125,7 +125,7 @@ function build() {
         site, t, lang, page: def.key, businessUnit: def.unit,
         canonicalPath: pagePath(lang, def.slug), alternates, xDefault, meta,
         bodyClass: `page-${def.key} lang-${lang}`, mobileCta, noindex: !!def.noindex, jsonLd,
-      }, def.render({ site, t, lang, studio: studioData, academy: academyData }));
+      }, def.render({ site, t, lang, studio: studioData, academy: academyData, ready: assetReady }));
 
       write(path.join(lang, def.slug, 'index.html'), html);
       if (!def.noindex) {

@@ -56,6 +56,12 @@ npm test               # build + qa
 
 환경변수는 `.env.example` 참고 (`SITE_URL`, `FORM_ENDPOINT`, `GTM_ID`).
 
+## 디자인 방향 (v2)
+
+참고 레퍼런스를 바탕으로 한 아트디렉션: 흰 배경, 딥 틸(`--primary`) 주색, 버건디(`--accent`) 포인트, 세리프 디스플레이 제목(Playfair Display + Noto Serif KR/JP), 산세리프 본문(Montserrat + 시스템 CJK), 각진 버튼·입력창, 중앙 정렬 로고와 섹션 제목.
+색상은 `src/styles/main.css` 상단의 토큰만 바꾸면 전체에 반영됩니다. 로고가 확정되면 헤더의 워드마크(`.brand`)를 이미지로 교체하세요.
+웹폰트는 Google Fonts(`display=swap`)를 언어별로 최소 가중치만 로드합니다. 히어로 이미지는 `content/assets.js`에서 `status: 'ready'`로 바꾸면 자동으로 2단 레이아웃(이미지+카피)으로 전환됩니다.
+
 ## 운영 정보 채우기
 
 1. `docs/MISSING_INFO.md` 의 목록을 확인

@@ -1,6 +1,14 @@
 'use strict';
 const { esc, attr, fill, pagePath } = require('./helpers');
 
+// 언어별 웹폰트: 세리프 디스플레이(Playfair) + 본문(Montserrat, 라틴) + 언어별 세리프(CJK)
+function fontsHref(lang) {
+  const fam = ['family=Playfair+Display:wght@600;700', 'family=Montserrat:wght@400;500;600'];
+  if (lang === 'ko') fam.push('family=Noto+Serif+KR:wght@700');
+  if (lang === 'ja') fam.push('family=Noto+Serif+JP:wght@700');
+  return `https://fonts.googleapis.com/css2?${fam.join('&')}&display=swap`;
+}
+
 /**
  * 공통 레이아웃.
  * ctx: { site, t, lang, page, canonicalPath, alternates:[{lang,href}], xDefault, ogImage, bodyClass, mobileCta:{href,label,unit}|null, noindex }
@@ -39,8 +47,11 @@ ${alternates.map((a) => `<link rel="alternate" hreflang="${attr(a.lang)}" href="
 ${ogImage ? `<meta property="og:image" content="${attr(ogImage)}">` : ''}
 <meta name="twitter:card" content="${ogImage ? 'summary_large_image' : 'summary'}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="${attr(fontsHref(lang))}">
 <link rel="stylesheet" href="/assets/main.css">
-<meta name="theme-color" content="#f8f5f0">
+<meta name="theme-color" content="#ffffff">
 <script>window.dataLayer=window.dataLayer||[];window.__LK={pageLanguage:${JSON.stringify(lang)},pageType:${JSON.stringify(page || 'home')},businessUnit:${JSON.stringify(ctx.businessUnit || 'brand')},formEndpoint:${JSON.stringify(site.form.endpoint)},thanksPath:${JSON.stringify(pagePath(lang, 'contact/thanks'))}};</script>
 ${gtm ? `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',${JSON.stringify(gtm)});</script>` : ''}
 ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}
@@ -50,14 +61,17 @@ ${gtm ? `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${at
 <a class="skip-link" href="#main">${esc(t.common.skipToContent)}</a>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="${pagePath(lang, '')}" aria-label="${attr(t.common.brand)} — ${attr(t.common.nav.home)}">
-      <span class="brand-mark" aria-hidden="true">LK</span>
-      <span class="brand-text">${esc(t.common.brand)}</span>
-    </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
       <span class="nav-toggle-label">${esc(t.common.menu)}</span>
       <span class="nav-toggle-bars" aria-hidden="true"></span>
     </button>
+    <a class="brand" href="${pagePath(lang, '')}" aria-label="${attr(t.common.brand)} — ${attr(t.common.nav.home)}">
+      <span class="brand-text">${esc(t.common.brand)}</span>
+      <span class="brand-sub">${esc(t.common.unitLabel)}</span>
+    </a>
+    <a class="header-contact" href="${pagePath(lang, 'contact')}" aria-label="${attr(t.common.ctaContact)}" data-cta="header-icon" data-unit="${attr(ctx.businessUnit || 'brand')}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5z" stroke-linejoin="round"/><path d="M8 9h8M8 12h5" stroke-linecap="round"/></svg>
+    </a>
     <nav id="site-nav" class="site-nav" aria-label="${attr(t.common.menu)}">
       <ul class="nav-list">
         ${nav.map(([p, label]) => `<li><a href="${pagePath(lang, p)}"${(p === page || (p === '' && page === 'home')) ? ' aria-current="page"' : ''}>${esc(label)}</a></li>`).join('')}

@@ -3,19 +3,27 @@ const { esc, attr, pagePath, show, badge, list, cards, faq, steps } = require('.
 
 // ---------- 공통 조각 ----------
 
-function hero(t, h, { eyebrow, heading, sub, primary, secondary, unit }) {
+function hero(t, h, { eyebrow, heading, sub, primary, secondary, unit, media }) {
   return `
-<section class="hero">
+<section class="hero${media ? ' hero-with-media' : ''}">
   <div class="container">
-    ${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ''}
-    <h1>${esc(heading)}</h1>
-    ${sub ? `<p class="lead">${esc(sub)}</p>` : ''}
-    ${(primary || secondary) ? `<div class="hero-actions">
-      ${primary ? `<a class="btn btn-primary" href="${attr(primary.href)}" data-cta="hero-primary" data-unit="${attr(unit || 'brand')}">${esc(primary.label)}</a>` : ''}
-      ${secondary ? `<a class="btn btn-secondary" href="${attr(secondary.href)}" data-cta="hero-secondary" data-unit="${attr(unit || 'brand')}">${esc(secondary.label)}</a>` : ''}
-    </div>` : ''}
+    ${media ? `<div class="hero-media"><img src="/${attr(media.src)}" alt="${attr(media.alt)}" width="1200" height="900" fetchpriority="high"></div>` : ''}
+    <div class="hero-copy">
+      ${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ''}
+      <h1>${esc(heading)}</h1>
+      ${sub ? `<p class="lead">${esc(sub)}</p>` : ''}
+      ${(primary || secondary) ? `<div class="hero-actions">
+        ${primary ? `<a class="btn btn-primary" href="${attr(primary.href)}" data-cta="hero-primary" data-unit="${attr(unit || 'brand')}">${esc(primary.label)}</a>` : ''}
+        ${secondary ? `<a class="btn btn-secondary" href="${attr(secondary.href)}" data-cta="hero-secondary" data-unit="${attr(unit || 'brand')}">${esc(secondary.label)}</a>` : ''}
+      </div>` : ''}
+    </div>
   </div>
 </section>`;
+}
+
+// 준비된 이미지 자산만 히어로에 사용 (없으면 타이포 중심 히어로)
+function heroMedia(ready, rel, alt) {
+  return ready && ready(rel) ? { src: rel, alt } : null;
 }
 
 function section(id, heading, inner, extraCls = '') {
@@ -75,7 +83,7 @@ function channelsList(site, t, { includeInstagram = true } = {}) {
 
 // ---------- 페이지 ----------
 
-function home({ site, t, lang }) {
+function home({ site, t, lang, ready }) {
   const h = t.home;
   const chooseCard = (key) => {
     const c = h.choose[key];
@@ -88,7 +96,7 @@ function home({ site, t, lang }) {
     </a>`;
   };
   return hero(t, h, {
-    eyebrow: h.hero.eyebrow, heading: h.hero.heading, sub: h.hero.sub, unit: 'brand',
+    eyebrow: h.hero.eyebrow, heading: h.hero.heading, sub: h.hero.sub, unit: 'brand', media: heroMedia(ready, 'images/home/hero.jpg', h.hero.imageAlt),
     primary: { href: pagePath(lang, h.choose.order[0]), label: h.choose.order[0] === 'academy' ? h.hero.ctaAcademy : h.hero.ctaStudio },
     secondary: { href: pagePath(lang, h.choose.order[1]), label: h.choose.order[1] === 'academy' ? h.hero.ctaAcademy : h.hero.ctaStudio },
   })
@@ -98,7 +106,7 @@ function home({ site, t, lang }) {
   + section('location', h.location.heading, `<p class="prose">${esc(h.location.desc)}</p>${locationBlock(site, t, lang)}<p><a class="btn btn-primary" href="${pagePath(lang, 'contact')}" data-cta="home-location" data-unit="brand">${esc(h.location.cta)}</a></p>`, 'section-alt');
 }
 
-function studio({ site, t, lang, studio: data }) {
+function studio({ site, t, lang, studio: data, ready }) {
   const s = t.studio;
   const contactHref = pagePath(lang, 'contact') + '#studio';
   const cases = data.cases.filter((c) => show(site, c) && (c.verified ? c.consent : true));
@@ -123,7 +131,7 @@ function studio({ site, t, lang, studio: data }) {
     </div>`).join('')}</div>` : `<p class="prose">${esc(s.services.pending)}</p>`;
 
   return hero(t, s, {
-    eyebrow: s.hero.eyebrow, heading: s.hero.heading, sub: s.hero.sub, unit: 'studio',
+    eyebrow: s.hero.eyebrow, heading: s.hero.heading, sub: s.hero.sub, unit: 'studio', media: heroMedia(ready, 'images/studio/hero.jpg', s.hero.imageAlt),
     primary: { href: contactHref, label: s.hero.ctaPrimary },
     secondary: { href: '#process', label: s.hero.ctaSecondary },
   })
@@ -140,7 +148,7 @@ function studio({ site, t, lang, studio: data }) {
   + ctaBand(s.ctaBand, contactHref, 'studio');
 }
 
-function academy({ site, t, lang, academy: data }) {
+function academy({ site, t, lang, academy: data, ready }) {
   const a = t.academy;
   const contactHref = pagePath(lang, 'contact') + '#academy';
   const courses = data.courses.filter((c) => show(site, c));
@@ -183,7 +191,7 @@ function academy({ site, t, lang, academy: data }) {
     </div>`).join('')}</div>` : '';
 
   return hero(t, a, {
-    eyebrow: a.hero.eyebrow, heading: a.hero.heading, sub: a.hero.sub, unit: 'academy',
+    eyebrow: a.hero.eyebrow, heading: a.hero.heading, sub: a.hero.sub, unit: 'academy', media: heroMedia(ready, 'images/academy/hero.jpg', a.hero.imageAlt),
     primary: { href: contactHref, label: a.hero.ctaPrimary },
     secondary: { href: '#tracks', label: a.hero.ctaSecondary },
   })
@@ -391,8 +399,9 @@ ${langs.map((l) => `<link rel="alternate" hreflang="${attr(l.code)}" href="${att
 <body class="page-root">
 <main id="main" class="root-main">
   <div class="container root-inner">
-    <p class="brand-mark brand-mark-lg" aria-hidden="true">LK</p>
     <h1>${esc(site.brand)}</h1>
+    <p class="root-sub">${esc(t.common.unitLabel)} · Seoul</p>
+    <div class="root-rule" aria-hidden="true"></div>
     <p class="root-suggest" data-lang-suggest hidden>${langs.map((l) => `<a href="${pagePath(l.code, '')}" lang="${attr(l.code)}" hreflang="${attr(l.code)}" data-suggest-for="${attr(l.code)}" data-suggest-label="${attr(l.root.suggestion)}" hidden>${esc(l.root.goto)}</a>`).join('')}</p>
     <ul class="root-langs">
       ${langs.map((l) => `<li><a class="btn btn-secondary btn-lg" href="${pagePath(l.code, '')}" lang="${attr(l.code)}" hreflang="${attr(l.code)}"><span>${esc(l.name)}</span><small>${esc(l.root.heading)}</small></a></li>`).join('')}
