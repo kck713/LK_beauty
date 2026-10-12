@@ -3,11 +3,16 @@ const { esc, attr, fill, pagePath } = require('./helpers');
 
 // 언어별 웹폰트: 세리프 디스플레이(Playfair) + 본문(Montserrat, 라틴) + 언어별 세리프(CJK)
 function fontsHref(lang) {
-  // 워드마크·영문 디스플레이: Playfair Display 이탤릭(하이컨트라스트 세리프). 본문·한글/일문 제목: 산세리프.
-  const fam = ['family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700', 'family=Montserrat:wght@400;500;600;700'];
-  if (lang === 'ko') fam.push('family=Noto+Sans+KR:wght@400;500;700');
-  if (lang === 'ja') fam.push('family=Noto+Sans+JP:wght@400;500;700');
+  // 브랜드 가이드 §04: 한글 Pretendard(대체 Noto Sans KR), 영문 Neue Haas Grotesk(라이선스 필요 → public/fonts 에 자체 호스팅 시 적용, 없으면 Pretendard/Arial).
+  // Google Fonts 는 시스템 서체 대체용 (Thin~Bold).
+  const fam = [];
+  if (lang === 'ja') fam.push('family=Noto+Sans+JP:wght@200;300;400;500;600');
+  else fam.push('family=Noto+Sans+KR:wght@200;300;400;500;600');
   return `https://fonts.googleapis.com/css2?${fam.join('&')}&display=swap`;
+}
+// Pretendard (오리온캑터스, OFL) — 다이내믹 서브셋 CSS. 가이드의 KR 브랜드 서체.
+const PRETENDARD_CSS = 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css';
+function fontsHrefUnused() {
 }
 
 /**
@@ -51,12 +56,16 @@ ${alternates.map((a) => `<link rel="alternate" hreflang="${attr(a.lang)}" href="
 <meta property="og:locale" content="${attr({ ko: 'ko_KR', en: 'en_US', ja: 'ja_JP' }[lang] || lang)}">
 ${ogImage ? `<meta property="og:image" content="${attr(ogImage)}">` : ''}
 <meta name="twitter:card" content="${ogImage ? 'summary_large_image' : 'summary'}">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" type="image/png" sizes="256x256">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="${PRETENDARD_CSS}">
 <link rel="stylesheet" href="${attr(fontsHref(lang))}">
+${ctx.brandFontsCss ? `<link rel="stylesheet" href="/${attr(ctx.brandFontsCss)}">` : ''}
 <link rel="stylesheet" href="/assets/main.css">
-<meta name="theme-color" content="#1c5cff">
+<meta name="theme-color" content="#0062ff">
 <script>window.dataLayer=window.dataLayer||[];window.__LK={pageLanguage:${JSON.stringify(lang)},pageType:${JSON.stringify(page || 'home')},businessUnit:${JSON.stringify(ctx.businessUnit || 'brand')},formEndpoint:${JSON.stringify(site.form.endpoint)},thanksPath:${JSON.stringify(pagePath(lang, 'contact/thanks'))}};</script>
 ${gtm ? `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',${JSON.stringify(gtm)});</script>` : ''}
 ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}
@@ -71,7 +80,7 @@ ${gtm ? `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${at
       <span class="nav-toggle-bars" aria-hidden="true"></span>
     </button>
     <a class="brand" href="${pagePath(lang, '')}" aria-label="${attr(t.common.brand)} — ${attr(t.common.nav.home)}">
-      <span class="brand-text">LK Beauty<span class="brand-axis">Axis</span></span>
+      <img class="brand-logo" src="/images/brand/logo-primary-blue.png" alt="${attr(t.common.brand)}" width="1600" height="291">
       <span class="brand-sub">${esc(t.common.unitLabel)}</span>
     </a>
     <a class="header-contact" href="${contactPath}" aria-label="${attr(contactLabel)}" data-cta="header-icon" data-unit="${attr(ctx.businessUnit || 'brand')}">
@@ -96,7 +105,7 @@ ${content}
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="footer-brand">
-      <strong class="brand-text">LK Beauty<span class="brand-axis">Axis</span></strong>
+      <img class="brand-logo brand-logo-footer" src="/images/brand/logo-primary-blue.png" alt="${attr(t.common.brand)}" width="1600" height="291" loading="lazy">
       <span>${esc(t.common.unitLabel)}</span>
       <span class="footer-tagline">${esc(t.common.tagline)}</span>
     </div>

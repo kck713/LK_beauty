@@ -23,7 +23,9 @@
 | 항목 | 파일 | 비고 |
 |---|---|---|
 | 히어로·OG 이미지 사용권 | `public/images/{home,studio,academy}/hero.jpg`, `public/images/og/*.jpg` | 2026-10-11 운영자 제공 모델 이미지 적용. 상업 사용 라이선스 확인 필요. 실제 작업·공간 사진 확보 시 교체 |
-| 로고 원본 SVG (LK BeautyAxis 워드마크·LKBA 모노그램) | `public/images/logo.svg`, 헤더 `.brand-text` | 2026-10-12 인스타그램 기준 블루(#1c5cff)·블랙 팔레트와 세리프 이탤릭 워드마크를 텍스트로 재현. 원본 SVG 로 교체 권장 |
+| 로고 벡터 원본 (SVG/AI) | `public/images/brand/*.png` | 가이드 PDF에서 고해상도 PNG 추출 적용(docs/BRAND.md). 벡터 원본 받으면 교체 |
+| 영문 브랜드 서체 Neue Haas Grotesk 라이선스 | `public/fonts/brand-fonts.css` | 라이선스 확보 후 woff2 자체 호스팅 시 자동 적용. 현재 Pretendard/Arial 대체 |
+| 주소·전화 불일치 | `content/data/site.json` → `address`, `channels.phone` | 가이드 명함 예시: 강동구 천호대로 1120, 107호 / 07-1475-1136 ↔ 카카오·인스타: 삼성동. 확인 필요 |
 | 공식 한글 표기 | `content/data/site.json` → `brandKo` | 인스타 프로필 기준 '엘케이뷰티엑시스' 적용(구 LK Beauty Lab) |
 | 실제 작업 사례 3~6개 (원본, 촬영 시점, 디자인 이유, 사용 동의) | `content/data/studio.json` → `cases`, `public/images/cases/` | 직후/탈각 후/리터치 후 구분 |
 | 교정 장면 영상 2~3개 + 포스터 | `content/data/academy.json` → `coachingVideos` | 자동재생 금지 |

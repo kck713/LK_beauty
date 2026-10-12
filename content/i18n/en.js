@@ -11,7 +11,7 @@ module.exports = {
   common: {
     brand: 'LK BeautyAxis',
     unitLabel: 'PMU Aesthetic Studio & Academy',
-    tagline: 'Beauty begins with an Axis.',
+    tagline: 'Define your axis',
     skipToContent: 'Skip to content',
     menu: 'Menu',
     close: 'Close',
@@ -49,8 +49,8 @@ module.exports = {
     hero: {
       eyebrow: 'LK BeautyAxis · Samseong-dong, Seoul',
       imageAlt: 'Model image of three people with different faces side by side',
-      heading: 'Beauty begins with a *standard*, not a trend.',
-      sub: 'Before shaping anything, LK BeautyAxis reads your features and designs a balance that is yours alone. Treatments in the studio; the standard behind them, taught in the academy.',
+      heading: 'Balance is designed, *not discovered*.',
+      sub: 'Rather than changing the shape, LK BeautyAxis defines the standard and refines the balance. Treatments in the studio; the standard behind them, taught in the academy.',
       ctaAcademy: 'Explore the academy',
       ctaStudio: 'See the studio',
     },
@@ -69,10 +69,10 @@ module.exports = {
       },
     },
     principle: {
-      heading: 'The *axis* of a face',
+      heading: 'The *perceptive* axis',
       paragraphs: [
-        'Before beauty is touched, a standard has to come first: the axis of your features. We do not draw the same shape on everyone.',
-        'To us, beauty is less about adding something and more about restoring the balance and standard that were already there.',
+        'It starts with a way of seeing that reads a person’s features, mood and the balance within them, rather than simply looking at shape. This axis is an aesthetic standard formed through observation and understanding, not a sensory guess.',
+        'Beauty is revealed through balance. Every element is considered in relation to the whole, allowing harmony to emerge without excess. Rather than emphasising change, we refine the balance that already exists.',
         'That same standard applies to design consultations in the studio and to correction-based teaching in the academy.',
       ],
     },
@@ -235,11 +235,21 @@ module.exports = {
   about: {
     title: 'About | LK BeautyAxis, Samseong-dong, Seoul',
     description: 'A permanent makeup studio and academy that puts the person and their features first. The design standards and way of working at LK BeautyAxis.',
-    hero: { eyebrow: 'About', heading: 'May your beauty have a *standard*, too.' },
+    hero: { eyebrow: 'About', heading: 'Beyond beauty, *towards life*.' },
     paragraphs: [
-      'LK BeautyAxis (formerly LK Beauty Lab) runs a permanent makeup studio and an academy together in Samseong-dong, Gangnam-gu, Seoul.',
-      'To us, beauty is less about adding something and more about restoring the balance and standard that were already there. We read the features before shaping anything, and aim for work we can explain. We review and correct students’ work by the same standard.',
+      'LK BeautyAxis (formerly LK Beauty Lab) sees beauty not as a result but as a process completed through structure and balance. Each element is aligned in relation to the others and together they form one impression.',
+      'Rather than changing the shape, we define the standard and refine the balance, so every result is completed in a natural, restrained state. We run a permanent makeup studio and an academy together in Samseong-dong, Gangnam-gu, Seoul, and review students’ work by the same standard.',
     ],
+    values: {
+      heading: 'Four *standards*',
+      intro: 'The values LK BeautyAxis defines begin with a standard, not a result: how we understand a person, what we judge by, and how we complete balance.',
+      items: [
+        { word: 'Insight', en: 'Understanding beyond appearance', desc: 'A way of seeing that reads the person, not just the surface' },
+        { word: 'Axis', en: 'Defining the standard of aesthetics', desc: 'The centre that defines the standard' },
+        { word: 'Balance', en: 'Creating harmony within individuality', desc: 'Balance designed within what makes you you' },
+        { word: 'Continuum', en: 'Extending impact through education', desc: 'Value extended through treatment and teaching' },
+      ],
+    },
     principles: {
       heading: 'The standards we keep',
       items: [

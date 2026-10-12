@@ -165,13 +165,15 @@ function build() {
 
   // 공통 페이지 작성기
   const fixtureMeta = FIXTURES ? '<meta name="lk-fixtures" content="1">' : '';
+  // 영문 브랜드 서체(Neue Haas Grotesk)는 라이선스 서체. public/fonts/brand-fonts.css + woff2 를 두면 자동 연결 (docs/BRAND.md)
+  const brandFontsCss = fs.existsSync(path.join(PUBLIC, 'fonts/brand-fonts.css')) ? 'fonts/brand-fonts.css' : '';
   function emit({ t, slug, alternates, xDefault, meta, pageKey, unit, mobileCta, noindex, jsonLd, bodyClass, content, withModal = true }) {
     const lang = t.code;
     const html = layout({
       site, t, lang, page: pageKey, businessUnit: unit,
       canonicalPath: pagePath(lang, slug), alternates, xDefault, meta,
       bodyClass: bodyClass || `page-${pageKey} lang-${lang}`, mobileCta, noindex: !!noindex, jsonLd,
-      showNews: anyNews,
+      showNews: anyNews, brandFontsCss,
       modalHtml: withModal && modalPost ? extras.modal({ site, t, lang, p: modalPost, ready: assetReady }) : '',
     }, content);
     write(path.join(lang, slug, 'index.html'), fixtureMeta ? html.replace('<meta charset="utf-8">', '<meta charset="utf-8">' + fixtureMeta) : html);
@@ -272,10 +274,6 @@ ${u.alternates.map((a) => `    <xhtml:link rel="alternate" hreflang="${a.lang}" 
   write('sitemap.xml', sitemap);
   write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /*/contact/thanks/\nSitemap: ${site.baseUrl}/sitemap.xml\n`);
 
-  // favicon (로고 확정 전 임시)
-  if (!fs.existsSync(path.join(DIST, 'favicon.svg'))) {
-    write('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#1c5cff"/><text x="32" y="39" font-family="Playfair Display, Didot, Georgia, serif" font-style="italic" font-size="21" text-anchor="middle" fill="#fff" letter-spacing="-0.5">LKBA</text></svg>`);
-  }
 
   // 빌드 리포트
   const report = {

@@ -64,7 +64,11 @@ FIXTURES=1 npm run build && FIXTURES=1 npm run qa   # 샘플 데이터로 팝업
 
 환경변수는 `.env.example` 참고 (`SITE_URL`, `FORM_ENDPOINT`, `GTM_ID`).
 
-## 디자인 방향 (v3 · 인스타그램 브랜드 기준)
+## 디자인 방향 (v4 · 브랜드 가이드라인 2026 적용)
+
+`docs/BRAND.md` 참고. Axis Blue `#0062ff` + Grey 1~5 + Black, Pretendard(KR)/Neue Haas Grotesk(EN, 라이선스 시 자체 호스팅), Thin 제목 위계, 가이드 PDF에서 추출한 로고 원본(단색), 5% 여백 그리드, 슬로건 "Define your axis" 와 키 메시지·가치 4종을 세 언어로 반영.
+
+### 이전 (v3 · 인스타그램 기준)
 
 2026-10-12 공식 인스타그램(@lk_beautyaxis)의 리뉴얼 아이덴티티를 적용했습니다. 코발트 블루(`--primary: #1c5cff`)·블랙·화이트 팔레트, 세리프 이탤릭 워드마크 `LK BeautyAxis`(Playfair Display), 한글·일문 제목은 산세리프, 영문 제목은 세리프 이탤릭. 브랜드 문구("아름다움은 유행이 아니라, 기준에서 시작됩니다", "Beauty begins with an Axis", "미감과 테크닉. 둘 다여야 한다", "좋은 결과는 좋은 상담에서 시작됩니다")를 세 언어로 반영했고, 제목의 `*강조*` 표기는 블루 강조로 렌더링됩니다. 실제 로고 SVG 가 들어오면 헤더 워드마크를 교체하세요.
 

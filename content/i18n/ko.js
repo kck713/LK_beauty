@@ -10,7 +10,7 @@ module.exports = {
   common: {
     brand: 'LK BeautyAxis',
     unitLabel: 'PMU Aesthetic Studio & Academy',
-    tagline: 'Beauty begins with an Axis.',
+    tagline: 'Define your axis',
     skipToContent: '본문으로 건너뛰기',
     menu: '메뉴',
     close: '닫기',
@@ -48,8 +48,8 @@ module.exports = {
     hero: {
       eyebrow: 'LK BeautyAxis · 서울 삼성동',
       imageAlt: '서로 다른 얼굴의 세 사람이 나란히 있는 모델 이미지',
-      heading: '아름다움은 유행이 아니라, *기준*에서 시작됩니다.',
-      sub: 'LK BeautyAxis는 형태를 만들기 전에 인상을 읽고, 한 사람만의 균형을 설계합니다. 시술은 스튜디오에서, 그 기준은 아카데미에서 가르칩니다.',
+      heading: '균형은 우연의 발견이 아닌, *필연의 설계*입니다.',
+      sub: 'LK BeautyAxis는 형태를 바꾸기보다 기준을 정의하고, 그 균형을 정제하는 데 집중합니다. 시술은 스튜디오에서, 그 기준은 아카데미에서 가르칩니다.',
       ctaAcademy: '수강 과정 알아보기',
       ctaStudio: '시술 사례 알아보기',
     },
@@ -68,10 +68,10 @@ module.exports = {
       },
     },
     principle: {
-      heading: '인상의 *축*',
+      heading: 'The *perceptive* axis',
       paragraphs: [
-        '아름다움을 다루기 전에 선행되어야 할 기준, 인상의 ‘축’. 같은 형태를 모두에게 그리지 않습니다.',
-        '우리가 생각하는 아름다움은 무언가를 더하는 일이 아니라, 본래의 균형과 기준을 정돈하는 과정에 가깝습니다.',
+        '단순히 형태를 보는 것이 아니라, 한 사람의 인상과 분위기, 그리고 그 안에 담긴 균형을 읽어내는 시선에서 출발합니다. 이 축은 감각적인 판단이 아닌, 관찰과 이해를 통해 형성된 미학적 기준입니다.',
+        '아름다움은 균형 속에서 드러납니다. 요소 하나하나를 섬세하게 다루며, 모든 요소는 전체와의 관계 속에서 고려됩니다. 변화를 강조하기보다 이미 존재하는 균형을 정제합니다.',
         '그 기준은 스튜디오의 디자인 상담에도, 아카데미의 교정 지도에도 같은 무게로 적용됩니다.',
       ],
     },
@@ -234,11 +234,21 @@ module.exports = {
   about: {
     title: '소개 | LK BeautyAxis 서울 삼성동',
     description: '사람과 인상을 중심에 두는 반영구 스튜디오·아카데미. LK BeautyAxis의 디자인 기준과 운영 방식을 소개합니다.',
-    hero: { eyebrow: '소개', heading: '당신의 아름다움에도 *기준*이 있기를.' },
+    hero: { eyebrow: '소개 · Beyond beauty, towards life', heading: '아름다움을 넘어, *삶의 변화*로.' },
     paragraphs: [
-      'LK BeautyAxis(엘케이뷰티엑시스, 구 LK Beauty Lab)는 서울 강남구 삼성동에서 반영구 스튜디오와 아카데미를 함께 운영합니다.',
-      '우리가 생각하는 아름다움은 무언가를 더하는 일이 아니라, 본래의 균형과 기준을 정돈하는 과정에 가깝습니다. 형태를 만들기 전에 인상을 읽고, 그 이유를 설명할 수 있는 작업을 지향합니다. 같은 기준으로 수강생의 작업을 보고 교정합니다.',
+      'LK BeautyAxis(엘케이뷰티엑시스, 구 LK Beauty Lab)는 아름다움을 결과가 아닌, 구조와 균형을 통해 완성되는 과정으로 바라봅니다. 각 요소는 독립적으로 존재하기보다 서로의 관계 속에서 정렬되며 하나의 인상을 형성합니다.',
+      '우리는 형태를 바꾸기보다 기준을 정의하고, 그 균형을 정제하는 데 집중합니다. 이를 통해 모든 결과는 자연스럽고 절제된 상태로 완성됩니다. 서울 강남구 삼성동에서 반영구 스튜디오와 아카데미를 함께 운영하며, 같은 기준으로 수강생의 작업을 보고 교정합니다.',
     ],
+    values: {
+      heading: '네 가지 *기준*',
+      intro: 'LK BeautyAxis가 정의하는 가치는 결과가 아닌 기준에서 시작됩니다. 사람을 어떻게 이해하고, 무엇을 기준으로 판단하며, 어떤 방식으로 균형을 완성하는지에 대한 태도입니다.',
+      items: [
+        { word: 'Insight', en: 'Understanding beyond appearance', desc: '외형을 넘어 사람을 읽는 시선' },
+        { word: 'Axis', en: 'Defining the standard of aesthetics', desc: '미학의 기준을 정의하는 중심' },
+        { word: 'Balance', en: 'Creating harmony within individuality', desc: '개인의 특성 안에서 균형을 설계' },
+        { word: 'Continuum', en: 'Extending impact through education', desc: '시술과 교육을 통해 가치를 확장' },
+      ],
+    },
     principles: {
       heading: '우리가 지키는 기준',
       items: [

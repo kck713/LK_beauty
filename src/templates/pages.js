@@ -9,7 +9,7 @@ function hero(t, h, { eyebrow, heading, sub, primary, secondary, unit, media, co
   return `
 <section class="hero hero-${attr(unit || 'brand')}${isCover ? ' hero-cover' : media ? ' hero-with-media' : primary ? ' hero-editorial' : ''}">
   <div class="container">
-    ${media ? `<div class="hero-media"><picture>${media.webp ? `<source type="image/webp" srcset="/${attr(media.webp)}">` : ''}<img src="/${attr(media.src)}" alt="${attr(media.alt)}" width="${media.width || 1200}" height="${media.height || 900}" fetchpriority="high"></picture></div>` : primary ? `<div class="hero-signature" aria-hidden="true"><span class="signature-index">LK BeautyAxis</span><span class="signature-monogram">LKBA<span>Beauty begins with an Axis</span></span><span class="signature-foot">${unit === 'studio' ? 'STUDIO' : unit === 'academy' ? 'ACADEMY' : 'STUDIO & ACADEMY'}<span>SEOUL</span></span></div>` : ''}
+    ${media ? `<div class="hero-media"><picture>${media.webp ? `<source type="image/webp" srcset="/${attr(media.webp)}">` : ''}<img src="/${attr(media.src)}" alt="${attr(media.alt)}" width="${media.width || 1200}" height="${media.height || 900}" fetchpriority="high"></picture></div>` : primary ? `<div class="hero-signature" aria-hidden="true"><span class="signature-index">${unit === 'studio' ? 'Studio' : unit === 'academy' ? 'Academy' : 'Studio & Academy'}</span><img class="signature-logo" src="/images/brand/logo-primary-white.png" alt="" width="1600" height="291"><span class="signature-foot"><span>${esc(t.common.tagline)}</span><span>Seoul</span></span></div>` : ''}
     <div class="hero-copy">
       ${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ''}
       <h1>${rich(heading)}</h1>
@@ -224,7 +224,8 @@ function about({ site, t, lang, academy: data, testimonials, ready }) {
   return hero(t, ab, { eyebrow: ab.hero.eyebrow, heading: ab.hero.heading, unit: 'brand' })
   + section('story', ab.hero.heading, ab.paragraphs.map((p) => `<p class="prose">${esc(p)}</p>`).join(''), 'sr-heading')
   + section('principles', ab.principles.heading, cards(ab.principles.items), 'section-alt')
-  + section('operations', ab.operations.heading, list(ab.operations.items, 'notes'))
+  + section('values', ab.values.heading, `<p class="prose">${esc(ab.values.intro)}</p><div class="values">${ab.values.items.map((v) => `<div class="value"><span class="value-word">${esc(v.word)}</span><span class="value-en">${esc(v.en)}</span><span class="value-desc">${esc(v.desc)}</span></div>`).join('')}</div>`)
+  + section('operations', ab.operations.heading, list(ab.operations.items, 'notes'), 'section-alt')
   + spaceSection({ site, t, lang, ready, compact: false })
   + directorHtml
   + testimonialsSection({ site, t, lang, testimonials, unit: null })
@@ -401,7 +402,7 @@ function root({ site, langs }) {
 <meta http-equiv="refresh" content="0; url=${attr(target)}">
 <link rel="canonical" href="${attr(site.baseUrl + target)}">
 <title>${esc(site.brand)}</title>
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" type="image/png">
 <style>body{margin:0;font-family:-apple-system,"Segoe UI","Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#faf9f6;color:#22313a;text-align:center;padding:64px 16px}a{color:#1e4d60;font-weight:600;margin:0 10px}</style>
 </head>
 <body>

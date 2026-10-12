@@ -1,26 +1,30 @@
-/* LK BeautyAxis — 브랜드 아트디렉션 v3 (인스타그램 @lk_beautyaxis 기준)
-   화이트 바탕 · 코발트 블루(--primary) · 블랙 텍스트 · 하이컨트라스트 세리프 이탤릭 워드마크 · 산세리프 본문/제목 · 가는 십자선(축) 모티프
-   실제 로고 SVG 가 들어오면 헤더 .brand-text 를 이미지로 교체하세요. */
+/* LK BeautyAxis — 브랜드 가이드라인 v2026 적용 (docs/BRAND.md)
+   Colour: Axis Blue #0062ff · Axis Grey 1~5 · Black #0e0f11. 주요 컬러는 강조와 구분에 선택적으로 사용.
+   Type: KR Pretendard(대체 Noto Sans KR) · EN Neue Haas Grotesk(라이선스, 자체 호스팅 시 적용; 대체 Pretendard/Arial).
+   Hierarchy: Title Thin/ExtraLight · Subtitle Regular · Body Regular. Tracking EN +20 / KR −10.
+   Grid: 여백 = 짧은 변의 5%. 로고는 원본 이미지(단색)만 사용, 최소 120px, 클리어스페이스 2x. */
 :root {
   --bg: #ffffff;
-  --bg-alt: #f4f6fa;
+  --bg-alt: #f5f6f8;          /* Axis Grey 1 */
   --surface: #ffffff;
-  --ink: #111111;
-  --ink-soft: #5b6168;
-  --line: #e2e6ec;
-  --primary: #1c5cff;
-  --primary-dark: #0f3fd6;
-  --primary-soft: #e9f0ff;
-  --accent: #1c5cff;
-  --accent-soft: #e9f0ff;
-  --warn: #c0392b;
-  --focus: #1c5cff;
+  --ink: #0e0f11;             /* Black */
+  --ink-soft: #6a6a6a;        /* Axis Grey 5 */
+  --ink-muted: #a8a8a8;       /* Axis Grey 4 */
+  --line: #e2e4e7;            /* Axis Grey 2 */
+  --line-strong: #c9cacc;     /* Axis Grey 3 */
+  --primary: #0062ff;         /* Axis Blue */
+  --primary-dark: #0e0f11;    /* hover: 팔레트 외 색 금지 → Black */
+  --primary-soft: #f5f6f8;
+  --accent: #0062ff;
+  --accent-soft: #f5f6f8;
+  --warn: #0e0f11;
+  --focus: #0062ff;
   --radius: 0px;
   --maxw: 1240px;
-  --gutter: clamp(22px, 4vw, 64px);
-  --font-body: "Montserrat", "Pretendard", "Noto Sans KR", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-heading: "Pretendard", "Noto Sans KR", "Noto Sans JP", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display: "Playfair Display", "Didot", "Bodoni MT", Georgia, "Times New Roman", serif;
+  --gutter: clamp(20px, 5vmin, 64px);
+  --font-body: "Neue Haas Grotesk Text", "Pretendard Variable", "Pretendard", "Noto Sans KR", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Hiragino Sans", "Meiryo", sans-serif;
+  --font-heading: "Neue Haas Grotesk Display", "Pretendard Variable", "Pretendard", "Noto Sans KR", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Hiragino Sans", "Meiryo", sans-serif;
+  --font-display: var(--font-heading);
   --mobile-cta-h: 72px;
 }
 *, *::before, *::after { box-sizing: border-box; }
@@ -38,12 +42,14 @@ img, video { max-width: 100%; height: auto; display: block; }
 a { color: var(--primary); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 a:hover { color: var(--accent); }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
-h1, h2, h3, .h3 { font-family: var(--font-heading); color: var(--ink); line-height: 1.25; margin: 0 0 .6em; font-weight: 700; letter-spacing: -0.02em; }
-.lang-en h1, .lang-en h2 { font-family: var(--font-display); font-weight: 500; font-style: italic; letter-spacing: -0.01em; }
-.lang-en .hero h1 { font-weight: 500; }
-em.hl { font-style: normal; color: var(--primary); }
-.lang-en em.hl { font-style: italic; }
-h1 { font-size: clamp(1.9rem, 4.5vw + .6rem, 3rem); }
+h1, h2, h3, .h3 { font-family: var(--font-heading); color: var(--ink); line-height: 1.2; margin: 0 0 .6em; letter-spacing: -0.01em; }
+h1 { font-weight: 200; }          /* Title: Thin/ExtraLight (가이드 §04 Hierarchy) */
+h2 { font-weight: 300; }
+h3, .h3 { font-weight: 500; }
+.lang-en, .lang-en .btn, .lang-en .nav-list a { letter-spacing: .02em; }   /* EN tracking +20 */
+.lang-ko body, .lang-ko { letter-spacing: -0.01em; }                        /* KR tracking −10 */
+em.hl { font-style: normal; color: var(--primary); font-weight: inherit; }
+h1 { font-size: clamp(2rem, 4.8vw + .6rem, 3.4rem); }
 h2 { font-size: clamp(1.55rem, 2.6vw + .5rem, 2.2rem); }
 h3, .h3 { font-size: 1.2rem; }
 p { margin: 0 0 1em; }
@@ -59,7 +65,7 @@ ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
 .prose-block h2::after { margin-left: 0; }
 
 /* 작은 대문자 라벨 (참고 사이트의 letterspaced caption) */
-.eyebrow, .kicker { font-family: var(--font-body); color: var(--accent); font-weight: 600; font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; margin-bottom: 14px; }
+.eyebrow, .kicker { font-family: var(--font-body); color: var(--primary); font-weight: 500; font-size: .8rem; letter-spacing: .02em; text-transform: none; margin-bottom: 14px; }
 
 /* Skip link */
 .skip-link { position: absolute; left: 8px; top: -60px; background: var(--primary); color: #fff; padding: 10px 14px; z-index: 100; }
@@ -70,9 +76,9 @@ ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
 .header-inner { display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; min-height: 68px; column-gap: 8px; }
 .brand { grid-column: 2; justify-self: center; display: flex; flex-direction: column; align-items: center; gap: 1px; color: var(--primary); text-decoration: none; min-height: 44px; justify-content: center; text-align: center; }
 .brand:hover { color: var(--primary); }
-.brand-text { font-family: var(--font-display); font-weight: 500; font-style: italic; font-size: 1.3rem; letter-spacing: -0.01em; line-height: 1.1; color: var(--ink); }
-.brand-axis { color: var(--primary); }
-.brand-sub { font-size: .56rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; white-space: nowrap; }
+.brand-logo { display: block; height: 24px; width: auto; }                 /* 1600×291 → 24px 높이 ≈ 132px 폭 (최소 120px 준수) */
+.brand-logo-footer { height: 22px; }
+.brand-sub { font-size: .6rem; letter-spacing: .04em; text-transform: none; color: var(--ink-muted); font-weight: 400; white-space: nowrap; margin-top: 6px; }
 .nav-toggle { grid-column: 1; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 0; background: none; color: var(--primary); cursor: pointer; }
 .nav-toggle-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
 .nav-toggle-bars { width: 24px; height: 2px; background: currentColor; position: relative; }
@@ -95,7 +101,8 @@ ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
   .header-inner { grid-template-columns: 1fr; row-gap: 0; min-height: 0; padding-top: 14px; }
   .brand { grid-column: 1; padding: 4px 0 8px; }
   .brand-text { font-size: 1.45rem; }
-  .brand-sub { font-size: .66rem; letter-spacing: .18em; }
+  .brand-sub { font-size: .7rem; }
+  .brand-logo { height: 28px; }
   .nav-toggle, .header-contact { display: none; }
   .site-nav { display: flex; grid-column: 1; align-items: center; justify-content: center; position: relative; padding: 0; border-top: 1px solid var(--line); min-height: 48px; }
   .nav-list { flex-direction: row; gap: 4px; margin: 0; }
@@ -250,8 +257,7 @@ ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
 .site-footer { border-top: 1px solid var(--line); padding: 44px 0 32px; background: var(--bg); font-size: .9rem; text-align: center; }
 .footer-inner { display: grid; gap: 18px; justify-items: center; }
 .footer-brand { display: grid; gap: 2px; }
-.footer-brand strong { font-family: var(--font-display); color: var(--ink); font-size: 1.25rem; }
-.footer-tagline { font-family: var(--font-display); font-style: italic; color: var(--primary); font-size: .95rem; letter-spacing: 0; text-transform: none; }
+.footer-tagline { color: var(--primary); font-size: .95rem; letter-spacing: 0; text-transform: none; }
 .footer-brand span { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
 .footer-links, .footer-channels { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 20px; }
 .footer-links a, .footer-channels a { color: var(--ink); min-height: 36px; display: inline-flex; align-items: center; text-decoration: none; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; }
@@ -337,7 +343,7 @@ h3 { font-family: var(--font-body); letter-spacing: -.025em; }
 .site-header { background: rgba(255,255,255,.97); }
 .header-inner { grid-template-columns: 1fr 44px 44px; column-gap: 8px; padding-top: 14px; }
 .brand { grid-column: 1; grid-row: 1; justify-self: start; align-items: flex-start; text-align: left; }
-.brand-text { font-size: .96rem; letter-spacing: .08em; }
+.brand-logo { height: 22px; }
 .brand-sub { font-size: .52rem; letter-spacing: .05em; }
 .header-contact { grid-column: 2; grid-row: 1; }
 .header-contact-label { display: none; }
@@ -358,9 +364,9 @@ h3 { font-family: var(--font-body); letter-spacing: -.025em; }
 .hero-signature { position: relative; isolation: isolate; min-height: 280px; background: var(--primary); color: #fff; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 24px; }
 .hero-signature::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 50%; border-top: 1px solid rgba(255,255,255,.45); }
 .hero-signature::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; border-left: 1px solid rgba(255,255,255,.45); }
-.signature-index, .signature-foot { font-size: .58rem; letter-spacing: .16em; }
-.signature-monogram { font-family: var(--font-display); font-style: italic; display: block; text-align: center; font-size: clamp(4.2rem, 9vw, 8rem); line-height: 1; letter-spacing: -.04em; font-weight: 500; padding: 26px 0; }
-.signature-monogram > span { display: block; font-family: var(--font-display); font-style: italic; font-size: .95rem; letter-spacing: .02em; margin-top: 16px; }
+.signature-index, .signature-foot { font-size: .72rem; letter-spacing: .02em; }
+.signature-logo { display: block; width: min(70%, 420px); height: auto; margin: 26px auto; }
+
 .signature-foot { display: flex; justify-content: space-between; }
 .hero-academy .hero-signature { background: var(--ink); color: #fff; }
 .hero-academy .hero-signature::before { border-color: rgba(255,255,255,.3); }
@@ -414,7 +420,7 @@ h3 { font-family: var(--font-body); letter-spacing: -.025em; }
 .site-footer { padding: 54px 0 32px; text-align: left; }
 .footer-inner { justify-items: start; gap: 24px; }
 .footer-links, .footer-channels { justify-content: flex-start; }
-.footer-brand strong { font-size: 1.1rem; }
+
 .footer-links a, .footer-channels a { min-height: 44px; letter-spacing: .02em; text-transform: none; }
 .tabs { max-width: 800px; }
 .lead-form { border: 0; background: #fff; }
@@ -431,7 +437,7 @@ h3 { font-family: var(--font-body); letter-spacing: -.025em; }
 @media (min-width: 900px) {
   .header-inner { grid-template-columns: 1fr auto; padding-top: 20px; }
   .brand { padding-bottom: 16px; }
-  .brand-text { font-size: 1.2rem; }
+  .brand-logo { height: 28px; }
   .brand-sub { font-size: .6rem; }
   .lang-switch { grid-column: 2; grid-row: 1; position: static; padding-bottom: 16px; }
   .site-nav { grid-column: 1; grid-row: 2; border: 0; justify-content: flex-start; min-height: 54px; }
@@ -463,7 +469,7 @@ h3 { font-family: var(--font-body); letter-spacing: -.025em; }
   .hero-actions { display: grid; grid-template-columns: minmax(0, 1fr); }
   .hero-actions .btn { width: 100%; }
   .hero-signature { min-height: 250px; }
-  .brand-text { font-size: .82rem; }
+  .brand-logo { height: 20px; }
   .brand-sub { font-size: .48rem; }
   .choice-card { padding: 26px; }
   .footer-brand span { letter-spacing: .05em; }
@@ -479,9 +485,10 @@ h3 { font-family: var(--font-body); letter-spacing: -.025em; }
 .hero-cover .container { display: flex; flex-direction: column; justify-content: flex-end; min-height: clamp(520px, 76vh, 720px); padding-top: 32px; padding-bottom: 40px; }
 .hero-cover .hero-copy { max-width: 640px; }
 .hero-cover h1, .hero-cover .lead { color: #fff; }
+.hero-cover h1 { font-weight: 300; }
 .hero-cover .lead { color: rgba(255,255,255,.86); }
-.hero-cover .eyebrow { color: #9db8ff; }
-.hero-cover em.hl { color: #7fa3ff; }
+.hero-cover .eyebrow { color: #c9cacc; }
+.hero-cover em.hl { color: #fff; }
 .hero-cover .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
 .hero-cover .btn-primary:hover { background: var(--primary-dark); color: #fff; border-color: var(--primary-dark); }
 .hero-cover .btn-secondary { color: #fff; border-color: rgba(255,255,255,.65); background: transparent; }
@@ -530,5 +537,23 @@ h3 { font-family: var(--font-body); letter-spacing: -.025em; }
 .step::before { color: var(--primary); }
 .checklist li::before { color: var(--primary); }
 .faq-item summary::after { color: var(--primary); }
-.footer-brand strong span { font: inherit; text-transform: none; letter-spacing: 0; color: var(--primary); }
-.footer-brand .footer-tagline { font-family: var(--font-display); font-style: italic; font-size: .95rem; letter-spacing: 0; text-transform: none; color: var(--primary); margin-top: 6px; }
+.footer-brand .footer-tagline { font-family: var(--font-heading); font-weight: 300; font-size: 1.15rem; letter-spacing: 0; text-transform: none; color: var(--primary); margin-top: 6px; }
+
+/* ---------- Brand values (가이드 §01 Brand Values, 2×2 crosshair) ---------- */
+.values { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); margin-top: 28px; }
+.value { display: grid; gap: 6px; padding: 28px 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; }
+.value:nth-child(2n) { border-right: 0; }
+.value:nth-child(n+3) { border-bottom: 0; }
+.value-word { font-family: var(--font-heading); font-weight: 200; font-size: clamp(2rem, 6vw, 3.6rem); color: var(--primary); line-height: 1.1; letter-spacing: -0.02em; }
+.value-en { font-size: .85rem; color: var(--ink-soft); }
+.value-desc { font-size: .9rem; color: var(--ink); }
+@media (min-width: 760px) { .value { padding: 56px 24px; } }
+/* 라벨 색: 가이드의 Grey 4/5 */
+.kv dt, .choice-kicker, .tag { color: var(--primary); }
+.post-more, .choice-cta { color: var(--primary); }
+.card-title, .post-title, .choice-title { font-weight: 400; }
+.choice-title { font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+.testimonial::before, .checklist li::before, .faq-item summary::after, .step::before { color: var(--primary); }
+.cta-band h2 { font-weight: 300; }
+.hero-signature { background: var(--primary); color: #fff; }
+.hero-academy .hero-signature { background: var(--ink); }

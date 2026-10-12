@@ -24,7 +24,7 @@ public_folder: images/uploads
 
 site_url: https://lkbeautyaxis.example   # SITE_URL 확정 후 변경
 display_url: https://lkbeautyaxis.example
-logo_url: /favicon.svg
+logo_url: /images/brand/logo-primary-blue.png
 
 collections:
   # ---------------------------------------------------------------- 사이트 운영 정보

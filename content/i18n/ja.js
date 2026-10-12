@@ -12,7 +12,7 @@ module.exports = {
   common: {
     brand: 'LK BeautyAxis',
     unitLabel: 'PMU Aesthetic Studio & Academy',
-    tagline: 'Beauty begins with an Axis.',
+    tagline: 'Define your axis',
     skipToContent: '本文へスキップ',
     menu: 'メニュー',
     close: '閉じる',
@@ -50,8 +50,8 @@ module.exports = {
     hero: {
       eyebrow: 'LK BeautyAxis · ソウル 三成洞',
       imageAlt: '異なる顔立ちの3人が並ぶモデルイメージ',
-      heading: '美しさは流行ではなく、*基準*から始まります。',
-      sub: 'LK BeautyAxis は形をつくる前に印象を読み、その人だけのバランスを設計します。施術はスタジオで、その基準はアカデミーで教えます。',
+      heading: 'バランスは偶然の発見ではなく、*必然の設計*です。',
+      sub: 'LK BeautyAxis は形を変えるのではなく、基準を定義し、そのバランスを磨くことに集中します。施術はスタジオで、その基準はアカデミーで教えます。',
       ctaAcademy: 'アカデミーを見る',
       ctaStudio: 'スタジオを見る',
     },
@@ -70,10 +70,10 @@ module.exports = {
       },
     },
     principle: {
-      heading: '印象の*軸*',
+      heading: 'The *perceptive* axis',
       paragraphs: [
-        '美しさを扱う前に先に立つべき基準、印象の「軸」。同じ形を全員に描くことはしません。',
-        '私たちが考える美しさは、何かを足すことではなく、本来のバランスと基準を整える過程に近いものです。',
+        '単に形を見るのではなく、その人の印象や雰囲気、そしてその中にあるバランスを読み取る視線から出発します。この軸は感覚的な判断ではなく、観察と理解を通じて形成された美学的基準です。',
+        '美しさはバランスの中に現れます。要素の一つひとつを丁寧に扱い、すべての要素は全体との関係の中で考えられます。変化を強調するのではなく、すでにあるバランスを磨きます。',
         'その基準は、スタジオのデザイン相談にも、アカデミーの添削指導にも同じ重みで適用されます。',
       ],
     },
@@ -236,11 +236,21 @@ module.exports = {
   about: {
     title: '私たちについて | LK BeautyAxis ソウル 三成洞',
     description: '人と印象を中心に据えるアートメイク スタジオ・アカデミー。LK BeautyAxis のデザイン基準と運営方針。',
-    hero: { eyebrow: '私たちについて', heading: 'あなたの美しさにも*基準*がありますように。' },
+    hero: { eyebrow: '私たちについて', heading: '美しさを超えて、*人生の変化*へ。' },
     paragraphs: [
-      'LK BeautyAxis（旧 LK Beauty Lab）は、ソウル 江南区 三成洞でアートメイクのスタジオとアカデミーを併せて運営しています。',
-      '私たちが考える美しさは、何かを足すことではなく、本来のバランスと基準を整える過程に近いものです。形をつくる前に印象を読み、その理由を説明できる仕事を目指します。同じ基準で受講生の作業を見て修正します。',
+      'LK BeautyAxis（旧 LK Beauty Lab）は、美しさを結果ではなく、構造とバランスを通じて完成される過程として捉えます。各要素は単独で存在するのではなく、互いの関係の中で整えられ、一つの印象を形づくります。',
+      '私たちは形を変えるのではなく基準を定義し、そのバランスを磨くことに集中します。それにより、すべての結果は自然で抑制された状態に仕上がります。ソウル 江南区 三成洞でアートメイクのスタジオとアカデミーを併せて運営し、同じ基準で受講生の作業を見て修正します。',
     ],
+    values: {
+      heading: '四つの*基準*',
+      intro: 'LK BeautyAxis が定義する価値は、結果ではなく基準から始まります。人をどう理解し、何を基準に判断し、どのようにバランスを完成させるかという姿勢です。',
+      items: [
+        { word: 'Insight', en: 'Understanding beyond appearance', desc: '外見を越えて人を読む視線' },
+        { word: 'Axis', en: 'Defining the standard of aesthetics', desc: '美学の基準を定義する中心' },
+        { word: 'Balance', en: 'Creating harmony within individuality', desc: '個人の特性の中でバランスを設計' },
+        { word: 'Continuum', en: 'Extending impact through education', desc: '施術と教育を通じて価値を広げる' },
+      ],
+    },
     principles: {
       heading: '私たちが守る基準',
       items: [

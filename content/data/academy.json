@@ -135,23 +135,26 @@
       "verified": true,
       "name": {
         "ko": "박동주",
-        "en": "LK Park (Park Dongju)",
-        "ja": "パク・ドンジュ（LK Park）"
+        "en": "Dongju Park",
+        "ja": "パク・ドンジュ（Dongju Park）"
       },
       "role": {
-        "ko": "대표 원장",
-        "en": "Director",
-        "ja": "代表"
+        "ko": "설립자 · 대표 원장",
+        "en": "Founder & Director",
+        "ja": "創設者・代表"
       },
       "credentials": {
         "ko": [
-          "LK BeautyAxis 대표 (구 LK Beauty Lab)"
+          "LK BeautyAxis 설립자·대표 (구 LK Beauty Lab)",
+          "서울 삼성동 스튜디오·아카데미 운영"
         ],
         "en": [
-          "Director, LK BeautyAxis (formerly LK Beauty Lab)"
+          "Founder & Director, LK BeautyAxis (formerly LK Beauty Lab)",
+          "Seoul, Korea"
         ],
         "ja": [
-          "LK BeautyAxis 代表（旧 LK Beauty Lab）"
+          "LK BeautyAxis 創設者・代表（旧 LK Beauty Lab）",
+          "ソウル・三成洞のスタジオ・アカデミー運営"
         ]
       },
       "photo": "images/about/director.jpg"
