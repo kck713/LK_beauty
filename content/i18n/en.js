@@ -416,11 +416,4 @@ module.exports = {
     body: 'This page may have moved or been removed. Use the links below.',
   },
 
-  root: {
-    title: 'LK BEAUTY AXIS — 언어 선택 / Select language / 言語を選択',
-    description: 'LK BEAUTY AXIS permanent makeup studio and academy in Seoul. Choose your language.',
-    heading: 'Select your language',
-    suggestion: 'Suggested for your browser language:',
-    goto: 'View in English',
-  },
 };

@@ -15,7 +15,7 @@ npm run qa             # 출시 QA 자동 검사
 
 - 디렉터리 경로 (`/ko/studio/`) → `index.html` 서빙, trailing slash 유지 (301 로 통일)
 - 없는 경로 → **실제 404 응답** + `404.html` (언어별 `/{lang}/404.html` 도 제공)
-- `/` 는 언어 선택 페이지. **IP·브라우저 언어 기반 서버 리디렉션 금지** (Google 지침)
+- `/` 는 기본 언어 홈 `/ko/` 로 **301 리디렉션** (`public/_redirects`, `vercel.json`, 아래 Nginx 예시). `dist/index.html` 은 메타 리프레시 폴백. **IP·브라우저 언어 기반 리디렉션은 사용하지 않음** (Google 지침). 언어 전환은 헤더에서.
 - HTTPS 강제, `www`/non-www 한쪽으로 301 통일 후 `SITE_URL` 과 일치시킬 것
 
 ### 예시 설정
@@ -31,6 +31,7 @@ npm run qa             # 출시 QA 자동 검사
 
 **Nginx**:
 ```
+location = / { return 301 /ko/; }
 location / { try_files $uri $uri/index.html =404; }
 error_page 404 /404.html;
 ```

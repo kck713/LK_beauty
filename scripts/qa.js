@@ -41,6 +41,7 @@ for (const f of files) {
   const isRoot = r === '/index.html';
 
   if (html.includes('name="lk-fixtures"') && process.env.FIXTURES !== '1') fail(r, 'FIXTURES build must not be deployed');
+  if (isRoot) { if (!/http-equiv="refresh" content="0; url=\/ko\/"/.test(html)) fail(r, 'root must redirect to /ko/'); if (!html.includes('noindex')) fail(r, 'root redirect page must be noindex'); continue; }
   if (!get(html, /<title>([^<]+)<\/title>/)) fail(r, 'missing <title>');
   if (!get(html, /<meta name="description" content="([^"]*)"/)) fail(r, 'missing meta description');
   const h1s = all(html, /<h1[^>]*>/g); if (h1s.length !== 1) fail(r, `expected 1 <h1>, found ${h1s.length}`);

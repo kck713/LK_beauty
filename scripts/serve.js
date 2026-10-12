@@ -10,6 +10,7 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=
 
 http.createServer((req, res) => {
   const url = decodeURIComponent(req.url.split('?')[0]);
+  if (url === '/') { res.writeHead(301, { Location: '/ko/' }); return res.end(); }
   let file = path.join(DIST, url);
   if (!file.startsWith(DIST)) { res.writeHead(403); return res.end(); }
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) {

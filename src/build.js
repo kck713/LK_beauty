@@ -153,14 +153,12 @@ function build() {
   fs.mkdirSync(path.join(DIST, 'assets'), { recursive: true });
   fs.copyFileSync(path.join(ROOT, 'src/styles/main.css'), path.join(DIST, 'assets/main.css'));
   fs.copyFileSync(path.join(ROOT, 'src/scripts/main.js'), path.join(DIST, 'assets/main.js'));
-  fs.copyFileSync(path.join(ROOT, 'src/scripts/root.js'), path.join(DIST, 'assets/root.js'));
 
   const sitemapUrls = [];
   const addSitemap = (loc, alternates) => sitemapUrls.push({ loc, alternates });
 
-  // 루트 언어 선택
+  // 루트: 기본 언어 홈으로 즉시 이동 (sitemap 제외)
   write('index.html', pages.root({ site, langs }));
-  addSitemap('/', [...langs.map((l) => ({ lang: l.code, href: pagePath(l.code, '') })), { lang: 'x-default', href: '/' }]);
 
   const anyNews = langs.some((t) => posts.some((p) => extras.postPublished(site, p, t.code)));
   const modalPost = extras.activeModalPost(site, posts);
@@ -185,7 +183,7 @@ function build() {
   for (const def of PAGE_DEFS) {
     const slugByLang = Object.fromEntries(langs.map((l) => [l.code, def.slug]));
     const alternates = altsFor(slugByLang);
-    const xDefault = def.key === 'home' ? '/' : pagePath(site.defaultLang, def.slug);
+    const xDefault = pagePath(site.defaultLang, def.slug);
     for (const t of langs) {
       const lang = t.code;
       const meta = { title: t[def.key].title, description: t[def.key].description || '', ogImage: ogFor(def.og) };
@@ -255,7 +253,7 @@ function build() {
     const alternates = langs.map((l) => ({ lang: l.code, name: l.name, href: pagePath(l.code, '') }));
     const html = layout({
       site, t, lang: t.code, page: '404', businessUnit: 'brand',
-      canonicalPath: pagePath(t.code, ''), alternates, xDefault: '/', meta: { title: t.notFound.title, description: t.notFound.body, ogImage: '' },
+      canonicalPath: pagePath(t.code, ''), alternates, xDefault: pagePath(site.defaultLang, ''), meta: { title: t.notFound.title, description: t.notFound.body, ogImage: '' },
       bodyClass: `page-404 lang-${t.code}`, noindex: true,
     }, pages.notFound({ t, lang: t.code }));
     write(path.join(t.code, '404.html'), html);

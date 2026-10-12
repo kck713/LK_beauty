@@ -1,0 +1,2 @@
+# Netlify / Cloudflare Pages: 루트는 기본 언어 홈으로. 브라우저 언어·IP 기반 리디렉션은 사용하지 않음.
+/  /ko/  301

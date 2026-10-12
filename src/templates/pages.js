@@ -388,37 +388,26 @@ function notFound({ t, lang }) {
 </section>`;
 }
 
-// 루트 `/` — 언어 선택 (자동 리디렉션 없음, 추천만 표시)
+// 루트 `/` — 기본 언어 홈(/ko/)으로 즉시 이동. 호스팅 레벨 301 이 우선이며, 이 페이지는 정적 폴백입니다.
+// IP·브라우저 언어 기반 강제 이동은 하지 않습니다 (Google 지침). 언어 전환은 각 페이지 헤더에서 제공.
 function root({ site, langs }) {
-  const ko = langs.find((l) => l.code === 'ko');
-  const t = ko;
+  const target = pagePath(site.defaultLang, '');
   return `<!doctype html>
-<html lang="ko">
+<html lang="${attr(site.defaultLang)}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(t.root.title)}</title>
-<meta name="description" content="${attr(t.root.description)}">
-<link rel="canonical" href="${attr(site.baseUrl + '/')}">
-${langs.map((l) => `<link rel="alternate" hreflang="${attr(l.code)}" href="${attr(site.baseUrl + pagePath(l.code, ''))}">`).join('\n')}
-<link rel="alternate" hreflang="x-default" href="${attr(site.baseUrl + '/')}">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=${attr(target)}">
+<link rel="canonical" href="${attr(site.baseUrl + target)}">
+<title>${esc(site.brand)}</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/assets/main.css">
-<meta name="theme-color" content="#f8f5f0">
+<style>body{margin:0;font-family:-apple-system,"Segoe UI","Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#faf9f6;color:#22313a;text-align:center;padding:64px 16px}a{color:#1e4d60;font-weight:600;margin:0 10px}</style>
 </head>
-<body class="page-root">
-<main id="main" class="root-main">
-  <div class="container root-inner">
-    <h1>${esc(site.brand)}</h1>
-    <p class="root-sub">${esc(t.common.unitLabel)} · Seoul</p>
-    <div class="root-rule" aria-hidden="true"></div>
-    <p class="root-suggest" data-lang-suggest hidden>${langs.map((l) => `<a href="${pagePath(l.code, '')}" lang="${attr(l.code)}" hreflang="${attr(l.code)}" data-suggest-for="${attr(l.code)}" data-suggest-label="${attr(l.root.suggestion)}" hidden>${esc(l.root.goto)}</a>`).join('')}</p>
-    <ul class="root-langs">
-      ${langs.map((l) => `<li><a class="btn btn-secondary btn-lg" href="${pagePath(l.code, '')}" lang="${attr(l.code)}" hreflang="${attr(l.code)}"><span>${esc(l.name)}</span><small>${esc(l.root.heading)}</small></a></li>`).join('')}
-    </ul>
-  </div>
-</main>
-<script src="/assets/root.js" defer></script>
+<body>
+<p><a href="${attr(target)}">${esc(site.brand)}</a></p>
+<p>${langs.map((l) => `<a href="${pagePath(l.code, '')}" lang="${attr(l.code)}" hreflang="${attr(l.code)}">${esc(l.name)}</a>`).join('')}</p>
+<script>location.replace(${JSON.stringify(target)});</script>
 </body>
 </html>`;
 }

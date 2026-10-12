@@ -13,7 +13,7 @@ module.exports = function applyFixtures({ posts, testimonials, studio, academy, 
     body: { ko: ['샘플 본문 문단 1.', '샘플 본문 문단 2.'], en: ['Sample paragraph 1.', 'Sample paragraph 2.'], ja: ['サンプル本文1。', 'サンプル本文2。'] },
     event: { startsAt: '2026-12-05T14:00:00+09:00', endsAt: '2026-12-05T17:00:00+09:00', location: { ko: '서울 강남구 삼성동', en: 'Samseong-dong, Seoul', ja: 'ソウル 三成洞' }, capacity: 12, seatsLeft: 5, registrationOpen: true, businessUnit: 'academy' },
     promotion: null,
-    modal: { enabled: true, from: '2026-10-01', until: '2026-12-05' },
+    modal: { enabled: false, from: '2026-10-01', until: '2026-12-05' }, // 팝업은 운영자 결정으로 꺼둠 (켜려면 enabled:true)
   }, {
     id: 'fx-news-ko', type: 'news', verified: true, publishedAt: '2026-09-20', image: '',
     slug: { ko: 'notice-sample', en: null, ja: null },

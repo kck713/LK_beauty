@@ -417,11 +417,4 @@ module.exports = {
     body: 'アドレスが変更されたか、削除されたページです。下記のリンクからお進みください。',
   },
 
-  root: {
-    title: 'LK BEAUTY AXIS — 언어 선택 / Select language / 言語を選択',
-    description: 'ソウルのアートメイク スタジオ・アカデミー LK BEAUTY AXIS。言語をお選びください。',
-    heading: '言語をお選びください',
-    suggestion: 'ブラウザの言語に合わせたページ：',
-    goto: '日本語で見る',
-  },
 };

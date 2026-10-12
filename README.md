@@ -37,7 +37,7 @@ docs/              MISSING_INFO · EVENTS · FORM_API · DEPLOY · QA
 
 | 페이지 | ko | en | ja |
 |---|---|---|---|
-| 언어 선택 | `/` | | |
+| 루트 → `/ko/` 301 | `/` | | |
 | 홈 | `/ko/` | `/en/` | `/ja/` |
 | 스튜디오 | `/ko/studio/` | `/en/studio/` | `/ja/studio/` |
 | 아카데미 | `/ko/academy/` | `/en/academy/` | `/ja/academy/` |

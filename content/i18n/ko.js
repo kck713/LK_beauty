@@ -415,11 +415,4 @@ module.exports = {
     body: '주소가 바뀌었거나 삭제된 페이지입니다. 아래 링크로 이동해 주세요.',
   },
 
-  root: {
-    title: 'LK BEAUTY AXIS — 언어 선택 / Select language / 言語を選択',
-    description: 'LK BEAUTY AXIS 서울 반영구 스튜디오·아카데미. 언어를 선택하세요.',
-    heading: '언어를 선택하세요',
-    suggestion: '브라우저 언어에 맞는 페이지:',
-    goto: '한국어로 보기',
-  },
 };

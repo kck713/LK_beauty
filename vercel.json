@@ -1,0 +1,12 @@
+{
+  "outputDirectory": "dist",
+  "trailingSlash": true,
+  "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/ko/",
+      "permanent": true
+    }
+  ]
+}

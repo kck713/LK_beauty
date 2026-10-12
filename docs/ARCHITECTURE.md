@@ -8,7 +8,7 @@
 | 요구 | 적용 | 구현 위치 |
 |---|---|---|
 | GNB: 좌 햄버거 · 중앙 로고 · 우 아이콘 | **적용** (우측은 장바구니 대신 상담 아이콘. 쇼핑 기능 결정 시 교체 가능) | `src/templates/layout.js`, `.header-inner` |
-| 진입 팝업: 행사 이미지 + 성명·연락처 폼 + CTA | **적용** — `content/posts/*.json`의 게시물에 `modal.enabled:true`와 기간을 설정하면 노출. 세션당 1회, '오늘 하루 보지 않기', Esc·포커스 트랩, 상담/개인정보/접수완료 페이지 제외 | `src/templates/extras.js` `modal()`, `src/scripts/main.js` |
+| 진입 팝업: 행사 이미지 + 성명·연락처 폼 + CTA | **적용, 기본 꺼짐(2026-10-12 운영자 결정)** — `content/posts/*.json`의 게시물에 `modal.enabled:true`와 기간을 설정하면 노출. 세션당 1회, '오늘 하루 보지 않기', Esc·포커스 트랩, 상담/개인정보/접수완료 페이지 제외 | `src/templates/extras.js` `modal()`, `src/scripts/main.js` |
 | 팝업 폼 데이터 전송 | **적용** — 상담 폼과 같은 엔드포인트로 `business_unit:"event"`, `event_id` 포함 전송. 서버 성공 후에만 `lead_submit` | `docs/FORM_API.md` |
 | 메인 Hero & About | **적용** — 홈 히어로(이미지 슬롯 포함) + '유행보다 기준' 소개. "상위 10대" 같은 검증 불가 수치는 사용하지 않음 | `content/i18n/*.js` `home` |
 
