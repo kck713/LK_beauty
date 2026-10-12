@@ -111,7 +111,9 @@ function relativize(html, rel) {
   const conv = (p) => prefix + (p.endsWith('/') ? p + 'index.html' : p);
   return html
     .replace(/\b(href|src|srcset|poster|action)="\/(?!\/)([^"#?]*)([#?][^"]*)?"/g, (m, a, p, rest) => `${a}="${conv(p)}${rest || ''}"`)
-    .replace(/thanksPath:"\/([^"]*)"/g, (m, p) => `thanksPath:"${conv(p)}"`);
+    .replace(/thanksPath:"\/([^"]*)"/g, (m, p) => `thanksPath:"${conv(p)}"`)
+    .replace(/content="0; url=\/([^"]*)"/g, (m, p) => `content="0; url=${conv(p)}"`)
+    .replace(/location\.replace\("\/([^"]*)"\)/g, (m, p) => `location.replace("${conv(p)}")`);
 }
 function write(rel, html) {
   const out = path.join(DIST, rel);

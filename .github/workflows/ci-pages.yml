@@ -1,0 +1,57 @@
+# CI: 모든 푸시에서 빌드·QA 검사.
+# GitHub Pages 테스트 배포: 저장소 Settings → Pages → Source 를 "GitHub Actions" 로 켜고,
+# Settings → Secrets and variables → Actions → Variables 에 DEPLOY_PAGES = true 를 추가하면
+# ccr-260d5634-lnlk2f 브랜치가 https://<owner>.github.io/<repo>/ 로 배포됩니다 (상대 경로 빌드).
+# 실제 서비스 도메인 배포는 docs/DEPLOY.md 참고 (RELATIVE 없이 빌드).
+name: ci-and-pages
+
+on:
+  push:
+    branches: [ccr-260d5634-lnlk2f, main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+      - run: FIXTURES=1 node src/build.js && FIXTURES=1 node scripts/qa.js
+
+  pages:
+    needs: test
+    if: github.event_name != 'pull_request' && vars.DEPLOY_PAGES == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build (relative paths for the /<repo>/ sub-path; sample content for layout review)
+        run: |
+          SITE_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}" \
+          RELATIVE=1 FIXTURES=1 node src/build.js
+          rm -rf dist/admin
+          touch dist/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

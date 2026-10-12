@@ -45,6 +45,18 @@
 
   var campaignId = last.campaign_id || last.utm_campaign || '';
 
+  // ---------- 새 페이지는 항상 맨 위에서 시작 ----------
+  // 일반 이동(navigate)일 때만 적용. 뒤로/앞으로 가기(back_forward)·새로고침은 브라우저의 위치 복원을 존중.
+  // 해시(#studio 등)가 있으면 앵커 위치를 유지. 미리보기 뷰어 등이 이전 스크롤을 되살리는 경우를 대비해 로드 직후 한 번 더 보정.
+  (function () {
+    var nav = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || {};
+    if (nav.type && nav.type !== 'navigate') return;
+    if (location.hash) return;
+    var toTop = function () { try { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); } catch (e) { window.scrollTo(0, 0); } };
+    toTop();
+    window.addEventListener('load', function () { toTop(); setTimeout(toTop, 60); });
+  })();
+
   // ---------- Nav toggle ----------
   var toggle = document.querySelector('[data-nav-toggle]');
   var nav = document.getElementById('site-nav');
