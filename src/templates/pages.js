@@ -1,5 +1,5 @@
 'use strict';
-const { esc, attr, pagePath, show, badge, list, cards, faq, steps } = require('./helpers');
+const { esc, attr, rich, pagePath, show, badge, list, cards, faq, steps } = require('./helpers');
 const { testimonialsSection, detailReady, spaceSection } = require('./extras');
 
 // ---------- 공통 조각 ----------
@@ -9,10 +9,10 @@ function hero(t, h, { eyebrow, heading, sub, primary, secondary, unit, media, co
   return `
 <section class="hero hero-${attr(unit || 'brand')}${isCover ? ' hero-cover' : media ? ' hero-with-media' : primary ? ' hero-editorial' : ''}">
   <div class="container">
-    ${media ? `<div class="hero-media"><picture>${media.webp ? `<source type="image/webp" srcset="/${attr(media.webp)}">` : ''}<img src="/${attr(media.src)}" alt="${attr(media.alt)}" width="${media.width || 1200}" height="${media.height || 900}" fetchpriority="high"></picture></div>` : primary ? `<div class="hero-signature" aria-hidden="true"><span class="signature-index">LK BEAUTY AXIS</span><span class="signature-monogram">LK<span>AXIS</span></span><span class="signature-foot">${unit === 'studio' ? 'STUDIO' : unit === 'academy' ? 'ACADEMY' : 'STUDIO & ACADEMY'}<span>SEOUL</span></span></div>` : ''}
+    ${media ? `<div class="hero-media"><picture>${media.webp ? `<source type="image/webp" srcset="/${attr(media.webp)}">` : ''}<img src="/${attr(media.src)}" alt="${attr(media.alt)}" width="${media.width || 1200}" height="${media.height || 900}" fetchpriority="high"></picture></div>` : primary ? `<div class="hero-signature" aria-hidden="true"><span class="signature-index">LK BeautyAxis</span><span class="signature-monogram">LKBA<span>Beauty begins with an Axis</span></span><span class="signature-foot">${unit === 'studio' ? 'STUDIO' : unit === 'academy' ? 'ACADEMY' : 'STUDIO & ACADEMY'}<span>SEOUL</span></span></div>` : ''}
     <div class="hero-copy">
       ${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ''}
-      <h1>${esc(heading)}</h1>
+      <h1>${rich(heading)}</h1>
       ${sub ? `<p class="lead">${esc(sub)}</p>` : ''}
       ${(primary || secondary) ? `<div class="hero-actions">
         ${primary ? `<a class="btn btn-primary" href="${attr(primary.href)}" data-cta="hero-primary" data-unit="${attr(unit || 'brand')}">${esc(primary.label)}</a>` : ''}
@@ -34,7 +34,7 @@ function section(id, heading, inner, extraCls = '') {
   return `
 <section class="section ${extraCls}" id="${attr(id)}" aria-labelledby="${attr(id)}-h">
   <div class="container">
-    <h2 id="${attr(id)}-h">${esc(heading)}</h2>
+    <h2 id="${attr(id)}-h">${rich(heading)}</h2>
     ${inner}
   </div>
 </section>`;
@@ -44,7 +44,7 @@ function ctaBand(c, href, unit) {
   return `
 <section class="cta-band">
   <div class="container">
-    <h2>${esc(c.heading)}</h2>
+    <h2>${rich(c.heading)}</h2>
     <p>${esc(c.desc)}</p>
     <a class="btn btn-primary btn-lg" href="${attr(href)}" data-cta="band" data-unit="${attr(unit)}">${esc(c.cta)}</a>
   </div>
@@ -95,7 +95,7 @@ function home({ site, t, lang, ready }) {
     return `
     <a class="choice-card choice-${key}" href="${pagePath(lang, key)}" data-cta="home-choice" data-unit="${key}">
       <span class="choice-top"><span class="choice-kicker">${esc(t.common.nav[key])}</span><span class="choice-number" aria-hidden="true">${key === 'studio' ? '01' : '02'}</span></span>
-      <span class="choice-title">${esc(c.title)}</span>
+      <span class="choice-title">${rich(c.title)}</span>
       <span class="choice-desc">${esc(c.desc)}</span>
       <span class="choice-cta">${esc(c.cta)}<span aria-hidden="true">↗</span></span>
     </a>`;

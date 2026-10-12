@@ -13,7 +13,7 @@
 | 상담 지원 언어(영/일 상담 가능 여부·방식) | `content/data/site.json` → `supportLanguages` | 미확인 | "페이지 언어 ≠ 상담 언어, 확인 후 안내" 문구 |
 | 운영시간·답변 가능 시간 | `content/data/site.json` → `hours` | 미확인 | "운영시간은 확인 후 게시" |
 | 상세 주소 (삼성로116길 5 3층, 카카오 채널 기준) | `content/data/site.json` → `address` | 재확인 필요 | 동 단위(삼성동)만 표시, 상세는 예약 시 안내 |
-| 현재 시술 메뉴·설명 | `content/data/studio.json` → `services` | 미확인 | "메뉴는 확인 후 게시" |
+| 현재 시술 메뉴·설명 | `content/data/studio.json` → `services` | 인스타 프로필 기준 4개 카테고리(헤어스트록·립·아이라인·헤어라인) 적용. 세부 설명·가격은 미확인 | 카테고리만 표시, 가격은 "상담 시 안내" |
 | 시술 가격(KRW)·리터치 포함 조건·예약금·취소 조건 | `content/data/studio.json` → `services[].priceKRW`, `retouchTerms` | 미확인 | "상담 시 안내, 결제는 KRW" |
 | 아카데미 과정명·기간·일정·정원·수강료·포함 도구 | `content/data/academy.json` → `courses` | 미확인 (과거 모집 글 수치 재사용 금지) | "확인 후 게시, 상담 시 현재 기준 안내" |
 | 보조 문의 경로 (카카오 채널 운영 여부, 이메일, 전화, WhatsApp, LINE) | `content/data/site.json` → `channels` | 인스타만 확정 | 인스타그램만 노출 |
@@ -23,12 +23,12 @@
 | 항목 | 파일 | 비고 |
 |---|---|---|
 | 히어로·OG 이미지 사용권 | `public/images/{home,studio,academy}/hero.jpg`, `public/images/og/*.jpg` | 2026-10-11 운영자 제공 모델 이미지 적용. 상업 사용 라이선스 확인 필요. 실제 작업·공간 사진 확보 시 교체 |
-| 로고 원본·브랜드 가이드·포인트색 | `public/images/logo.svg`, `src/styles/main.css` `--accent` | 현재 임시 'LK' 마크·갈색 포인트 |
-| 공식 한글 표기 (Lab / Axis 명칭 정리) | `content/data/site.json` → `brandKo` | 확정 전 영문만 사용 |
+| 로고 원본 SVG (LK BeautyAxis 워드마크·LKBA 모노그램) | `public/images/logo.svg`, 헤더 `.brand-text` | 2026-10-12 인스타그램 기준 블루(#1c5cff)·블랙 팔레트와 세리프 이탤릭 워드마크를 텍스트로 재현. 원본 SVG 로 교체 권장 |
+| 공식 한글 표기 | `content/data/site.json` → `brandKo` | 인스타 프로필 기준 '엘케이뷰티엑시스' 적용(구 LK Beauty Lab) |
 | 실제 작업 사례 3~6개 (원본, 촬영 시점, 디자인 이유, 사용 동의) | `content/data/studio.json` → `cases`, `public/images/cases/` | 직후/탈각 후/리터치 후 구분 |
 | 교정 장면 영상 2~3개 + 포스터 | `content/data/academy.json` → `coachingVideos` | 자동재생 금지 |
 | 수강생 성장 사례 (전/후, 경력, 과정, 촬영 시점, 지도 여부, 동의) | `content/data/academy.json` → `growthCases` | |
-| 원장·강사 경력 근거 | `content/data/academy.json` → `instructors` | 검증 가능한 경력만 |
+| 원장·강사 경력 근거 | `content/data/academy.json` → `instructors` | 대표 박동주(인스타 프로필). 영문 표기 'LK Park (Park Dongju)'는 확인 필요. 추가 경력(세미나 연사 등)은 근거 확인 후 추가 |
 | 공식 커리큘럼 단계 | `content/data/academy.json` → `curriculum` | |
 | 수료 후 실제 지원 | `content/data/academy.json` → `postCompletionSupport` | |
 | 공간·위생 절차 사진 | `content/assets.js` | |

@@ -132,21 +132,27 @@
   "instructors": [
     {
       "id": "director",
-      "verified": false,
+      "verified": true,
       "name": {
-        "ko": "",
-        "en": "",
-        "ja": ""
+        "ko": "박동주",
+        "en": "LK Park (Park Dongju)",
+        "ja": "パク・ドンジュ（LK Park）"
       },
       "role": {
-        "ko": "원장",
+        "ko": "대표 원장",
         "en": "Director",
-        "ja": "院長"
+        "ja": "代表"
       },
       "credentials": {
-        "ko": [],
-        "en": [],
-        "ja": []
+        "ko": [
+          "LK BeautyAxis 대표 (구 LK Beauty Lab)"
+        ],
+        "en": [
+          "Director, LK BeautyAxis (formerly LK Beauty Lab)"
+        ],
+        "ja": [
+          "LK BeautyAxis 代表（旧 LK Beauty Lab）"
+        ]
       },
       "photo": "images/about/director.jpg"
     }

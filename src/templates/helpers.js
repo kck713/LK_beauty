@@ -6,6 +6,9 @@ const esc = (s) => String(s == null ? '' : s)
 
 const attr = (s) => esc(s);
 
+// 제목용 강조: *텍스트* → <em class="hl"> (브랜드 블루 강조)
+const rich = (s) => esc(s).replace(/\*([^*]+)\*/g, '<em class="hl">$1</em>');
+
 // 간단한 템플릿 치환: {year} 등
 const fill = (s, vars) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
 
@@ -41,4 +44,4 @@ const faq = (items, heading) => `
 const steps = (items) => `<ol class="steps">${items.map((s) => `
   <li class="step"><strong>${esc(s.title)}</strong><span>${esc(s.desc)}</span></li>`).join('')}</ol>`;
 
-module.exports = { esc, attr, fill, pagePath, show, badge, list, cards, faq, steps };
+module.exports = { esc, attr, rich, fill, pagePath, show, badge, list, cards, faq, steps };

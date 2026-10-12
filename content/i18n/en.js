@@ -9,9 +9,9 @@ module.exports = {
   dir: 'ltr',
 
   common: {
-    brand: 'LK BEAUTY AXIS',
-    unitLabel: 'Permanent Makeup Studio & Academy',
-    tagline: 'We design beauty for the individual, and teach the judgment behind it.',
+    brand: 'LK BeautyAxis',
+    unitLabel: 'PMU Aesthetic Studio & Academy',
+    tagline: 'Beauty begins with an Axis.',
     skipToContent: 'Skip to content',
     menu: 'Menu',
     close: 'Close',
@@ -34,7 +34,7 @@ module.exports = {
     addressPending: 'The full address and directions are shared when your booking is confirmed.',
     languageSupportPending: 'This site is available in Korean, English and Japanese, but a page in your language does not by itself mean consultations or classes are offered in that language. We will confirm what support is actually available. Leave your preferred language in the form and we will reply with the options.',
     unverifiedBadge: 'Unverified · hidden until confirmed by the operator',
-    footerNote: '© {year} LK BEAUTY AXIS. Samseong-dong, Gangnam-gu, Seoul. By appointment only.',
+    footerNote: '© {year} LK BeautyAxis. Samseong-dong, Gangnam-gu, Seoul. By appointment only.',
     backHome: 'Back to home',
     learnMore: 'Learn more',
     faqHeading: 'Frequently asked questions',
@@ -44,13 +44,13 @@ module.exports = {
   },
 
   home: {
-    title: 'LK BEAUTY AXIS | Permanent Makeup Studio & Academy in Seoul',
-    description: 'Permanent makeup designed for your face, and an academy that teaches the judgment behind it. LK BEAUTY AXIS studio and academy in Samseong-dong, Gangnam, Seoul.',
+    title: 'LK BeautyAxis | Permanent Makeup Studio & Academy in Seoul',
+    description: 'Permanent makeup designed for your face, and an academy that teaches the judgment behind it. LK BeautyAxis studio and academy in Samseong-dong, Gangnam, Seoul.',
     hero: {
-      eyebrow: 'Permanent Makeup Studio & Academy · Samseong-dong, Seoul',
+      eyebrow: 'LK BeautyAxis · Samseong-dong, Seoul',
       imageAlt: 'Model image of three people with different faces side by side',
-      heading: 'We design beauty for the individual, and teach the judgment behind it.',
-      sub: 'A studio that designs brows and features to suit your face, and an academy that teaches the standards behind those decisions. Choose the page that fits your purpose.',
+      heading: 'Beauty begins with a *standard*, not a trend.',
+      sub: 'Before shaping anything, LK BeautyAxis reads your features and designs a balance that is yours alone. Treatments in the studio; the standard behind them, taught in the academy.',
       ctaAcademy: 'Explore the academy',
       ctaStudio: 'See the studio',
     },
@@ -59,20 +59,21 @@ module.exports = {
       order: ['studio', 'academy'],
       academy: {
         title: 'I want to learn permanent makeup',
-        desc: 'Courses for beginners and experienced artists, taught in Gangnam, Seoul. Teaching is primarily conducted in Korean; see the academy page for details.',
+        desc: 'Aesthetic sense and technique, taught together. Courses for beginners and experienced artists in Gangnam, Seoul. Teaching is primarily conducted in Korean; see the academy page for details.',
         cta: 'View the academy',
       },
       studio: {
         title: 'I want a treatment in Seoul',
-        desc: 'We look at the shape and hair flow of your brows and the look you want, and design together. By appointment in Samseong-dong, Seoul.',
+        desc: 'Hair-stroke brows · Lips · Eyeline · Hairline. We read your features before shaping anything, and design together. By appointment in Samseong-dong, Seoul.',
         cta: 'View the studio',
       },
     },
     principle: {
-      heading: 'Standards over trends',
+      heading: 'The *axis* of a face',
       paragraphs: [
-        'We do not draw the same shape on everyone. We look at facial proportions, the flow of your existing hair and the look you want, and we believe we should be able to explain why this shape and this flow were chosen.',
-        'That same judgment applies to design consultations in the studio and to correction-based teaching in the academy.',
+        'Before beauty is touched, a standard has to come first: the axis of your features. We do not draw the same shape on everyone.',
+        'To us, beauty is less about adding something and more about restoring the balance and standard that were already there.',
+        'That same standard applies to design consultations in the studio and to correction-based teaching in the academy.',
       ],
     },
     connection: {
@@ -91,13 +92,13 @@ module.exports = {
   },
 
   studio: {
-    title: 'Eyebrow Tattoo & Hair-Stroke Brows in Seoul | LK BEAUTY AXIS Studio',
-    description: 'Brows that follow your face. Design consultation, pricing and retouch information, and how to book at LK BEAUTY AXIS studio in Samseong-dong, Seoul — for visitors travelling to Korea.',
+    title: 'Eyebrow Tattoo & Hair-Stroke Brows in Seoul | LK BeautyAxis Studio',
+    description: 'Brows that follow your face. Design consultation, pricing and retouch information, and how to book at LK BeautyAxis studio in Samseong-dong, Seoul — for visitors travelling to Korea.',
     hero: {
       eyebrow: 'Studio · Samseong-dong, Seoul',
       imageAlt: 'Model image of a face in profile showing natural brow hair flow',
-      heading: 'Hair flow that fits your face. A look that fits you.',
-      sub: 'We look at the shape and flow of your brows and the mood you want, and design together.',
+      heading: 'We read the *features* before we shape them.',
+      sub: 'Hair-stroke brows · Lips · Eyeline · Hairline. We look at the shape and flow of your brows and the mood you want, and design a balance that is yours alone.',
       ctaPrimary: 'Design consultation inquiry',
       ctaSecondary: 'How booking works',
     },
@@ -144,7 +145,7 @@ module.exports = {
       ],
     },
     process: {
-      heading: 'How consultation and booking work',
+      heading: 'Good results start with a *good consultation*.',
       steps: [
         { title: 'Send the inquiry form', desc: 'Tell us the treatment you are interested in, your intended visit dates (undecided is fine) and your preferred language.' },
         { title: 'We reply', desc: 'During business hours (KST) we reply with available dates and what to expect.' },
@@ -172,13 +173,13 @@ module.exports = {
   },
 
   academy: {
-    title: 'Permanent Makeup Academy in Seoul | LK BEAUTY AXIS',
-    description: 'The skill of drawing hair strokes and the judgment to design. Courses for beginners and experienced artists with correction-based teaching at LK BEAUTY AXIS academy in Gangnam, Seoul.',
+    title: 'Permanent Makeup Academy in Seoul | LK BeautyAxis',
+    description: 'The skill of drawing hair strokes and the judgment to design. Courses for beginners and experienced artists with correction-based teaching at LK BeautyAxis academy in Gangnam, Seoul.',
     hero: {
       eyebrow: 'Academy · Gangnam, Seoul',
       imageAlt: 'Model image of a person checking their brow line with fingertips',
-      heading: 'The skill to draw hair strokes. The judgment to design.',
-      sub: 'Find the permanent makeup course that fits your experience and goals. Teaching is primarily conducted in Korean; please ask about language support before enrolling.',
+      heading: 'Aesthetic sense and technique. You need *both*.',
+      sub: 'Learn the skill of drawing strokes and the judgment to design, together. Find the course that fits your experience and goals. Teaching is primarily conducted in Korean; please ask about language support before enrolling.',
       ctaPrimary: 'Course consultation inquiry',
       ctaSecondary: 'See how courses are structured',
     },
@@ -232,12 +233,12 @@ module.exports = {
   },
 
   about: {
-    title: 'About | LK BEAUTY AXIS, Samseong-dong, Seoul',
-    description: 'A permanent makeup studio and academy that puts the person and their features first. The design standards and way of working at LK BEAUTY AXIS.',
-    hero: { eyebrow: 'About', heading: 'We put the person and their features first.' },
+    title: 'About | LK BeautyAxis, Samseong-dong, Seoul',
+    description: 'A permanent makeup studio and academy that puts the person and their features first. The design standards and way of working at LK BeautyAxis.',
+    hero: { eyebrow: 'About', heading: 'May your beauty have a *standard*, too.' },
     paragraphs: [
-      'LK BEAUTY AXIS runs a permanent makeup studio and an academy together in Samseong-dong, Gangnam-gu, Seoul.',
-      'Rather than drawing a trending shape, we start from one person’s face to decide shape, flow and colour, and aim for work we can explain. We review and correct students’ work by the same standard.',
+      'LK BeautyAxis (formerly LK Beauty Lab) runs a permanent makeup studio and an academy together in Samseong-dong, Gangnam-gu, Seoul.',
+      'To us, beauty is less about adding something and more about restoring the balance and standard that were already there. We read the features before shaping anything, and aim for work we can explain. We review and correct students’ work by the same standard.',
     ],
     principles: {
       heading: 'The standards we keep',
@@ -261,7 +262,7 @@ module.exports = {
   },
 
   contact: {
-    title: 'Contact | LK BEAUTY AXIS',
+    title: 'Contact | LK BeautyAxis',
     description: 'Treatment inquiries (studio) and course inquiries (academy) are handled separately. Send one even if your dates are undecided. Replies in KST.',
     hero: { eyebrow: 'Contact', heading: 'Contact', sub: 'Treatment and course inquiries are handled separately. We reply during business hours (KST) using the contact details you leave.' },
     tabs: { studio: 'Treatment · Studio', academy: 'Course · Academy' },
@@ -298,6 +299,7 @@ module.exports = {
         { value: 'brow-other', label: 'Brows (other technique / decide after consultation)' },
         { value: 'eyeliner', label: 'Eyeliner' },
         { value: 'lips', label: 'Lips' },
+        { value: 'hairline', label: 'Hairline' },
         { value: 'correction', label: 'Correction of previous permanent makeup' },
         { value: 'undecided', label: 'Not sure yet' },
       ],
@@ -343,7 +345,7 @@ module.exports = {
   },
 
   thanks: {
-    title: 'Inquiry received | LK BEAUTY AXIS',
+    title: 'Inquiry received | LK BeautyAxis',
     description: 'Your inquiry has been received.',
     heading: 'Your inquiry has been received.',
     body: 'We will reply during business hours (KST) using the contact details you left. If you do not hear from us, check your spam folder or use another route.',
@@ -355,7 +357,7 @@ module.exports = {
   },
 
   privacy: {
-    title: 'Privacy notice | LK BEAUTY AXIS',
+    title: 'Privacy notice | LK BeautyAxis',
     description: 'What personal data we collect through inquiry forms, why, how long we keep it and how to contact us.',
     hero: { eyebrow: 'Policy', heading: 'Privacy notice' },
     updatedLabel: 'Last updated',
@@ -371,8 +373,8 @@ module.exports = {
   },
 
   news: {
-    title: 'News & Events | LK BEAUTY AXIS',
-    description: 'News, seminars and events, and promotions from LK BEAUTY AXIS.',
+    title: 'News & Events | LK BeautyAxis',
+    description: 'News, seminars and events, and promotions from LK BeautyAxis.',
     heading: 'News & Events',
     sub: 'Seminar and event announcements and studio news.',
     empty: 'No posts yet.',
@@ -411,7 +413,7 @@ module.exports = {
   },
 
   notFound: {
-    title: 'Page not found | LK BEAUTY AXIS',
+    title: 'Page not found | LK BeautyAxis',
     heading: 'Page not found.',
     body: 'This page may have moved or been removed. Use the links below.',
   },

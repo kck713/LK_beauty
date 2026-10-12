@@ -274,7 +274,7 @@ ${u.alternates.map((a) => `    <xhtml:link rel="alternate" hreflang="${a.lang}" 
 
   // favicon (로고 확정 전 임시)
   if (!fs.existsSync(path.join(DIST, 'favicon.svg'))) {
-    write('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#2b2a28"/><text x="32" y="41" font-family="Georgia, serif" font-size="26" text-anchor="middle" fill="#f8f5f0" letter-spacing="1">LK</text></svg>`);
+    write('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#1c5cff"/><text x="32" y="39" font-family="Playfair Display, Didot, Georgia, serif" font-style="italic" font-size="21" text-anchor="middle" fill="#fff" letter-spacing="-0.5">LKBA</text></svg>`);
   }
 
   // 빌드 리포트

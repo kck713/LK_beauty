@@ -2,16 +2,16 @@
   "services": [
     {
       "id": "brow-hairstroke",
-      "verified": false,
+      "verified": true,
       "name": {
-        "ko": "눈썹 헤어스트록",
+        "ko": "헤어스트록",
         "en": "Hair-stroke brows",
-        "ja": "眉ヘアストローク"
+        "ja": "ヘアストローク"
       },
       "summary": {
-        "ko": "",
-        "en": "",
-        "ja": ""
+        "ko": "결을 한 올씩 그려 자연스러운 눈썹의 형태와 밀도를 설계합니다.",
+        "en": "Strokes drawn one by one to design a natural brow shape and density.",
+        "ja": "毛を一本ずつ描き、自然な眉の形と密度を設計します。"
       },
       "priceKRW": null,
       "retouchIncluded": null,
@@ -32,17 +32,17 @@
       }
     },
     {
-      "id": "eyeliner",
-      "verified": false,
+      "id": "lips",
+      "verified": true,
       "name": {
-        "ko": "아이라인",
-        "en": "Eyeliner",
-        "ja": "アイライン"
+        "ko": "립",
+        "en": "Lips",
+        "ja": "リップ"
       },
       "summary": {
-        "ko": "",
-        "en": "",
-        "ja": ""
+        "ko": "입술의 윤곽과 혈색을 정돈합니다.",
+        "en": "Refines the contour and tone of the lips.",
+        "ja": "唇の輪郭と血色を整えます。"
       },
       "priceKRW": null,
       "retouchIncluded": null,
@@ -52,9 +52,9 @@
         "ja": ""
       },
       "slug": {
-        "ko": "eyeliner",
-        "en": "eyeliner",
-        "ja": "eyeliner"
+        "ko": "lip",
+        "en": "lips",
+        "ja": "lip"
       },
       "detail": {
         "ko": null,
@@ -63,17 +63,17 @@
       }
     },
     {
-      "id": "lips",
-      "verified": false,
+      "id": "eyeliner",
+      "verified": true,
       "name": {
-        "ko": "입술",
-        "en": "Lips",
-        "ja": "リップ"
+        "ko": "아이라인",
+        "en": "Eyeline",
+        "ja": "アイライン"
       },
       "summary": {
-        "ko": "",
-        "en": "",
-        "ja": ""
+        "ko": "눈의 형태에 맞춰 라인의 두께와 길이를 설계합니다.",
+        "en": "Line thickness and length designed to the shape of your eyes.",
+        "ja": "目の形に合わせてラインの太さと長さを設計します。"
       },
       "priceKRW": null,
       "retouchIncluded": null,
@@ -83,14 +83,45 @@
         "ja": ""
       },
       "slug": {
-        "ko": "lips",
-        "en": "lips",
-        "ja": "lips"
+        "ko": "eyeline",
+        "en": "eyeline",
+        "ja": "eyeline"
       },
       "detail": {
         "ko": null,
         "en": null,
         "ja": null
+      }
+    },
+    {
+      "id": "hairline",
+      "priceKRW": null,
+      "retouchIncluded": null,
+      "retouchTerms": {
+        "ko": "",
+        "en": "",
+        "ja": ""
+      },
+      "detail": {
+        "ko": null,
+        "en": null,
+        "ja": null
+      },
+      "verified": true,
+      "name": {
+        "ko": "헤어라인",
+        "en": "Hairline",
+        "ja": "ヘアライン"
+      },
+      "summary": {
+        "ko": "이마 라인과 얼굴 비율에 맞춰 헤어라인을 보완합니다.",
+        "en": "Fills and shapes the hairline to your facial proportions.",
+        "ja": "額のラインと顔の比率に合わせてヘアラインを補います。"
+      },
+      "slug": {
+        "ko": "hairline",
+        "en": "hairline",
+        "ja": "hairline"
       }
     }
   ],

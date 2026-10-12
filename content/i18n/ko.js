@@ -8,9 +8,9 @@ module.exports = {
   dir: 'ltr',
 
   common: {
-    brand: 'LK BEAUTY AXIS',
-    unitLabel: '반영구 아카데미 & 스튜디오',
-    tagline: '개인의 아름다움을 설계하고, 그 기준을 가르칩니다.',
+    brand: 'LK BeautyAxis',
+    unitLabel: 'PMU Aesthetic Studio & Academy',
+    tagline: 'Beauty begins with an Axis.',
     skipToContent: '본문으로 건너뛰기',
     menu: '메뉴',
     close: '닫기',
@@ -33,7 +33,7 @@ module.exports = {
     addressPending: '상세 주소와 오시는 길은 예약 확정 시 안내드립니다.',
     languageSupportPending: '이 페이지는 한국어·영어·일본어로 제공되지만, 페이지 언어가 곧 해당 언어로 상담이나 수업을 지원한다는 뜻은 아닙니다. 실제 지원 범위는 확인 후 안내드립니다. 폼에 선호 언어를 남겨 주시면 가능한 방법을 답변드립니다.',
     unverifiedBadge: '미확정 · 운영자 확인 전 비공개',
-    footerNote: '© {year} LK BEAUTY AXIS. 서울 강남구 삼성동. 예약제 운영.',
+    footerNote: '© {year} LK BeautyAxis. 서울 강남구 삼성동. 예약제 운영.',
     backHome: '홈으로',
     learnMore: '자세히 보기',
     faqHeading: '자주 묻는 질문',
@@ -43,13 +43,13 @@ module.exports = {
   },
 
   home: {
-    title: 'LK BEAUTY AXIS | 서울 삼성동 반영구 스튜디오 & 아카데미',
-    description: '개인의 인상에 맞는 반영구 디자인, 그리고 그 판단 기준을 가르치는 교육. 서울 강남구 삼성동 LK BEAUTY AXIS 스튜디오·아카데미.',
+    title: 'LK BeautyAxis | 서울 삼성동 반영구 스튜디오 & 아카데미',
+    description: '개인의 인상에 맞는 반영구 디자인, 그리고 그 판단 기준을 가르치는 교육. 서울 강남구 삼성동 LK BeautyAxis 스튜디오·아카데미.',
     hero: {
-      eyebrow: '반영구 아카데미 & 스튜디오 · 서울 삼성동',
+      eyebrow: 'LK BeautyAxis · 서울 삼성동',
       imageAlt: '서로 다른 얼굴의 세 사람이 나란히 있는 모델 이미지',
-      heading: '개인의 아름다움을 설계하고, 그 기준을 가르칩니다.',
-      sub: '얼굴에 맞는 결과 인상을 디자인하는 스튜디오, 그 판단 기준을 배우는 아카데미. 목적에 맞는 페이지를 선택하세요.',
+      heading: '아름다움은 유행이 아니라, *기준*에서 시작됩니다.',
+      sub: 'LK BeautyAxis는 형태를 만들기 전에 인상을 읽고, 한 사람만의 균형을 설계합니다. 시술은 스튜디오에서, 그 기준은 아카데미에서 가르칩니다.',
       ctaAcademy: '수강 과정 알아보기',
       ctaStudio: '시술 사례 알아보기',
     },
@@ -58,20 +58,21 @@ module.exports = {
       order: ['academy', 'studio'],
       academy: {
         title: '반영구를 배우고 싶어요',
-        desc: '입문부터 경력자까지, 내 수준에 맞는 과정과 실제 지도 방식을 확인하세요. 서울 강남에서 진행합니다.',
+        desc: '미감과 테크닉, 둘 다 가르칩니다. 입문부터 경력자까지 내 수준에 맞는 과정과 실제 지도 방식을 확인하세요. 서울 강남에서 진행합니다.',
         cta: '아카데미 보기',
       },
       studio: {
         title: '시술을 받고 싶어요',
-        desc: '눈썹의 형태와 결, 원하는 분위기를 함께 살펴 디자인을 상담합니다. 서울 삼성동 예약제.',
+        desc: '헤어스트록 · 립 · 아이라인 · 헤어라인. 형태를 만들기 전에 인상을 읽고 디자인을 상담합니다. 서울 삼성동 예약제.',
         cta: '스튜디오 보기',
       },
     },
     principle: {
-      heading: '유행보다 기준',
+      heading: '인상의 *축*',
       paragraphs: [
-        '같은 형태를 모두에게 그리지 않습니다. 얼굴의 비율, 기존 털의 결, 원하는 분위기를 보고 왜 이 형태와 결을 선택했는지 설명할 수 있어야 한다고 생각합니다.',
-        '그 판단 과정은 스튜디오의 디자인 상담에도, 아카데미의 교정 지도에도 같은 기준으로 적용됩니다.',
+        '아름다움을 다루기 전에 선행되어야 할 기준, 인상의 ‘축’. 같은 형태를 모두에게 그리지 않습니다.',
+        '우리가 생각하는 아름다움은 무언가를 더하는 일이 아니라, 본래의 균형과 기준을 정돈하는 과정에 가깝습니다.',
+        '그 기준은 스튜디오의 디자인 상담에도, 아카데미의 교정 지도에도 같은 무게로 적용됩니다.',
       ],
     },
     connection: {
@@ -90,13 +91,13 @@ module.exports = {
   },
 
   studio: {
-    title: '서울 눈썹 반영구·헤어스트록 시술 상담 | LK BEAUTY AXIS 스튜디오',
-    description: '얼굴에 맞는 결, 나에게 맞는 인상. 서울 삼성동 LK BEAUTY AXIS 스튜디오의 디자인 상담, 비용·리터치 안내, 상담·예약 순서.',
+    title: '서울 눈썹 반영구·헤어스트록 시술 상담 | LK BeautyAxis 스튜디오',
+    description: '얼굴에 맞는 결, 나에게 맞는 인상. 서울 삼성동 LK BeautyAxis 스튜디오의 디자인 상담, 비용·리터치 안내, 상담·예약 순서.',
     hero: {
       eyebrow: '스튜디오 · 서울 삼성동',
       imageAlt: '자연스러운 눈썹 결이 보이는 측면 얼굴 모델 이미지',
-      heading: '얼굴에 맞는 결, 나에게 맞는 인상.',
-      sub: '눈썹의 형태와 결, 원하는 분위기를 함께 살펴 디자인을 상담합니다.',
+      heading: '형태를 만들기 전에, *인상*을 읽습니다.',
+      sub: '헤어스트록 · 립 · 아이라인 · 헤어라인. 눈썹의 형태와 결, 원하는 분위기를 함께 살펴 한 사람만의 균형을 디자인합니다.',
       ctaPrimary: '나에게 맞는 디자인 상담',
       ctaSecondary: '상담·예약 순서 보기',
     },
@@ -143,7 +144,7 @@ module.exports = {
       ],
     },
     process: {
-      heading: '상담·예약 순서',
+      heading: '좋은 결과는 *좋은 상담*에서 시작됩니다.',
       steps: [
         { title: '상담 폼 접수', desc: '관심 시술, 희망 방문일(미정 가능), 선호 언어를 남겨 주세요.' },
         { title: '회신', desc: '운영시간(KST) 내에 가능한 일정과 안내 사항을 회신합니다.' },
@@ -171,13 +172,13 @@ module.exports = {
   },
 
   academy: {
-    title: '반영구 교육·헤어스트록 수강 상담 | LK BEAUTY AXIS 아카데미 (서울 강남)',
-    description: '결을 그리는 기술, 디자인을 판단하는 기준. 입문·경력별 반영구 교육 과정과 실제 교정 지도 방식을 확인하고 서울 강남 LK BEAUTY AXIS 아카데미 수강 상담을 접수하세요.',
+    title: '반영구 교육·헤어스트록 수강 상담 | LK BeautyAxis 아카데미 (서울 강남)',
+    description: '결을 그리는 기술, 디자인을 판단하는 기준. 입문·경력별 반영구 교육 과정과 실제 교정 지도 방식을 확인하고 서울 강남 LK BeautyAxis 아카데미 수강 상담을 접수하세요.',
     hero: {
       eyebrow: '아카데미 · 서울 강남',
       imageAlt: '손끝으로 눈썹 라인을 확인하는 모델 이미지',
-      heading: '결을 그리는 기술, 디자인을 판단하는 기준.',
-      sub: '나의 경험과 목표에 맞는 반영구 교육 과정을 확인하세요.',
+      heading: '미감과 테크닉. *둘 다여야* 한다.',
+      sub: '결을 그리는 기술과 디자인을 판단하는 기준을 함께 배웁니다. 나의 경험과 목표에 맞는 과정을 확인하세요.',
       ctaPrimary: '내 수준에 맞는 과정 상담',
       ctaSecondary: '과정 구성 보기',
     },
@@ -231,12 +232,12 @@ module.exports = {
   },
 
   about: {
-    title: '소개 | LK BEAUTY AXIS 서울 삼성동',
-    description: '사람과 인상을 중심에 두는 반영구 스튜디오·아카데미. LK BEAUTY AXIS의 디자인 기준과 운영 방식을 소개합니다.',
-    hero: { eyebrow: '소개', heading: '사람과 인상을 중심에 둡니다.' },
+    title: '소개 | LK BeautyAxis 서울 삼성동',
+    description: '사람과 인상을 중심에 두는 반영구 스튜디오·아카데미. LK BeautyAxis의 디자인 기준과 운영 방식을 소개합니다.',
+    hero: { eyebrow: '소개', heading: '당신의 아름다움에도 *기준*이 있기를.' },
     paragraphs: [
-      'LK BEAUTY AXIS는 서울 강남구 삼성동에서 반영구 스튜디오와 아카데미를 함께 운영합니다.',
-      '유행하는 형태를 따라 그리기보다 한 사람의 얼굴에서 출발해 형태·결·색을 정하고, 그 이유를 설명할 수 있는 작업을 지향합니다. 같은 기준으로 수강생의 작업을 보고 교정합니다.',
+      'LK BeautyAxis(엘케이뷰티엑시스, 구 LK Beauty Lab)는 서울 강남구 삼성동에서 반영구 스튜디오와 아카데미를 함께 운영합니다.',
+      '우리가 생각하는 아름다움은 무언가를 더하는 일이 아니라, 본래의 균형과 기준을 정돈하는 과정에 가깝습니다. 형태를 만들기 전에 인상을 읽고, 그 이유를 설명할 수 있는 작업을 지향합니다. 같은 기준으로 수강생의 작업을 보고 교정합니다.',
     ],
     principles: {
       heading: '우리가 지키는 기준',
@@ -260,7 +261,7 @@ module.exports = {
   },
 
   contact: {
-    title: '상담 문의 | LK BEAUTY AXIS',
+    title: '상담 문의 | LK BeautyAxis',
     description: '시술 상담(스튜디오)과 수강 상담(아카데미)을 구분해 접수합니다. 희망 일정이 미정이어도 접수할 수 있습니다. 회신은 KST 기준.',
     hero: { eyebrow: '상담 문의', heading: '상담 문의', sub: '시술 상담과 수강 상담을 구분해 접수합니다. 접수 후 운영시간(KST) 내에 남겨 주신 연락처로 회신드립니다.' },
     tabs: { studio: '시술 상담 · 스튜디오', academy: '수강 상담 · 아카데미' },
@@ -296,7 +297,8 @@ module.exports = {
         { value: 'brow-hairstroke', label: '눈썹 (헤어스트록·결 중심)' },
         { value: 'brow-other', label: '눈썹 (기타 기법·상담 후 결정)' },
         { value: 'eyeliner', label: '아이라인' },
-        { value: 'lips', label: '입술' },
+        { value: 'lips', label: '립' },
+        { value: 'hairline', label: '헤어라인' },
         { value: 'correction', label: '기존 반영구 수정 상담' },
         { value: 'undecided', label: '아직 모르겠어요' },
       ],
@@ -342,7 +344,7 @@ module.exports = {
   },
 
   thanks: {
-    title: '접수 완료 | LK BEAUTY AXIS',
+    title: '접수 완료 | LK BeautyAxis',
     description: '상담 문의가 접수되었습니다.',
     heading: '접수가 완료되었습니다.',
     body: '운영시간(KST) 내에 남겨 주신 연락처로 회신드립니다. 회신이 없다면 스팸함을 확인하시거나 다른 경로로 문의해 주세요.',
@@ -354,7 +356,7 @@ module.exports = {
   },
 
   privacy: {
-    title: '개인정보 처리 안내 | LK BEAUTY AXIS',
+    title: '개인정보 처리 안내 | LK BeautyAxis',
     description: '상담 접수 시 수집하는 개인정보의 항목·목적·보관·문의 경로를 안내합니다.',
     hero: { eyebrow: '정책', heading: '개인정보 처리 안내' },
     updatedLabel: '최종 수정',
@@ -370,8 +372,8 @@ module.exports = {
   },
 
   news: {
-    title: '소식·이벤트 | LK BEAUTY AXIS',
-    description: 'LK BEAUTY AXIS의 소식, 세미나·이벤트 안내, 프로모션을 확인하세요.',
+    title: '소식·이벤트 | LK BeautyAxis',
+    description: 'LK BeautyAxis의 소식, 세미나·이벤트 안내, 프로모션을 확인하세요.',
     heading: '소식·이벤트',
     sub: '세미나·이벤트 안내와 운영 소식을 게시합니다.',
     empty: '게시된 소식이 아직 없습니다.',
@@ -410,7 +412,7 @@ module.exports = {
   },
 
   notFound: {
-    title: '페이지를 찾을 수 없습니다 | LK BEAUTY AXIS',
+    title: '페이지를 찾을 수 없습니다 | LK BeautyAxis',
     heading: '페이지를 찾을 수 없습니다.',
     body: '주소가 바뀌었거나 삭제된 페이지입니다. 아래 링크로 이동해 주세요.',
   },

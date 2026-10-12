@@ -10,9 +10,9 @@ module.exports = {
   dir: 'ltr',
 
   common: {
-    brand: 'LK BEAUTY AXIS',
-    unitLabel: 'アートメイク スタジオ & アカデミー',
-    tagline: '一人ひとりの美しさを設計し、その判断基準を教えます。',
+    brand: 'LK BeautyAxis',
+    unitLabel: 'PMU Aesthetic Studio & Academy',
+    tagline: 'Beauty begins with an Axis.',
     skipToContent: '本文へスキップ',
     menu: 'メニュー',
     close: '閉じる',
@@ -35,7 +35,7 @@ module.exports = {
     addressPending: '詳しい住所と行き方は、ご予約確定時にご案内します。',
     languageSupportPending: '当サイトは韓国語・英語・日本語で提供していますが、ページが日本語であることは、日本語での相談や授業を提供することを意味しません。実際の対応範囲は確認のうえご案内します。フォームにご希望の言語をご記入いただければ、可能な方法をお返事します。',
     unverifiedBadge: '未確定 · 運営者の確認まで非公開',
-    footerNote: '© {year} LK BEAUTY AXIS. ソウル 江南区 三成洞. 完全予約制.',
+    footerNote: '© {year} LK BeautyAxis. ソウル 江南区 三成洞. 完全予約制.',
     backHome: 'ホームへ戻る',
     learnMore: '詳しく見る',
     faqHeading: 'よくある質問',
@@ -45,13 +45,13 @@ module.exports = {
   },
 
   home: {
-    title: 'LK BEAUTY AXIS | ソウル 三成洞のアートメイク スタジオ & アカデミー',
-    description: '一人ひとりの顔に合わせたアートメイクのデザインと、その判断基準を教えるアカデミー。ソウル 江南区 三成洞の LK BEAUTY AXIS。',
+    title: 'LK BeautyAxis | ソウル 三成洞のアートメイク スタジオ & アカデミー',
+    description: '一人ひとりの顔に合わせたアートメイクのデザインと、その判断基準を教えるアカデミー。ソウル 江南区 三成洞の LK BeautyAxis。',
     hero: {
-      eyebrow: 'アートメイク スタジオ & アカデミー · ソウル 三成洞',
+      eyebrow: 'LK BeautyAxis · ソウル 三成洞',
       imageAlt: '異なる顔立ちの3人が並ぶモデルイメージ',
-      heading: '一人ひとりの美しさを設計し、その判断基準を教えます。',
-      sub: '顔に合う毛流れと印象をデザインするスタジオと、その判断基準を学ぶアカデミー。目的に合ったページをお選びください。',
+      heading: '美しさは流行ではなく、*基準*から始まります。',
+      sub: 'LK BeautyAxis は形をつくる前に印象を読み、その人だけのバランスを設計します。施術はスタジオで、その基準はアカデミーで教えます。',
       ctaAcademy: 'アカデミーを見る',
       ctaStudio: 'スタジオを見る',
     },
@@ -60,20 +60,21 @@ module.exports = {
       order: ['studio', 'academy'],
       academy: {
         title: 'アートメイクを学びたい',
-        desc: '入門から経験者まで、レベルに合ったコースと実際の指導方法をご確認ください。ソウル 江南で開講。授業は主に韓国語で行います。',
+        desc: '美的感覚とテクニック、その両方を教えます。入門から経験者まで、レベルに合ったコースと実際の指導方法をご確認ください。ソウル 江南で開講。授業は主に韓国語で行います。',
         cta: 'アカデミーを見る',
       },
       studio: {
         title: 'ソウルで施術を受けたい',
-        desc: '眉の形と毛流れ、なりたい雰囲気を一緒に確認しながらデザインをご相談します。ソウル 三成洞、完全予約制。',
+        desc: 'ヘアストローク · リップ · アイライン · ヘアライン。形をつくる前に印象を読み、デザインをご相談します。ソウル 三成洞、完全予約制。',
         cta: 'スタジオを見る',
       },
     },
     principle: {
-      heading: '流行より基準',
+      heading: '印象の*軸*',
       paragraphs: [
-        '同じ形を全員に描くことはしません。顔のバランス、もともとの毛流れ、なりたい雰囲気を見て、なぜこの形と毛流れを選んだのかを説明できるべきだと考えています。',
-        'その判断の過程は、スタジオのデザイン相談にも、アカデミーの添削指導にも、同じ基準で適用されます。',
+        '美しさを扱う前に先に立つべき基準、印象の「軸」。同じ形を全員に描くことはしません。',
+        '私たちが考える美しさは、何かを足すことではなく、本来のバランスと基準を整える過程に近いものです。',
+        'その基準は、スタジオのデザイン相談にも、アカデミーの添削指導にも同じ重みで適用されます。',
       ],
     },
     connection: {
@@ -92,13 +93,13 @@ module.exports = {
   },
 
   studio: {
-    title: '韓国 ソウルで眉アートメイク・ヘアストローク | LK BEAUTY AXIS スタジオ',
-    description: '顔に合う毛流れ、自分に合う印象。ソウル 三成洞 LK BEAUTY AXIS スタジオのデザイン相談、費用・リタッチのご案内、ご相談からご予約までの流れ。訪韓されるお客様へ。',
+    title: '韓国 ソウルで眉アートメイク・ヘアストローク | LK BeautyAxis スタジオ',
+    description: '顔に合う毛流れ、自分に合う印象。ソウル 三成洞 LK BeautyAxis スタジオのデザイン相談、費用・リタッチのご案内、ご相談からご予約までの流れ。訪韓されるお客様へ。',
     hero: {
       eyebrow: 'スタジオ · ソウル 三成洞',
       imageAlt: '自然な眉の毛流れが見える横顔のモデルイメージ',
-      heading: '顔に合う毛流れ、自分に合う印象。',
-      sub: '眉の形と毛流れ、なりたい雰囲気を一緒に確認しながらデザインをご相談します。',
+      heading: '形をつくる前に、*印象*を読みます。',
+      sub: 'ヘアストローク · リップ · アイライン · ヘアライン。眉の形と毛流れ、なりたい雰囲気を一緒に確認し、その人だけのバランスをデザインします。',
       ctaPrimary: 'デザイン相談のお問い合わせ',
       ctaSecondary: 'ご予約までの流れを見る',
     },
@@ -145,7 +146,7 @@ module.exports = {
       ],
     },
     process: {
-      heading: 'ご相談からご予約までの流れ',
+      heading: '良い結果は*良いカウンセリング*から始まります。',
       steps: [
         { title: 'フォームを送信', desc: 'ご希望の施術、訪問希望時期（未定でも可）、ご希望の言語をご記入ください。' },
         { title: '返信', desc: '営業時間内（KST）に、可能な日程とご案内事項をお返事します。' },
@@ -173,13 +174,13 @@ module.exports = {
   },
 
   academy: {
-    title: 'ソウルのアートメイク アカデミー | LK BEAUTY AXIS',
-    description: '毛流れを描く技術と、デザインを判断する基準。入門・経験者別のコースと添削中心の指導方法。ソウル 江南 LK BEAUTY AXIS アカデミー。',
+    title: 'ソウルのアートメイク アカデミー | LK BeautyAxis',
+    description: '毛流れを描く技術と、デザインを判断する基準。入門・経験者別のコースと添削中心の指導方法。ソウル 江南 LK BeautyAxis アカデミー。',
     hero: {
       eyebrow: 'アカデミー · ソウル 江南',
       imageAlt: '指先で眉のラインを確認するモデルイメージ',
-      heading: '毛流れを描く技術、デザインを判断する基準。',
-      sub: 'ご自身の経験と目標に合ったアートメイク教育コースをご確認ください。授業は主に韓国語で行います。受講前に言語対応についてお問い合わせください。',
+      heading: '美的感覚とテクニック、*その両方*が必要です。',
+      sub: '毛流れを描く技術と、デザインを判断する基準を一緒に学びます。ご自身の経験と目標に合ったコースをご確認ください。授業は主に韓国語で行います。受講前に言語対応についてお問い合わせください。',
       ctaPrimary: '受講相談のお問い合わせ',
       ctaSecondary: 'コース構成を見る',
     },
@@ -233,12 +234,12 @@ module.exports = {
   },
 
   about: {
-    title: '私たちについて | LK BEAUTY AXIS ソウル 三成洞',
-    description: '人と印象を中心に据えるアートメイク スタジオ・アカデミー。LK BEAUTY AXIS のデザイン基準と運営方針。',
-    hero: { eyebrow: '私たちについて', heading: '人と印象を中心に据えます。' },
+    title: '私たちについて | LK BeautyAxis ソウル 三成洞',
+    description: '人と印象を中心に据えるアートメイク スタジオ・アカデミー。LK BeautyAxis のデザイン基準と運営方針。',
+    hero: { eyebrow: '私たちについて', heading: 'あなたの美しさにも*基準*がありますように。' },
     paragraphs: [
-      'LK BEAUTY AXIS は、ソウル 江南区 三成洞でアートメイクのスタジオとアカデミーを併せて運営しています。',
-      '流行の形をなぞるのではなく、一人の顔から出発して形・毛流れ・色を決め、その理由を説明できる仕事を目指します。同じ基準で受講生の作業を見て修正します。',
+      'LK BeautyAxis（旧 LK Beauty Lab）は、ソウル 江南区 三成洞でアートメイクのスタジオとアカデミーを併せて運営しています。',
+      '私たちが考える美しさは、何かを足すことではなく、本来のバランスと基準を整える過程に近いものです。形をつくる前に印象を読み、その理由を説明できる仕事を目指します。同じ基準で受講生の作業を見て修正します。',
     ],
     principles: {
       heading: '私たちが守る基準',
@@ -262,7 +263,7 @@ module.exports = {
   },
 
   contact: {
-    title: 'お問い合わせ | LK BEAUTY AXIS',
+    title: 'お問い合わせ | LK BeautyAxis',
     description: '施術のご相談（スタジオ）と受講のご相談（アカデミー）を分けて受け付けます。日程未定でも送信できます。返信は KST 基準。',
     hero: { eyebrow: 'お問い合わせ', heading: 'お問い合わせ', sub: '施術のご相談と受講のご相談は分けて受け付けます。送信後、営業時間内（KST）にご記入の連絡先へ返信します。' },
     tabs: { studio: '施術のご相談 · スタジオ', academy: '受講のご相談 · アカデミー' },
@@ -299,6 +300,7 @@ module.exports = {
         { value: 'brow-other', label: '眉（その他の技法・相談後に決定）' },
         { value: 'eyeliner', label: 'アイライン' },
         { value: 'lips', label: 'リップ' },
+        { value: 'hairline', label: 'ヘアライン' },
         { value: 'correction', label: '以前のアートメイクの修正相談' },
         { value: 'undecided', label: 'まだ決めていない' },
       ],
@@ -344,7 +346,7 @@ module.exports = {
   },
 
   thanks: {
-    title: '送信完了 | LK BEAUTY AXIS',
+    title: '送信完了 | LK BeautyAxis',
     description: 'お問い合わせを受け付けました。',
     heading: 'お問い合わせを受け付けました。',
     body: '営業時間内（KST）にご記入の連絡先へ返信します。返信がない場合は迷惑メールフォルダをご確認いただくか、他の方法でお問い合わせください。',
@@ -356,7 +358,7 @@ module.exports = {
   },
 
   privacy: {
-    title: 'プライバシーに関するご案内 | LK BEAUTY AXIS',
+    title: 'プライバシーに関するご案内 | LK BeautyAxis',
     description: 'お問い合わせフォームで収集する個人情報の項目・目的・保管・連絡先をご案内します。',
     hero: { eyebrow: 'ポリシー', heading: 'プライバシーに関するご案内' },
     updatedLabel: '最終更新',
@@ -372,8 +374,8 @@ module.exports = {
   },
 
   news: {
-    title: 'お知らせ・イベント | LK BEAUTY AXIS',
-    description: 'LK BEAUTY AXIS のお知らせ、セミナー・イベント案内、プロモーション。',
+    title: 'お知らせ・イベント | LK BeautyAxis',
+    description: 'LK BeautyAxis のお知らせ、セミナー・イベント案内、プロモーション。',
     heading: 'お知らせ・イベント',
     sub: 'セミナー・イベントのご案内と運営に関するお知らせを掲載します。',
     empty: 'まだ投稿はありません。',
@@ -412,7 +414,7 @@ module.exports = {
   },
 
   notFound: {
-    title: 'ページが見つかりません | LK BEAUTY AXIS',
+    title: 'ページが見つかりません | LK BeautyAxis',
     heading: 'ページが見つかりません。',
     body: 'アドレスが変更されたか、削除されたページです。下記のリンクからお進みください。',
   },
