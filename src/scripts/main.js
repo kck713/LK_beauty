@@ -52,8 +52,11 @@
     var nav = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || {};
     if (nav.type && nav.type !== 'navigate') return;
     if (location.hash) return;
-    var toTop = function () { try { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); } catch (e) { window.scrollTo(0, 0); } };
+    var userMoved = false;
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (ev) { window.addEventListener(ev, function () { userMoved = true; }, { passive: true, once: true }); });
+    var toTop = function () { if (userMoved) return; try { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); } catch (e) { window.scrollTo(0, 0); } };
     toTop();
+    // load 가 늦게 올 수 있으므로(이미지·폰트), 사용자가 이미 스크롤했다면 건드리지 않음
     window.addEventListener('load', function () { toTop(); setTimeout(toTop, 60); });
   })();
 
