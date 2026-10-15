@@ -92,11 +92,14 @@ ${gtm ? `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${at
         ${nav.map(([p, label]) => `<li><a href="${pagePath(lang, p)}"${(p === page || (p === '' && page === 'home')) ? ' aria-current="page"' : ''}>${esc(label)}</a></li>`).join('')}
       </ul>
     </nav>
-      <div class="lang-switch" aria-label="${attr(t.common.languageLabel)}">
-        ${alternates.map((a) => a.lang === lang
-          ? `<span class="lang-current" aria-current="true" lang="${attr(a.lang)}"><span class="sr-only">${esc(t.common.currentLanguage)}: </span>${esc(a.name)}</span>`
-          : `<a href="${attr(a.href)}" hreflang="${attr(a.lang)}" lang="${attr(a.lang)}" rel="alternate">${esc(a.name)}</a>`).join('<span class="lang-sep" aria-hidden="true">·</span>')}
-      </div>
+      <details class="lang-switch" data-lang-menu>
+        <summary aria-label="${attr(t.common.languageLabel)}"><span class="lang-globe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18" stroke-linecap="round"/></svg></span><span class="lang-current" lang="${attr(lang)}">${esc(alternates.find((a) => a.lang === lang).name)}</span><span class="lang-caret" aria-hidden="true"></span></summary>
+        <ul class="lang-list" role="list">
+          ${alternates.map((a) => a.lang === lang
+            ? `<li><span class="lang-item is-current" aria-current="true" lang="${attr(a.lang)}">${esc(a.name)}<span class="sr-only"> (${esc(t.common.currentLanguage)})</span></span></li>`
+            : `<li><a class="lang-item" href="${attr(a.href)}" hreflang="${attr(a.lang)}" lang="${attr(a.lang)}" rel="alternate">${esc(a.name)}</a></li>`).join('')}
+        </ul>
+      </details>
   </div>
 </header>
 <main id="main" tabindex="-1">

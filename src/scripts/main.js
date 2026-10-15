@@ -60,6 +60,13 @@
     window.addEventListener('load', function () { toTop(); setTimeout(toTop, 60); });
   })();
 
+  // ---------- Language dropdown (details) ----------
+  var langMenu = document.querySelector('[data-lang-menu]');
+  if (langMenu) {
+    document.addEventListener('click', function (e) { if (langMenu.open && !langMenu.contains(e.target)) langMenu.open = false; });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && langMenu.open) { langMenu.open = false; langMenu.querySelector('summary').focus(); } });
+  }
+
   // ---------- Nav toggle ----------
   var toggle = document.querySelector('[data-nav-toggle]');
   var nav = document.getElementById('site-nav');

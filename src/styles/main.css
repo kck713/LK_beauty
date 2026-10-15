@@ -557,3 +557,19 @@ h3 { font-family: var(--font-body); letter-spacing: -.025em; }
 .cta-band h2 { font-weight: 300; }
 .hero-signature { background: var(--primary); color: #fff; }
 .hero-academy .hero-signature { background: var(--ink); }
+
+/* ---------- Language dropdown ---------- */
+.lang-switch { position: relative; padding: 0; font-size: .85rem; }
+.lang-switch summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 500; }
+.lang-switch summary::-webkit-details-marker { display: none; }
+.lang-switch summary:hover, .lang-switch[open] summary { border-color: var(--ink); }
+.lang-globe svg { width: 18px; height: 18px; display: block; color: var(--ink-soft); }
+.lang-current { font-weight: 500; color: var(--ink); text-decoration: none; }
+.lang-caret { width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin: -3px 2px 0 0; transition: transform .15s ease; }
+.lang-switch[open] .lang-caret { transform: rotate(-135deg); margin-top: 3px; }
+.lang-list { position: absolute; left: 0; top: calc(100% + 4px); min-width: 160px; margin: 0; padding: 6px 0; list-style: none; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(14,15,17,.08); z-index: 60; }
+.lang-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; min-height: 44px; color: var(--ink); text-decoration: none; }
+a.lang-item:hover { background: var(--bg-alt); color: var(--primary); }
+.lang-item.is-current { color: var(--ink-muted); cursor: default; }
+.lang-item.is-current::after { content: ""; width: 6px; height: 6px; background: var(--primary); border-radius: 50%; }
+@media (min-width: 900px) { .lang-list { left: auto; right: 0; } }
